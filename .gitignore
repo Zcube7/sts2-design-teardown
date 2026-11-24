@@ -1,0 +1,5 @@
+csharp/
+data/pck_text/
+logs/verify/backup/
+__pycache__/
+*.pyc
