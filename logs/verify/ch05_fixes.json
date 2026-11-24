@@ -1,0 +1,170 @@
+[
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "精英再 +12.5%，长期收敛到约 49%（设计目标常量 50%）",
+    "fix_new": "精英再 +12.5%；全打普通战斗时平稳态恰好收敛到 50%（= 注释里的设计目标 targetOdds），只是从 40% 起步，前 40 场平均约 48.8%",
+    "severity": "error",
+    "reason": "长期极限算错：±10% 的生灭链以 50% 为中心对称，平稳态掉率精确等于 50%；48.8% 是从 40% 起步的前 40 场平均，不是收敛值",
+    "evidence": "Odds/PotionRewardOdds.cs:54-72（掉了 -0.1、没掉 +0.1、无钳制）；精确求平稳分布 π(v+0.1)(v+0.1)=π(v)(1-v) 得掉率 0.5000；前 40 场 DP 精确值 0.4875。scripts/ch05_build_tables.py 已加 potion_stationary() 并重跑"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "长期掉率：全普通战斗 48.8%；普通:精英 = 4:1 时普通 46%、精英 60%（蒙特卡洛）。",
+    "fix_new": "掉率：全普通战斗时这是一条以 50% 为中心对称的生灭链，平稳态掉率**恰好 50%**；从 40% 起步，前 40 场平均 48.8%、前 20 场约 47.5%。普通:精英 = 4:1 交替时前 40 场普通 46%、精英 60%（无限长约 47%/61%）。",
+    "severity": "error",
+    "reason": "把 40 场的有限样本均值写成了「长期掉率」；真正的长期值全普通是 50%，4:1 交替约 47%/61%",
+    "evidence": "Odds/PotionRewardOdds.cs:61-71；精确 DP：M×40=0.4875、M×20=0.4753、MMMME×8 普通 0.464/精英 0.605、MMMME×2000 普通 0.4726/精英 0.6095；平稳态解析值 0.5"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "规则保证「**分叉处的选项类型不同**」（兄弟节点不同类型），再用",
+    "fix_new": "放置规则只让特殊房（休息/商店/精英/未知）不与兄弟节点同类型——最后「其余填敌人」不查规则、第 1 排也固定全是敌人，同一分叉下两个敌人很常见（Python 复刻 150 张第 1 幕图里 116 张至少有一处）；真正兜底的是用",
+    "severity": "overclaim",
+    "reason": "速览把「兄弟互斥」写成了保证，与本章 §2.2 自己的注释矛盾：填敌人一步不检查规则，row 1 全是敌人，分叉的两个子节点同为敌人很常见；保证「不是假选择」的是剪枝",
+    "evidence": "Map/StandardActMap.cs:270-274（row 1 全设 Monster）、:294-299（剩余 Unassigned 直接设 Monster，不调 IsValidPointType）；scripts/ch05_map_sim.py 复刻统计：150 张剪枝后的第 1 幕图有 211 处非固定排分叉子节点同类型，几乎全是敌人+敌人；同一批图剪枝后残留重复片段 0 张"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "每个事件自带「种子 + 事件名哈希」的独立 RNG，**同种子下事件结果与走到它的先后无关**",
+    "fix_new": "每个事件自带「种子 + 事件名哈希」的独立 RNG，**同种子下事件自己掷的随机与走到它的先后无关**（但事件发的遗物/卡仍走玩家奖励流与遗物袋，会随进度变化）",
+    "severity": "overclaim",
+    "reason": "独立 RNG 只管事件自己掷的随机；大量事件发遗物用 RelicFactory.PullNextRelicFromFront(Owner)，稀有度用玩家 Rewards 流、遗物取自遗物袋队头，结果取决于之前拿过什么",
+    "evidence": "Models/EventModel.cs:234（只有 base.Rng 是独立种子）；Factories/RelicFactory.cs:26-28,80-83（PullNextRelicFromFront(player) → RollRarity(player.PlayerRng.Rewards) + RelicGrabBag.PullFromFront）；调用方如 Models.Events/Trial.cs:149、RanwidTheElder.cs:113,121,131、RelicTrader.cs:68、LuminousChoir.cs:65、BattlewornDummy.cs:87、PunchOff.cs:115（new RelicReward(Owner)）"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "——同一种子里一个事件的随机结果与你何时走到它无关。",
+    "fix_new": "——同一种子里，事件用自己这条 RNG 掷的结果（如水晶球报价、传送带菜品、滑脚木桥抽中的牌）与你何时走到它无关；但很多事件发遗物走 `RelicFactory.PullNextRelicFromFront(Owner)`（稀有度用玩家奖励流、遗物从遗物袋队头取，如审判、长者兰伟德、遗物交换商），这部分仍取决于之前拿过什么。",
+    "severity": "overclaim",
+    "reason": "同上：独立种子只覆盖 base.Rng，事件给的遗物/奖励卡并不独立于进度",
+    "evidence": "Models/EventModel.cs:234；Factories/RelicFactory.cs:26-28,80-83；Models.Events/Trial.cs:149、RanwidTheElder.cs:113、RelicTrader.cs:68"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "灯火钥匙（第 3 幕所有 ? 变事件并锁定战史学家）、黄金罗盘（第 2 幕变一条直道）",
+    "fix_new": "灯火钥匙（第 3 幕交出钥匙前 ? 只出事件、且下一个事件必为战史学家，交出即恢复——实际是「第 3 幕第一个 ? 必遇战史学家」）、黄金罗盘（先古遗物，第 2 幕开头拿到即把当幕地图重生成一条直道，严格说不跨幕）",
+    "severity": "overclaim",
+    "reason": "战史学家两个选项都会把灯火钥匙从牌组移除，钥匙一走 ModifyUnknownMapPointRoomTypes 就失效，不是「第 3 幕所有 ?」；黄金罗盘改的是拿到它的当前幕",
+    "evidence": "Models.Cards/LanternKey.cs:21-37（两个 Hook 都以钥匙在牌组为前提）；Models.Events/WarHistorianRepy.cs:44-70 InitialUnlockCage/InitialUnlockChest 先调 RemoveLanternKeysForInitialChoice，:102-131 CompleteQuest + RemoveFromDeck；Models.Relics/GoldenCompass.cs:33-46（GoldenPathAct = CurrentActIndex 后立即 GenerateMap）"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "持有它进入第 3 幕后：所有 ? 只出事件，且**下一个事件被强制替换为战史学家 付袭**",
+    "fix_new": "持有它进入第 3 幕后：? 只出事件，且**下一个事件被强制替换为战史学家 付袭**——两个选项都会收走钥匙（`WarHistorianRepy.cs:102-131`），之后 ? 恢复正常，所以实际效果是「第 3 幕第一个 ? 必为战史学家」",
+    "severity": "overclaim",
+    "reason": "「所有 ? 只出事件」只持续到交出钥匙，也就是第 3 幕第一个 ?",
+    "evidence": "Models.Cards/LanternKey.cs:21-37；Models.Events/WarHistorianRepy.cs:44-70,102-131"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "`EventOption` 的修饰器把风险显式化：`ThatDoesDamage(n)` 在按钮上标扣血、`ThatDecreasesMaxHp(n)` 标扣上限、`ThatWillKillPlayerIf(...)` 在会致死时警示（`Events/EventOption.cs:194-220`）。",
+    "fix_new": "`EventOption` 的修饰器把致死风险显式化：`ThatDoesDamage(n)`（当前 HP ≤ n 时）和 `ThatDecreasesMaxHp(n)`（最大 HP ≤ n 时）都只是 `ThatWillKillPlayerIf(...)` 的快捷写法，条件成立时按钮闪红警示；扣多少血本身写在选项文案的变量里，不是这几个方法标的（`Events/EventOption.cs:199-222`）。",
+    "severity": "error",
+    "reason": "ThatDoesDamage/ThatDecreasesMaxHp 不在按钮上标数值，只设置 WillKillPlayer 判定，用于致死时闪红",
+    "evidence": "Events/EventOption.cs:199-205 注释「Causes the event option to flash red if the player's HP is below the damage value passed」，实现 return ThatWillKillPlayerIf(p => CurrentHp <= damage)；:207-213 同理比较 MaxHp；:218-222 只赋值 WillKillPlayer"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "「抓住」花 3、4、5…点 HP 重抽要丢的那张，已跳过的不会再抽到。",
+    "fix_new": "「抓住」花 3、4、5…点 HP 重抽要丢的那张，已跳过的不会再抽到；注意只有第一次抽限定非基础牌，重抽的候选是牌组里除当前这张同名牌外的所有可移除牌（含打击/防御等基础牌）（`SlipperyBridge.cs:106-130`）。",
+    "severity": "minor",
+    "reason": "「失去非基础牌」只对首抽成立，抓住后的重抽会把基础牌放回候选，玩家可以借此把损失导向基础牌",
+    "evidence": "Models.Events/SlipperyBridge.cs:109-112 首抽 Where(Rarity != Basic)；:113-121 重抽 Where(c.GetType() != RandomCardToLose.GetType())，不再排除 Basic；:122 只去掉不可移除与已跳过"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "只有「来源=战斗 且 赔率类型∈普通/精英/Boss」会推进偏移；事件/遗物给的卡走 `RollWithBaseOdds`，既不吃保底也不消耗保底（`Factories/CardFactory.cs:RollForRarity`）。",
+    "fix_new": "只有「来源=战斗 且 赔率类型∈普通/精英/Boss」（或带 `ForceRarityOddsChange` 标志，目前只有修饰符 SealedDeck）会推进偏移；大多数事件/遗物给的卡走 `RollWithBaseOdds`，既不吃保底也不消耗保底（`Factories/CardFactory.cs:246-262`）。例外：捕梦网（休息时给一份卡）、转经轮（普通战斗额外一份）、白星（精英额外一份、Boss 赔率）用 `CardCreationOptions.ForRoom` 生成，来源算「战斗」，同样读写保底（`Models.Relics/DreamCatcher.cs:22`、`PrayerWheel.cs:24`、`WhiteStar.cs:29`）。",
+    "severity": "overclaim",
+    "reason": "「遗物给的卡不碰保底」不成立：三个遗物用 ForRoom 造奖励，Source=Encounter，会走 CardRarityOdds.Roll（捕梦网连休息处给的卡都推进保底，白星必出稀有会把偏移重置）",
+    "evidence": "Runs/CardCreationOptions.cs:81-90（ForRoom 对 Monster/Elite/Boss 设 CardCreationSource.Encounter，注释写着 Do not use this in events or relics）；Factories/CardFactory.cs:246-261（Source==Encounter 且 rollMethod∈1..3 → Roll）；Models.Relics/DreamCatcher.cs:22、PrayerWheel.cs:24、WhiteStar.cs:29；Models.Modifiers/SealedDeck.cs:31 带 ForceRarityOddsChange"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "否则普通（`Odds/CardRarityOdds.cs:96-111`）。",
+    "fix_new": "否则普通（`Odds/CardRarityOdds.cs:96-111`）。罕见区间从「稀有+偏移」处起算，所以稀有+偏移为负时罕见也被吃掉同样多：普通战斗刚出完稀有（偏移 −5%）时稀有 0%、罕见 35%、普通 65%；下表的「罕见 37%」只在稀有+偏移 ≥ 0 时成立。",
+    "severity": "minor",
+    "reason": "表里普通战斗「罕见 37%」在出稀有后的前两张卡不成立（3%−5% 为负，罕见阈值 = 0.37 + (−0.02)）",
+    "evidence": "Odds/CardRarityOdds.cs:99-108：num2 = rare + offset；if (num < num2) Rare；if (num < baseOdds(Uncommon) + num2) Uncommon"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "上一房是商店，或下一排**全是**商店 → 本次 ? 不能出商店",
+    "fix_new": "上一房是商店，或这个 ? 通往的下一批点（子节点）**全是**商店 → 本次 ? 不能出商店",
+    "severity": "minor",
+    "reason": "判断对象是当前点的子节点，不是整排",
+    "evidence": "Runs/RunManager.cs:668-676 BuildRoomTypeBlacklist(previousMapPointEntry, nextMapPoints)：nextMapPoints.All(p => p.PointType == Shop)，注释「The next map points from the current one」"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "（**第 2 条强制和第 1 条不同列**，保证至少两个入口）",
+    "fix_new": "（**第 2 条强制和第 1 条不同列**，生成阶段保证至少两个入口；剪枝可能删掉 row 1 的点，复刻 300 张第 1 幕图里有 3 张最后只剩 1 个入口）",
+    "severity": "minor",
+    "reason": "剪枝 RemovePoint 会把 row 1 的点从 startMapPoints 移除，「至少两个入口」只在生成阶段成立",
+    "evidence": "Map/StandardActMap.cs:208-219；Map/MapPathPruning.cs:322-334 RemovePoint 里 startMapPoints.Remove；scripts/ch05_map_sim.py 复刻 300 张第 1 幕图（seed 11）最终入口数最小为 1，<2 的 3 张"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "扫完仍没放下的类型会被丢弃，由下一步的修复补回。",
+    "fix_new": "扫完仍没放下的类型会被丢弃，由下一步的修复补回——但修复是拿**全图该类型总数**对比目标（`MapPathPruning.cs:52-58`），休息处的计数包含 Boss 前那一整排固定休息处，所以休息处实际上补不回来（商店/精英/未知能补）。",
+    "severity": "minor",
+    "reason": "RepairPointType 统计 GetAllMapPoints() 里所有 RestSite（含 row L-1 固定休息处）去比 NumOfRests（不含固定排），几乎永远够数",
+    "evidence": "Map/MapPathPruning.cs:48,52-58（num = 全图 Count(PointType == type)，num2 = target - num ≤ 0 则不修）；Map/StandardActMap.cs:249-253 固定排也是 MapPointType.RestSite；复刻统计第 1 幕全图休息处均值 9.7 = 目标 6.67 + 固定排约 3"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "「一幕逛一次店只够买一样大件」是有意的紧。",
+    "fix_new": "「一幕逛一次店只够买一样大件」（推断：是有意的紧）。",
+    "severity": "minor",
+    "reason": "设计意图是推断，源码里没有对应注释，应标注",
+    "evidence": "无直接源码依据；数字本身（约 310 金/幕、遗物均价 209、删牌 75）可复算"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "期望价（不计浮动）：角色卡均价 68、随机遗物 209、药水 61；**把一家店买空约 1,366 金**（不含删牌）",
+    "fix_new": "期望价（不计浮动，按名义商店赔率 54/37/9、保底偏移按 0）：攻击/技能卡均价 68、能力卡 82（5 个角色都没有普通能力牌，抽到普通会顺延成罕见）、随机遗物 209、药水 61；**把一家店买空约 1,380 金**（不含删牌；= 4×68.25 + 81.75 − 半价期望 35.5 + 无色 86+172 + 遗物 2×208.5+200 + 药水 3×61.25）",
+    "severity": "minor",
+    "reason": "原算法 5×68.25−34.1+86+172+2×208.5+200+3×61.25=1,365.9 把能力格也按 54/37/9 算，但能力牌没有普通稀有度，商店会把普通顺延成罕见，能力格期望 81.75；修正后约 1,378。另注：实际稀有率还要加保底偏移（−5%~+40%），名义值只是近似",
+    "evidence": "Factories/CardFactory.cs:50-51（RollWithoutChangingFutureOdds(Shop) 后 GetNextAllowedRarity 按「该类型有没有这稀有度的牌」顺延）；Entities.Cards/CardRarityExtensions.cs:14（Common→Uncommon）；data/csv/cards.csv 五个角色 Power 只有 Uncommon/Rare；scripts/ch05_build_tables.py shop_expect() 已修正并重跑，输出 1378"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "`maxElites = 15` 与 `EnsureRowsContainPointType` 也没有被用到",
+    "fix_new": "`maxElites = 15` 与 `EnsureRowsContainsPointType` 也没有被用到",
+    "severity": "citation",
+    "reason": "方法名写错（源码是 EnsureRowsContainsPointType），按原名 Grep 找不到",
+    "evidence": "Map/StandardActMap.cs:308 private void EnsureRowsContainsPointType(...)；全局 Grep 无调用"
+  },
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "每个都是「3 个池子各抽 1」或「大池洗牌取 3」，部分选项看牌组条件解锁",
+    "fix_new": "多数是「3 个池子各抽 1」或「大池洗牌取 3」（涅奥是 1 个代价项 + 正面池取 2，达弗 50% 取 2 + 尘封魔典），部分选项看牌组条件解锁",
+    "severity": "minor",
+    "reason": "「每个都是」两类之一不准确：涅奥和达弗是第三种结构（本章 §10.2 表里写对了）",
+    "evidence": "Models.Events/Neow.cs:216-285（CurseOptions 取 1 + PositiveOptions 洗牌取 2）；Models.Events/Darv.cs GenerateInitialOptions（NextBool：Take(2)+DustyTome 或 Take(3)）"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "灯火钥匙让第三幕所有未知房只出事件",
+    "fix_new": "灯火钥匙让第三幕第一个未知房必为战史学家（交出钥匙前未知房只出事件）",
+    "severity": "overclaim",
+    "reason": "战史学家两个选项都会收走钥匙，Hook 随即失效，不是整个第 3 幕",
+    "evidence": "Models.Cards/LanternKey.cs:21-37；Models.Events/WarHistorianRepy.cs:44-70,102-131"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "**商店买不起是设计好的**：买空一家店约 1,366 金",
+    "fix_new": "**商店买不起是设计好的（推断）**：买空一家店约 1,380 金",
+    "severity": "minor",
+    "reason": "设计意图未标推断；能力格不会出普通卡，期望总价修正为约 1,378",
+    "evidence": "同第 05 章 §5.1 修正：Factories/CardFactory.cs:50-51；scripts/ch05_build_tables.py 输出「全店清空约 1378」"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "随机走一条路线平均遇到敌人 6.9、精英 1.1",
+    "fix_new": "第 1 幕随机走一条路线平均遇到敌人 6.9、精英 1.1",
+    "severity": "minor",
+    "reason": "这组数字只是第 1 幕（密林单人）的复刻结果，第 2/3 幕不同（敌人 6.1/5.4）",
+    "evidence": "data/csv/ch05_map_sim.csv 密林 Overgrowth 单人行 path_mean_*（敌人 6.88、精英 1.12、未知 2.86、休息 2.42、商店 0.72）"
+  }
+]

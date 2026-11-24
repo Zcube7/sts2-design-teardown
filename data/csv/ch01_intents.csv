@@ -1,0 +1,17 @@
+﻿intent_class,intent_type,loc_prefix,title_zh,desc_zh,uses_in_monsters,example_monsters,sprite,source
+AttackIntent,Attack,ATTACK,攻势,这个敌人将要[gold]攻击[/gold]{IsMultiplayer:所有人|}造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{}[/blue]次}。,0,,atlases/intent_atlas.sprites/intent_attack.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/AttackIntent.cs
+BuffIntent,Buff,BUFF,强化,这个敌人将要使用一个[gold]强化效果[/gold]。,75,Aeonglass/Axebot/BowlbugNectar/BruteRubyRaider,atlases/intent_atlas.sprites/intent_buff.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/BuffIntent.cs
+CardDebuffIntent,CardDebuff,CARD_DEBUFF,恶意,这个敌人将要对你的卡牌施加[gold]侵蚀[/gold]。,4,LivingFog/Queen/ThievingHopper/VineShambler,atlases/intent_atlas.sprites/intent_card_debuff.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/CardDebuffIntent.cs
+DeathBlowIntent,DeathBlow,DEATH_BLOW,濒死一击,这个生物试图拉你一起陪葬。它会在被摧毁前攻击你造成[blue]{Damage}[/blue]点伤害。,2,GasBomb/WaterfallGiant,atlases/intent_atlas.sprites/intent_death_blow.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/DeathBlowIntent.cs
+DebuffIntent,Debuff/DebuffStrong,DEBUFF,策略,这个敌人将要对你施加一个[gold]负面效果[/gold]。,41,Axebot/BowlbugSilk/CeremonialBeast/CorpseSlug,atlases/intent_atlas.sprites/intent_debuff.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/DebuffIntent.cs
+DefendIntent,Defend,DEFEND,守势,这个敌人将会在其回合获得[gold]格挡[/gold]。,23,Aeonglass/Axebot/AxeRubyRaider/BowlbugEgg,atlases/intent_atlas.sprites/intent_defend.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/DefendIntent.cs
+EscapeIntent,Escape,ESCAPE,懦弱,这个敌人将会[gold]逃跑[/gold]。,2,FatGremlin/ThievingHopper,atlases/intent_atlas.sprites/intent_escape.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/EscapeIntent.cs
+HealIntent,Heal,HEAL,回复,这个敌人将会[gold]回复[/gold]。,4,DecimillipedeSegment/KnowledgeDemon/TestSubject/WaterfallGiant,atlases/intent_atlas.sprites/intent_heal.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/HealIntent.cs
+HiddenIntent,Hidden,HIDDEN,,,5,Architect/BigDummy/DeprecatedMonster/OneHpMonster,,MegaCrit.Sts2.Core.MonsterMoves.Intents/HiddenIntent.cs
+MultiAttackIntent,Attack(继承),ATTACK,攻势,这个敌人将要[gold]攻击[/gold]{IsMultiplayer:所有人|}造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{}[/blue]次}。,54,Aeonglass/Axebot/BowlbugSilk/Byrdonis,,MegaCrit.Sts2.Core.MonsterMoves.Intents/MultiAttackIntent.cs
+SingleAttackIntent,Attack(继承),ATTACK,攻势,这个敌人将要[gold]攻击[/gold]{IsMultiplayer:所有人|}造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{}[/blue]次}。,162,Aeonglass/AssassinRubyRaider/Axebot/AxeRubyRaider,,MegaCrit.Sts2.Core.MonsterMoves.Intents/SingleAttackIntent.cs
+SleepIntent,Sleep,SLEEP,沉睡,这个敌人本回合不会采取任何行动。,5,BygoneEffigy/LagavulinMatriarch/Rocket/SlumberingBeetle,atlases/intent_atlas.sprites/intent_sleep.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/SleepIntent.cs
+StatusIntent,StatusCard,STATUS,策略,这个敌人将会给你[blue]{CardCount}[/blue]张[gold]状态[/gold]牌。,18,Aeonglass/Chomper/EyeWithTeeth/HauntedShip,atlases/intent_atlas.sprites/intent_status_card.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/StatusIntent.cs
+StunIntent,Stun,STUN,击晕,这个敌人在其下一回合无法行动。,8,BowlbugRock/CeremonialBeast/FatGremlin/SneakyGremlin,atlases/intent_atlas.sprites/intent_stun.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/StunIntent.cs
+SummonIntent,Summon,SUMMON,召唤,这个敌人将要召唤[gold]怪物[/gold]。,8,Fabricator/Fogmog/LivingFog/Ovicopter,atlases/intent_atlas.sprites/intent_summon.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/SummonIntent.cs
+UnknownIntent,Unknown,UNKNOWN,未知,这个敌人将要进行某种[gold]未知[/gold]行动。,0,,atlases/intent_atlas.sprites/intent_unknown.tres,MegaCrit.Sts2.Core.MonsterMoves.Intents/UnknownIntent.cs

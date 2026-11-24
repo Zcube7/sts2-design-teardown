@@ -1,0 +1,250 @@
+[
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "共享事件里票数打平时，由 host 用一个**非确定性**随机数决定，结果广播给其他人（`EventSynchronizer.cs:53-56`）。",
+    "fix_new": "共享事件收齐全员投票后，host 从所有人的票里**随机抽一张**作为结果（`_multiplayerOptionSelectionRng.NextItem(_playerVotes)`），等于按票数加权抽签，不是“多数决 + 平票才随机”（字段注释虽写“票数相同时用”，代码并没有先比票数）。这个随机数用跑局种子初始化，但只在 host 上推进，注释要求别指望各端一致；结果广播给其他人（`EventSynchronizer.cs:53-57,170-190`）。",
+    "severity": "error",
+    "reason": "代码不是“平票才随机”，而是每次都从全员选票里均匀抽一张（3 人 2:1 时少数派也有 1/3 概率胜出）；随机数也不是“非确定性”，而是种子化、只在 host 推进",
+    "evidence": "MegaCrit.Sts2.Core.Multiplayer.Game/EventSynchronizer.cs:77 `_multiplayerOptionSelectionRng = new Rng(seed, \"event_synchronizer\")`；:161 收齐票后调用 ChooseSharedEventOption；:178 `uint value = _multiplayerOptionSelectionRng.NextItem(_playerVotes).Value;`；_playerVotes 只在 :38/:101-103/:159/:311-319 出现，没有任何计票/取多数逻辑；Rng.cs:290-300 NextItem = 均匀取一项"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "| 限时 | 整局 25 分钟；每个房间 2 分钟；每个界面 30 秒；看门狗 30 秒没有进展就转储状态并判失败 | `AutoSlayConfig.cs` |",
+    "fix_new": "| 限时 | 整局 25 分钟；房间按类型各自限时（战斗 5 分钟、事件 3 分钟、商店 2 分钟，营火/宝箱/胜利房 30 秒）；界面多数 30 秒（水晶球、结算界面 2 分钟）；看门狗 30 秒没有进展就转储状态并判失败。`AutoSlayConfig` 里“房间 2 分钟 / 界面 30 秒”的默认值没有被任何代码引用 | `AutoSlayConfig.cs`；`AutoSlay.Handlers.Rooms/*.cs`、`Handlers.Screens/*.cs` 的 `Timeout` 属性；`AutoSlayer.cs:266,347` |",
+    "severity": "error",
+    "reason": "实际生效的是各处理器自己的 Timeout，AutoSlayConfig.defaultRoomTimeout/defaultScreenTimeout 是死常量",
+    "evidence": "CombatRoomHandler.cs:35 FromMinutes(5)；EventRoomHandler.cs:40 FromMinutes(3)；ShopRoomHandler.cs:27 FromSeconds(120)；RestSite/Treasure/VictoryRoomHandler 30s；CrystalSphereScreenHandler.cs:27 120s、GameOverScreenHandler.cs:19 2min、其余界面 30s；AutoSlayer.cs:266,347 `WaitHelper.WithTimeout(..., handler.Timeout, ct)`；全局 grep defaultRoomTimeout/defaultScreenTimeout 除定义外 0 处引用"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "完整控制台解锁，遥测停止上传，Sentry 关闭",
+    "fix_new": "完整控制台解锁，每局记录停止上传（纪元、设置两类遥测不检查 Mod，照常上传），Sentry 关闭",
+    "severity": "overclaim",
+    "reason": "只有每局记录（record_data）检查 IsRunningModded；纪元和设置上传只走 ShouldUploadMetrics，里面没有 Mod 判断",
+    "evidence": "MegaCrit.Sts2.Core.Runs.Metrics/MetricUtilities.cs:65-88 ShouldUploadMetrics 只查 ReleaseInfo/UploadData/FullConsole/editor；:104 IsRunningModded 只在 UploadRunMetricsInternal 里；:224 UploadEpochMetric、:248 UploadSettingsMetric 只调 ShouldUploadMetrics；调用方 SaveManager.cs:1247、RunManager.cs:1671-1674 也无 Mod 判断"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "以下情况不上传：Mod 局、开了完整控制台、放弃的局、第一局、非标准模式、不足 5 层。",
+    "fix_new": "4 个接口共同的门槛是正式构建、上传开关打开、没开完整控制台、不在编辑器；每局记录另外排除 Mod 局、放弃的局、第一局、非标准模式、不足 5 个地图点（纪元、设置记录在 Mod 局照传）。",
+    "severity": "overclaim",
+    "reason": "放弃/第一局/非标准/不足 5 层/Mod 这 5 条只对每局记录生效，放在“4 个上传接口”后面会被读成对全部接口生效",
+    "evidence": "MetricUtilities.cs:65-88（4 个接口共用）、:96-123（只在 UploadRunMetricsInternal：IsAbandoned、NumberOfRuns<=1、IsRunningModded、GameMode!=Standard、list.Count<5）"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "存档分目录，遥测和崩溃上报全关，",
+    "fix_new": "存档分目录，每局遥测和崩溃上报全关（纪元/设置遥测仍照传），",
+    "severity": "overclaim",
+    "reason": "同上：Mod 局纪元、设置遥测不受影响",
+    "evidence": "MetricUtilities.cs:224-246、:248-282 无 Mod 判断"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "遥测和崩溃上报一键全关",
+    "fix_new": "每局遥测和崩溃上报一键全关",
+    "severity": "overclaim",
+    "reason": "同上（§5.5 设计观察）",
+    "evidence": "MetricUtilities.cs:104 是唯一的 IsRunningModded 判断"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "每次玩家动作结束、每个回合阶段、离开事件房和营火都算一次。",
+    "fix_new": "战斗进行中每次玩家动作结束（结束回合、准备进入敌方回合两个动作除外）、每个回合阶段、离开事件房（仅确定性事件）和营火都算一次。",
+    "severity": "overclaim",
+    "reason": "动作后校验只在 CombatManager.IsInProgress 时算；离开事件房只对 IsDeterministic 的事件算",
+    "evidence": "MegaCrit.Sts2.Core.Runs/RunManager.cs:576-582 `if (CombatManager.Instance.IsInProgress && !(action is EndPlayerTurnAction) && !(action is ReadyToBeginEnemyTurnAction))`；MegaCrit.Sts2.Core.Rooms/EventRoom.cs:94-97 `if (localEvent.IsDeterministic) GenerateChecksum(...)`"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "每个玩家动作执行完（结束回合和准备进入敌方回合这两个动作除外）；玩家回合开始后、敌方回合开始后、敌方回合结束后、玩家回合结束第一段和第二段；离开事件房；离开营火",
+    "fix_new": "战斗进行中每个玩家动作执行完（结束回合和准备进入敌方回合这两个动作除外；战斗外的地图移动、选遗物等不算）；玩家回合开始后、敌方回合开始后、敌方回合结束后、玩家回合结束第一段和第二段；离开事件房（仅 `IsDeterministic` 的事件）；离开营火",
+    "severity": "overclaim",
+    "reason": "同上，触发条件漏了两个限定",
+    "evidence": "RunManager.cs:578；EventRoom.cs:94-97"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "| Replay | 从回放文件里读出动作，按原顺序喂进队列 |",
+    "fix_new": "| Replay | `RequestEnqueue` 不处理（switch 里没有 Replay 分支，本地输入直接丢弃）；动作由调试场景 `NMultiplayerTest` 从回放文件读出，直接 `ActionQueueSet.EnqueueWithoutSynchronizing` 按原顺序喂进队列（`MegaCrit.Sts2.Core.Nodes.Debug.Multiplayer/NMultiplayerTest.cs:562-592`） |",
+    "severity": "citation",
+    "reason": "表头是“RequestEnqueue 的行为”，但 Replay 模式下 RequestEnqueue 什么都不做，喂动作的代码在 NMultiplayerTest，不在所引的 ActionQueueSynchronizer 行段",
+    "evidence": "ActionQueueSynchronizer.cs:147-170 switch 只有 Client / Singleplayer / Host 三个 case；NMultiplayerTest.cs:562 `foreach (CombatReplayEvent replayEvent in replay.events)`、:581/:592 `ActionQueueSet.EnqueueWithoutSynchronizing(...)`"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "| Any | 随时可以执行 | 控制台命令 |",
+    "fix_new": "| Any | 随时可以执行 | 地图投票（`VoteForMapCoordAction`）；控制台命令只在战斗外是 Any，战斗内是 CombatPlayPhaseOnly |",
+    "severity": "minor",
+    "reason": "控制台命令的类型随是否在战斗而变，战斗内不是 Any；固定为 Any 的是地图投票",
+    "evidence": "MegaCrit.Sts2.Core.DevConsole/ConsoleCmdGameAction.cs:14-23 `if (!InCombat) return GameActionType.Any; return GameActionType.CombatPlayPhaseOnly;`；MegaCrit.Sts2.Core.GameActions/VoteForMapCoordAction.cs:37 `=> GameActionType.Any`"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "| 超时 | 20,000 ms（Steam 初始连接和已连接两个超时都是这个值；`NetConst.timeoutMsec`） | `SteamHost.cs:62-80`、`MegaCrit.Sts2.Core.Multiplayer/NetConst.cs` |",
+    "fix_new": "| 超时 | 20,000 ms：Steam host 监听套接字的初始连接超时和已连接超时（`SteamHost` 里写死的字面量；`NetConst.timeoutMsec` 也是 20000，但全程序集没有任何引用）。另外 ENet 客户端连接超时 10 秒，大厅等新玩家首条消息 10 秒 | `SteamHost.cs:62-80`、`Transport.ENet/ENetClient.cs:54-60`、`Game.Lobby/StartRunLobby.cs:102` |",
+    "severity": "minor",
+    "reason": "NetConst.timeoutMsec 是未被引用的死常量，写在出处里会让人以为它控制超时；20 秒只配在 Steam host 的 listen socket 上",
+    "evidence": "grep timeoutMsec 全局只命中 NetConst.cs:5 定义；SteamHost.cs:61-80 两处 `m_int32 = 20000`；SteamClient.cs:94 ConnectP2P(..., null) 未配超时；ENetClient.cs:54-56 `timeoutTimer > 10000`；StartRunLobby.cs:102/LoadRunLobby.cs:82 ClientResponseTimeout = 10000"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "同一 Mod 本地和工坊各有一份时，加载版本高的那份，同版本选较新的",
+    "fix_new": "同一 Mod 本地和工坊各有一份时，加载版本号高的那份；版本相同或版本号解析不了时保留本地 `mods/` 那份、停用工坊版（`DisabledDuplicate`）",
+    "severity": "error",
+    "reason": "同版本时代码固定停用工坊版，没有“选较新”的逻辑",
+    "evidence": "MegaCrit.Sts2.Core.Modding/ModManager.cs:481-546 RemoveDisabledMods：version 解析失败或 `num == 0` → `mod2.state = ModLoadState.DisabledDuplicate`（mod2 是 SteamWorkshop 来源）；num>0 才停用本地版"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "加载错误有 15 种本地化提示",
+    "fix_new": "加载错误有 14 个 `MOD_ERROR.*` 本地化条目（含 `NONE`，实际报错 13 种）",
+    "severity": "minor",
+    "reason": "数错",
+    "evidence": "localization/eng/main_menu_ui.json 与 zhs/main_menu_ui.json 各 14 个 MOD_ERROR.* key：ASSEMBLY_LOAD, CIRCULAR_DEPENDENCY, DEPENDENCY_MIN_VERSION_INVALID, DEPENDENCY_VERSION_INVALID, DEPENDENCY_VERSION_MISSING, DEPENDENCY_VERSION_UNSUPPORTED, DUPLICATE_ID, EXCEPTION, GAME_VERSION_INVALID, GAME_VERSION_UNSUPPORTED, MIGRATION_REQUIRED, MISSING_DEPENDENCY, NONE, STEAM_BRANCH_UNSUPPORTED；C# 源码里引用的也正好是这 14 个"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "`CombatRoomHandler.cs:22-62`、`AutoSlayConfig.cs:48-61`",
+    "fix_new": "`CombatRoomHandler.cs:22-62`（999、200、第 3 回合都是这里写死的字面量；`AutoSlayConfig.cs:48-61` 的同值常量 `combatStrengthRampStartTurn/PerTurn` 没被引用）",
+    "severity": "citation",
+    "reason": "AutoSlayConfig 里的力量常量是死代码，实际数值写在 CombatRoomHandler 里",
+    "evidence": "CombatRoomHandler.cs:45-46 `PowerCmd.Apply<PlatingPower>(..., 999m, ...)`/`RegenPower 999m`；:60-62 `if (playingTurnNumber >= 3) PowerCmd.Apply<StrengthPower>(..., 200m, ...)`；grep combatStrengthRamp/maxFloor 除 AutoSlayConfig.cs 外 0 处引用"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "`input/debug_hide_*` 共 20 多个",
+    "fix_new": "`input/debug_hide_*` 共 18 个（另有 `debug_speed_up/down`、`debug_unlock_characters`、`debug_slow_rewards`，`input/debug_*` 合计 22 个）",
+    "severity": "minor",
+    "reason": "数错",
+    "evidence": "data/csv/ch07_project_settings.csv：`^input/debug_hide_` 18 行，`^input/debug` 22 行"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "`SentryService.cs:294`",
+    "fix_new": "`SentryService.cs:653`",
+    "severity": "citation",
+    "reason": "294 行在 SetPlatformBranch 里，完整控制台的判断在 ShouldStayAliveAfterInit",
+    "evidence": "MegaCrit.Sts2.Core.Debug/SentryService.cs:633 `ShouldStayAliveAfterInit`、:653 `if (SaveManager.Instance.SettingsSave.FullConsole)` → return false → AfterGameInit(:154-157) Shutdown"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "`MegaCrit.Sts2.Core.Debug/SentryService.cs:59-76,268-310`",
+    "fix_new": "`MegaCrit.Sts2.Core.Debug/SentryService.cs:59-76,147-172,633-680`",
+    "severity": "citation",
+    "reason": "268-310 是按分支设采样率的 SetPlatformBranch；Mod 局关 SDK 的逻辑在 AfterGameInit + ShouldStayAliveAfterInit",
+    "evidence": "SentryService.cs:68-74 DisableSentryIfModded；:147-172 AfterGameInit 调 ShouldStayAliveAfterInit 失败则 Shutdown；:670 `if (ModManager.IsRunningModded())` return false"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "| 关闭条件 | 跑 Mod、开了完整控制台、`prefs.upload_data=false` | `SentryService.cs:59-76,250-310` |",
+    "fix_new": "| 关闭条件 | 初始化后直接关 SDK：Steam 没初始化（非 Steam 构建）、开了完整控制台、跑 Mod（带 `force-sentry` 时都不关）；`prefs.upload_data=false` 不关 SDK，而是逐条事件丢弃 | `SentryService.cs:59-76,147-172,612-680` |",
+    "severity": "citation",
+    "reason": "出处行段错（250-310 是采样率），且漏了“Steam 未初始化”这一关闭条件、混淆了 upload_data 的处理方式",
+    "evidence": "SentryService.cs:633-680 ShouldStayAliveAfterInit：IsForcedOn→true；!SteamInitializer.Initialized→false；FullConsole→false；IsRunningModded→false；:612-620 ShouldSampleEvent 里 `!PrefsSave.UploadData` → return false（丢事件）"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "每种语言 44 个 JSON 表加 `patch_notes/`",
+    "fix_new": "每种语言 46 个 JSON 表；`patch_notes/` 只有 eng（127 份）和 zhs（1 份）有",
+    "severity": "error",
+    "reason": "表数错；patch_notes 不是每种语言都有",
+    "evidence": "data/pck_text/localization/<16 种语言>/*.json 每个目录都是 46 个；16×46+completion.json=737 与 pck_index 的 737 个本地化 JSON 吻合；patch_notes 目录只存在于 eng/（127）和 zhs/（1）"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "26 种 `DynamicVar`",
+    "fix_new": "24 个 `DynamicVar` 子类（目录里 26 个文件，另 2 个是基类 `DynamicVar` 和容器 `DynamicVarSet`）",
+    "severity": "minor",
+    "reason": "把基类和容器类也算进“种类”了",
+    "evidence": "MegaCrit.Sts2.Core.Localization.DynamicVars/ 26 个 .cs：DynamicVar.cs（基类）、DynamicVarSet.cs（IReadOnlyDictionary 容器）+ 24 个 `: DynamicVar`/`: CalculatedVar` 子类"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "（`event:/sfx/...` 为主，music 19 条）",
+    "fix_new": "（`event:/sfx/...` 350 条，music 18 条，temp 1 条）",
+    "severity": "minor",
+    "reason": "music 去重后是 18 条",
+    "evidence": "grep -rhoE '\"event:/[^\"]*\"' 去重 369 条：sfx 350、music 18（act1_a1_v1 … menu_update）、temp 1（event:/temp/sfx/game_over）"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "`TmpSfx` 里 25 个临时音效 mp3",
+    "fix_new": "`TmpSfx` 里引用的 33 个临时音效 mp3（预加载清单 `assetPaths` 里是 23 个 mp3 + 1 个 tres；PCK 的 `debug_audio/` 共 50 个 mp3）",
+    "severity": "minor",
+    "reason": "25 对不上任何口径",
+    "evidence": "MegaCrit.Sts2.Core.Audio.Debug/TmpSfx.cs：28 个 `public const string … .mp3` + BattleStart 2 个 + PotionSlosh 3 个 = 33 个去重 mp3 名；:10-14 assetPaths 24 项（含 sleep.tres）；data/pck_index.csv 里 .mp3 共 50 个，全在 debug_audio/。注意第 08 章写的是 29 个，也对不上"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "全游戏共 60 处",
+    "fix_new": "全游戏共 59 处（遗物 47、卡牌 9、基类 2、修饰符 1）",
+    "severity": "minor",
+    "reason": "grep 命中的 60 行里有 1 行是 SavedProperties.cs 异常消息字符串",
+    "evidence": "grep -rn '\\[SavedProperty' 共 60 行，其中 MegaCrit.Sts2.Core.Saves.Runs/SavedProperties.cs:113 是 `throw new JsonException($\"... [SavedProperty] ...\")`；其余 59 处：Models.Relics 47、Models.Cards 9、Models（RelicModel 基类）2、Models.Modifiers 1"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "709 个类带 `[ScriptPath(\"res://src/...cs\")]` 与场景绑定",
+    "fix_new": "全程序集 709 个类带 `[ScriptPath]` 与场景绑定（其中 704 个指向 `res://src/...cs`，Nodes 命名空间内 664 个）",
+    "severity": "minor",
+    "reason": "709 是全程序集 ScriptPath 总数，不全是 res://src，也不全在 Nodes 行",
+    "evidence": "grep -rh '\\[ScriptPath(' 共 709；其中 '\\[ScriptPath(\"res://src/' 704；限定 MegaCrit.Sts2.Core.Nodes* 目录 664"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "extra_fields, game_mode`（`MegaCrit.Sts2.Core.Saves/SerializableRun.cs`）",
+    "fix_new": "extra_fields, game_mode`，外加一个驼峰命名的例外 `dailyTime`（`MegaCrit.Sts2.Core.Saves/SerializableRun.cs:21-115`）",
+    "severity": "minor",
+    "reason": "顶层字段清单漏了 dailyTime，而且它恰好是“字段名用 snake_case”的例外",
+    "evidence": "SerializableRun.cs:37 `[JsonPropertyName(\"dailyTime\")]`；该文件共 23 个 JsonPropertyName"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "| 4 | 8 | 手柄和键盘绑定的增补与改名 |",
+    "fix_new": "| 4 | 8 | 4→5 删掉旧字段 `disabled_mods`（Mod 开关改存 `mod_settings`）；其余是手柄和键盘绑定的增补与改名 |",
+    "severity": "minor",
+    "reason": "漏了一条与 Mod 相关的设置迁移",
+    "evidence": "MegaCrit.Sts2.Core.Saves.Migrations.SettingsSaves/SettingsSaveV4ToV5.cs:7-9 `saveData.Remove(\"disabled_mods\")`"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "`SharedMigrationHelper.v100Renames / v110Renames` 同时用于跑局存档、跑局历史和进度存档",
+    "fix_new": "`SharedMigrationHelper.v100Renames` 用于跑局存档（V15→16）和跑局历史（V8→9），`v110Renames` 用于跑局存档（V19→20）、跑局历史（V9→10）和进度存档（V22→23）",
+    "severity": "minor",
+    "reason": "v100Renames 没有用于进度存档",
+    "evidence": "SharedMigrationHelper.cs:9-11 注释“Renames used by SerializableRun V15->V16 and RunHistory V8->V9”；:19-21 v110 用于 Run V19->V20、RunHistory V9->V10；data/csv/ch07_save_migrations.csv 的 uses_shared_renames 列：ProgressSaveV22ToV23 只用 v110Renames"
+  },
+  {
+    "file": "sections/07_tech_multiplayer.md",
+    "fix_old": "每个方法遍历 `combatState/runState.IterateHookListeners()`，逐个 `await` 回调。",
+    "fix_new": "每个方法遍历监听者（战斗钩子多数经私有包装 `IterateCombatHookListeners`，战斗已在结束时整次派发为空）；其中 81 个返回 `Task` 的（After/Before 等）逐个 `await` 回调，67 个 Modify/Should 类是同步计算。",
+    "severity": "minor",
+    "reason": "“逐个 await”只对一半派发方法成立，Modify/Should 是同步的",
+    "evidence": "Hook.cs 148 个 public static 方法里签名含 Task 的 81 个、不含的 67 个（如 :1453 `public static decimal ModifyAttackHitCount`）；:177-207 IterateCombatHookListeners 注释"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "，不是锁步也不是状态同步；单人模式也走同一条动作队列。每个玩家动作后和回合各阶段都对整场战斗状态算 XxHash32 校验和",
+    "fix_new": "，不是按帧锁步也不是状态同步；单人模式也走同一条动作队列。战斗中每个玩家动作后和回合各阶段都对整场战斗状态算 XxHash32 校验和",
+    "severity": "overclaim",
+    "reason": "“输入定序 + 确定性模拟”本身就属于广义的确定性锁步家族，章里写的是“不是帧锁步”，report 简化成“不是锁步”过头；动作后校验只在战斗中",
+    "evidence": "第 07 章结论 5 原文“不是帧锁步”；RunManager.cs:578 `CombatManager.Instance.IsInProgress`"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "遥测和 Sentry 都停",
+    "fix_new": "每局遥测记录和 Sentry 都停（纪元、设置两类遥测仍照常上传）",
+    "severity": "overclaim",
+    "reason": "Mod 局只停每局记录，纪元/设置上传无 Mod 判断",
+    "evidence": "MetricUtilities.cs:65-88、:104、:224、:248"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "Mod 局、放弃的局、第一局、非标准模式、不足 5 层都不上传",
+    "fix_new": "每局记录在 Mod 局、放弃的局、第一局、非标准模式、不足 5 个地图点时不上传",
+    "severity": "overclaim",
+    "reason": "这些条件只对 4 个上传点中的每局记录生效",
+    "evidence": "MetricUtilities.cs:96-123 只在 UploadRunMetricsInternal 里判断"
+  }
+]

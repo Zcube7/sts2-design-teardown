@@ -1,0 +1,46 @@
+﻿character,character_zh,mechanic,label,n_cards,share_of_pool,by_rarity,examples
+Ironclad,铁甲战士,exhaust,消耗(产出/收益),27,0.3,Common:5 Uncommon:10 Rare:11 Ancient:1,熔融之拳、余烬、破灭、战栗、坚毅、灰烬打击、彼岸咆哮、无惧疼痛、恶魔护盾、燃烧契约、战鼓、邪眼
+Ironclad,铁甲战士,strength,力量,10,0.111,Common:1 Uncommon:5 Rare:4,预备打击、与我一战！、燃烧、撕裂、炽焰、跃跃欲试、凌虐、恶魔形态、烙印、主宰
+Ironclad,铁甲战士,self_hp_loss,自损生命,7,0.078,Common:2 Uncommon:3 Rare:2,突破、血墙、御血术、放血、恶魔护盾、烙印、祭品
+Ironclad,铁甲战士,vulnerable,易伤,13,0.144,Basic:1 Common:4 Uncommon:6 Rare:1 Ancient:1,痛击、熔融之拳、闪电霹雳、挑衅、战栗、欺凌、拆卸、上勾拳、残酷、凶恶、巨像、主宰
+Ironclad,铁甲战士,generates_card,生成卡牌,5,0.056,Common:1 Uncommon:2 Rare:2,愤怒、群情激愤、地狱之刃、原始力量、添柴
+Ironclad,铁甲战士,multiplayer_only,仅多人,5,0.056,Uncommon:3 Rare:2,群情激愤、恶魔护盾、炽焰、午夜、肉盾
+Silent,静默猎手,shiv,小刀,13,0.143,Common:3 Uncommon:6 Rare:4,先制打击、刀刃之舞、斗篷与匕首、精准、无尽刀刃、幻影之刃、隐秘匕首、刀刃交响曲、袖里乾坤、刀扇、墨之刃、钢铁风暴
+Silent,静默猎手,shiv_gen,小刀-生成,10,0.11,Common:3 Uncommon:4 Rare:3,先制打击、刀刃之舞、斗篷与匕首、无尽刀刃、隐秘匕首、刀刃交响曲、袖里乾坤、刀扇、墨之刃、钢铁风暴
+Silent,静默猎手,poison,中毒,13,0.143,Common:3 Uncommon:7 Rare:3,带毒刺击、致命毒药、蛇咬、触媒、毒雾、调制、咕嘟冒泡、蜃景、弹跳药瓶、迷雾、涂毒、腐蚀波
+Silent,静默猎手,discard,弃牌,8,0.088,Basic:1 Common:2 Uncommon:3 Rare:2,生存者、投掷匕首、早有准备、计算下注、隐秘匕首、杂技、暗影步、钢铁风暴
+Silent,静默猎手,sly,奇巧 Sly,9,0.099,Common:3 Uncommon:3 Rare:3,翻越撑击、连续反弹、触不可及、手上技法、本能反应、战术大师、谋划专家、鬼祟、磨蚀
+Silent,静默猎手,generates_card,生成卡牌,9,0.099,Common:3 Uncommon:3 Rare:3,先制打击、刀刃之舞、斗篷与匕首、隐秘匕首、刀刃交响曲、袖里乾坤、刀扇、墨之刃、钢铁风暴
+Silent,静默猎手,multiplayer_only,仅多人,5,0.055,Uncommon:3 Rare:2,调制、消影、刀刃交响曲、鬼祟、夹击
+Defect,故障机器人,orb_channel,生成充能球,22,0.242,Basic:1 Common:3 Uncommon:12 Rare:6,电击、球状闪电、寒流、冷静头脑、空值、折射、冰寒、混沌、漆黑、聚变、玻璃工艺、引火
+Defect,故障机器人,orb_evoke,激发,4,0.044,Basic:1 Rare:2 Ancient:1,双重释放、打碎、多重释放、四重释放
+Defect,故障机器人,focus,集中,6,0.066,Common:2 Uncommon:1 Rare:2 Ancient:1,集中打击、热修复、同步、超能光束、碎片整理、偏差认知
+Defect,故障机器人,orb_slot,球槽增减,3,0.033,Uncommon:2 Rare:1,扩容、暴涨、模组改造
+Defect,故障机器人,status_gen,状态牌,8,0.088,Common:3 Uncommon:4 Rare:1,污秽攻击、高速脱离、内核加速、火箭飞拳、超频、压缩、强撑、散射炮
+Defect,故障机器人,generates_card,生成卡牌,8,0.088,Common:3 Uncommon:4 Rare:1,污秽攻击、高速脱离、内核加速、超频、压缩、强撑、白噪声、适应打击
+Defect,故障机器人,multiplayer_only,仅多人,5,0.055,Uncommon:3 Rare:2,能量涌动、引火、休眠、一心化万、模仿学习
+Regent,储君,stars_gain,辉星-产出,12,0.132,Basic:1 Common:4 Uncommon:4 Rare:2 Ancient:1,崇拜、太阳打击、收集光辉、辉光、隐秘藏品、明耀打击、决胜一击、胜券在王、汇流、创世纪、大爆炸、封印王座
+Regent,储君,stars_spend,辉星-消耗(星耗牌),23,0.253,Basic:1 Common:4 Uncommon:10 Rare:6 Ancient:2,陨星、星界脉冲、新月长矛、引导之星、群星斗篷、伽马爆破、星尘、葬送、星位序列、群星荟萃、粒子墙、类星体
+Regent,储君,forge,铸造,11,0.121,Common:3 Uncommon:4 Rare:4,战火铸就、淬炼刀刃、战利品、熔炉、征服者、征召上前、铸墙、锻打成型、追踪之刃、大爆炸、铸剑者
+Regent,储君,sovereign_blade,君王之剑相关,3,0.033,Uncommon:2 Rare:1,招架、征召上前、剑圣
+Regent,储君,minion,仆从,3,0.033,Common:1 Uncommon:1 Rare:1,下去！、冲锋！！、护驾！！！
+Regent,储君,colorless_gen,无色牌生成/联动,5,0.055,Uncommon:3 Rare:2,慷慨捐助、类星体、君权自授、传承之锤、新生之喜
+Regent,储君,generates_card,生成卡牌,9,0.099,Common:2 Uncommon:3 Rare:4,碰撞轨迹、下去！、慷慨捐助、类星体、君权自授、迫降、传承之锤、新生之喜、护驾！！！
+Regent,储君,multiplayer_only,仅多人,5,0.055,Uncommon:3 Rare:2,群星荟萃、慷慨捐助、筹划、锤子时间、指导
+Necrobinder,亡灵契约师,summon,召唤(奥斯提HP产出),10,0.11,Basic:1 Common:3 Uncommon:4 Rare:2,护卫、来生、唤起、吸引仇恨、洁净、增生、骸骨军团、挽歌、亡灵精通、死者苏生
+Necrobinder,亡灵契约师,osty_attack,奥斯提攻击,12,0.132,Basic:1 Common:3 Uncommon:6 Rare:1 Ancient:1,出击、戳击、响指、重压、取回、得力助手、碎骨、猛晃、紧追不放、击掌、榨取、守护者
+Necrobinder,亡灵契约师,osty_any,引用奥斯提(含上两项),14,0.154,Basic:1 Common:3 Uncommon:7 Rare:2 Ancient:1,出击、戳击、响指、重压、取回、得力助手、碎骨、猛晃、紧追不放、击掌、增生、榨取
+Necrobinder,亡灵契约师,doom,灾厄,14,0.154,Common:3 Uncommon:6 Rare:5,荒疫打击、负能量脉冲、鞭打、倒数计时、厄运之衣、死亡之门、无处可逃、死亡使者、幽冥之界、大限已至、精神过载、死神形态
+Necrobinder,亡灵契约师,soul,灵魂,11,0.121,Common:2 Uncommon:5 Rare:4,剥夺、守墓人、切断、纠缠、灵魂绑定、捕捉灵魂、挽歌、灵魂风暴、吞噬生命、彼岸一瞥、降灵
+Necrobinder,亡灵契约师,soul_gen,灵魂-生成,8,0.088,Common:2 Uncommon:4 Rare:2,剥夺、守墓人、切断、灵魂绑定、捕捉灵魂、挽歌、彼岸一瞥、降灵
+Necrobinder,亡灵契约师,ethereal_syn,虚无联动(自带或检查),16,0.176,Common:4 Uncommon:6 Rare:6,玷污、恐惧、雕琢打击、违逆、亡魂牵引、刺破帷幕、致死性、书页风暴、弱化之触、领会、女妖之嚎、虚空之唤
+Necrobinder,亡灵契约师,generates_card,生成卡牌,7,0.077,Common:2 Uncommon:3 Rare:2,剥夺、守墓人、切断、捕捉灵魂、挽歌、不死、彼岸一瞥
+Necrobinder,亡灵契约师,multiplayer_only,仅多人,5,0.055,Uncommon:3 Rare:2,灵魂绑定、骸骨军团、幽冥之界、不谐合曲、彼岸一瞥
+CROSS,跨池分布,stars_gain,该机制在各池的分布,12,,Regent:12,
+CROSS,跨池分布,forge,该机制在各池的分布,11,,Regent:11,
+CROSS,跨池分布,summon,该机制在各池的分布,10,,Necrobinder:10,
+CROSS,跨池分布,doom,该机制在各池的分布,14,,Necrobinder:14,
+CROSS,跨池分布,orb_channel,该机制在各池的分布,22,,Defect:22,
+CROSS,跨池分布,shiv,该机制在各池的分布,14,,Silent:13 Token:1,
+CROSS,跨池分布,poison,该机制在各池的分布,13,,Silent:13,
+CROSS,跨池分布,focus,该机制在各池的分布,6,,Defect:6,

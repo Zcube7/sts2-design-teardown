@@ -1,0 +1,40 @@
+﻿system,key,value_normal,value_ascension,ascension_or_modifier,note,src
+卡牌稀有度,普通战斗 稀有基础概率,0.03,0.0149,A7 Scarcity 稀缺,另加保底偏移 offset,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:33
+卡牌稀有度,普通战斗 罕见概率,0.37,,,罕见区间从「稀有+offset」起算，稀有+offset<0 时罕见同样被吃掉（offset=-5% 时罕见只有 35%）；普通 = 剩余,"MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:15,99-110"
+卡牌稀有度,精英战斗 稀有基础概率,0.1,0.05,A7 Scarcity 稀缺,另加 offset,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:37
+卡牌稀有度,精英战斗 罕见概率,0.4,,,,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:17
+卡牌稀有度,Boss 战斗 稀有概率,1.0,,,Roll 时 offset 强制按 0 计；抽到稀有后照样把 offset 重置,"MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:19-23,71"
+卡牌稀有度,商店 稀有概率,0.09,0.045,A7 Scarcity 稀缺,商店用 RollWithoutChangingFutureOdds：读 offset 但不改它,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:41; Factories/CardFactory.cs:CreateForMerchant
+卡牌稀有度,商店 罕见概率,0.37,,,,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:25
+卡牌稀有度,保底 offset 初值,-0.05,,,每局开局、每次出稀有后回到 -5%,"MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:27,47,74"
+卡牌稀有度,保底 offset 每次未出稀有的增量,0.01,0.005,A7 Scarcity 稀缺,普通/罕见都 +1%（不是只算普通）,"MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:31,78"
+卡牌稀有度,保底 offset 上限,0.4,,,,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:29
+卡牌稀有度,会推进保底的来源,,,,"仅 Source=Encounter 且 Odds∈{普通,精英,Boss}，或带 ForceRarityOddsChange（SealedDeck 修饰符）；用 CardCreationOptions.ForRoom 生成奖励的遗物（捕梦网/转经轮/白星）来源也算 Encounter，同样读写 offset；其余事件/遗物给的卡走 RollWithBaseOdds 不读不写 offset",Factories/CardFactory.cs:246-262; Runs/CardCreationOptions.cs:81-90; Models.Relics/DreamCatcher.cs:22; PrayerWheel.cs:24; WhiteStar.cs:29
+卡牌升级,战斗奖励卡（非稀有）预升级概率,幕序号×0.25,幕序号×0.125,A7 Scarcity 稀缺,第1幕 0%/第2幕 25%/第3幕 50%；稀有卡不吃这条,"Factories/CardFactory.cs:23,RollForUpgrade"
+卡牌升级,商店卡预升级概率,基础 -999999999,,,等于不会预升级，除非有 Hook 改,Factories/CardFactory.cs:CreateForMerchant
+卡牌升级,事件给卡,不 roll,,,ForNonCombatWithDefaultOdds 带 NoUpgradeRoll,Runs/CardCreationOptions.cs:116
+未知房,敌人 基础/增量,0.1,,,没抽中的类型每次 + 自身基础值,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs:21
+未知房,宝箱 基础/增量,0.02,,,DeadlyEvents 修饰符下宝箱增量×2,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs:25
+未知房,商店 基础/增量,0.03,,,上一房是商店、或下一层全是商店时本次排除商店,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs:27; Runs/RunManager.cs:668
+未知房,精英 基础,-1,0.1,修饰符 DeadlyEvents,负数=永不出且不增长,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs:23; Models.Modifiers/DeadlyEvents.cs:18
+未知房,事件,1-其余正值之和,,,抽中的类型重置到基础值；每幕开始全部重置,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs:96; Runs/RunManager.cs:1393
+未知房,首局教学,前 2 个 ? 必为事件，第 3 个必为敌人,,,NumberOfRuns==0,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs:125-136
+药水掉落,初值,0.4,,,每名玩家一份，跨幕不重置,MegaCrit.Sts2.Core.Odds/PotionRewardOdds.cs:19
+药水掉落,掉了 / 没掉,-0.10 / +0.10,,,无上下限钳制,MegaCrit.Sts2.Core.Odds/PotionRewardOdds.cs:67-72
+药水掉落,精英加成,0.25×0.5 = +12.5%,,,常量叫 eliteBonus=0.25，代码里又乘了 0.5,"MegaCrit.Sts2.Core.Odds/PotionRewardOdds.cs:17,63"
+药水掉落,设计目标,0.5,,,targetOdds 常量只是注释用，代码未引用；全普通战斗时 ±10% 生灭链的平稳态掉率恰好 50%（从 40% 起步，前 40 场平均 48.8%）,MegaCrit.Sts2.Core.Odds/PotionRewardOdds.cs:15
+药水稀有度,稀有 / 罕见 / 普通,10% / 25% / 65%,,,奖励与商店共用,"Factories/PotionFactory.cs:13-19,83"
+遗物稀有度,普通 / 罕见 / 稀有,50% / 33% / 17%,,,精英、宝箱、商店前两格共用 RollRarity,Factories/RelicFactory.cs:RollRarity
+金币,普通战斗,10–20,7–15,A3 Poverty 贫穷(×0.75),×(1-逃跑敌人数/出场敌人数),"Models/EncounterModel.cs:64-99,369"
+金币,精英战斗,35–45,26–33,Poverty,,"Models/EncounterModel.cs:71,90"
+金币,Boss 战斗,100,75,Poverty,最后一幕 Boss 不给任何奖励,"Models/EncounterModel.cs:72,91; Rewards/RewardsSet.cs:WithRewardsFromRoom"
+金币,宝箱房,42–52,31–39,Poverty,"NextInt(42,53)",Multiplayer.Game/OneOffSynchronizer.cs:132-136
+金币,首局铁甲 教学战斗,10–20,,,前 7 场普通战斗奖励写死,Rewards/RewardsSet.cs:TryGenerateTutorialRewards
+营火,休息 回复,最大HP×30%,,,,Entities.RestSite/HealRestSiteOption.cs:92
+营火,锻造 升级张数,1,,,SmithCount 可被遗物改,Entities.RestSite/SmithRestSiteOption.cs:29
+营火,愈合（仅多人）,队友最大HP×30%,,,,Entities.RestSite/MendRestSiteOption.cs:56
+先古之民,进场回血,回满,回缺失量的 80%,A2 WearyTraveler 旅途劳顿,涅奥先把 HP 置 0 再回，所以进阶下开局只有 80% HP,Models/AncientEventModel.cs:BeforeEventStarted
+地图,精英数,5,8,A1 SwarmingElites 精英蜂拥(×1.6 四舍五入),,Map/MapPointTypeCounts.cs:15
+地图,商店数,3,,,,Map/MapPointTypeCounts.cs:18
+地图,未知数,"Gauss(12,1)∈[10,14]",,,第2/3幕再 -1,Map/MapPointTypeCounts.cs:34; Models.Acts/*.cs
+地图,休息处数（不含 Boss 前一排）,"第1幕 Gauss(7,1)∈[6,7]；第2幕 Gauss(6,1)∈[6,7]；第3幕 NextInt(5,7)=5或6",,,,Models.Acts/Overgrowth.cs:136; Hive.cs:119; Glory.cs:108

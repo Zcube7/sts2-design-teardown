@@ -1,0 +1,11 @@
+﻿level,enum,title_zh,desc_zh,implementation,source,history_from_patch_notes
+1,SwarmingElites,精英蜂拥,精英敌人出现更加频繁。,每幕地图精英点数 5 → round(5×1.6)=8,MegaCrit.Sts2.Core.Map/MapPointTypeCounts.cs:15,2024-10 首版 A1 为 Burly Enemies；2025-01 改 Mighty Bosses；现为精英蜂拥
+2,WearyTraveler,旅途劳顿,先古之民只会回复你已损失生命值的80%。,先古之民事件开场回血：回复已损失生命的 80%（普通 100%）；涅奥开局先把 HP 置 0 再回血，所以 A2 起开局只有 80% 最大生命,MegaCrit.Sts2.Core.Models/AncientEventModel.cs:176-189,2025-11-06 起也影响开局 HP；2025-11-13 75%→80%
+3,Poverty,贫穷,敌人和宝箱掉落的金币减少25%。,战斗金币上下限 ×0.75（普通 10-20 / 精英 35-45 / Boss 100）；宝箱金币 42-52 ×0.75,MegaCrit.Sts2.Core.Models/EncounterModel.cs:64-98；MegaCrit.Sts2.Core.Multiplayer.Game/OneOffSynchronizer.cs:133；MegaCrit.Sts2.Core.Helpers/AscensionHelper.cs:PovertyAscensionGoldMultiplier,2025-12-11 由别的效果改为贫穷
+4,TightBelt,收紧腰带,游戏开始时药水栏位减少1。,药水栏 3 → 2（开局 SubtractFromMaxPotionCount(1)）,MegaCrit.Sts2.Core.Entities.Ascension/AscensionManager.cs:56-59；MegaCrit.Sts2.Core.Entities.Players/Player.cs:28,2024-10 首版即有；2025-01 一度被 Warden 替换；2025-12-11 回到 A4
+5,AscendersBane,进阶之灾,游戏开始时被诅咒。,开局牌组加 1 张「进阶之灾」诅咒（不能打出、虚无、永恒=不可移除，不可升级）,MegaCrit.Sts2.Core.Entities.Ascension/AscensionManager.cs:60-65；MegaCrit.Sts2.Core.Models.Cards/AscendersBane.cs,2024-10 首版即有
+6,Inflation,通货膨胀,商人的卡牌移除服务价格提升。,商人删牌基础价 75 → 100，每次涨价 25 → 50,MegaCrit.Sts2.Core.Entities.Merchant/MerchantCardRemovalEntry.cs:20-22,2026-04-02 由 Gloom（更少休息处）改为通货膨胀：开发者认为改地图的进阶玩家感知不到
+7,Scarcity,稀缺,稀有和已升级卡牌更少出现。,卡牌稀有度：普通战斗稀有 3%→1.49%、普通 60%→61.5%；精英稀有 10%→5%、普通 50%→55%；商店稀有 9%→4.5%、普通 54%→58.5%（普通=1−稀有−罕见的余量；代码里的普通概率常量 0.615/0.549/0.585 从未被掷骰读取，CardRarityOdds.cs:96-133）；稀有保底增长 0.01→0.005；奖励牌升级概率系数 0.25→0.125,MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:13-41；MegaCrit.Sts2.Core.Factories/CardFactory.cs:23,2024-12 加入（A8），2025-12-11 移到 A9，现为 A7；2025-10-30 不再影响药水
+8,ToughEnemies,强韧敌人,所有的敌人变得更难杀死。,怪物 HP 上调：156 处 HP 取值，进阶/普通中位数 1.055（+3 HP），区间 1.00-1.24；另有 17 处非 HP 数值（如覆甲、易躲）,MegaCrit.Sts2.Core.Models.Monsters/*（101 个文件 173 处），统计脚本 scripts/ch06_ascension_scan.py,2024-10 首版即有（当时 A6）
+9,DeadlyEnemies,致命敌人,所有的敌人变得更加致命。,怪物伤害/增益上调：227 处，进阶/普通中位数 1.143（+1），区间 1.0-3.0,MegaCrit.Sts2.Core.Models.Monsters/*（96 个文件 227 处）,—
+10,DoubleBoss,双重Boss,在第3阶段最后与两个Boss战斗。,最后一幕（第 3 幕）在原 Boss 之外再抽 1 个本幕其他 Boss（不重复）,MegaCrit.Sts2.Core.Runs/RunManager.cs:769-773,2025-09 Villainy → 2025-11 重做 → 2025-12 Ascender's Scorn → 2026-01-15 改为一代回归的双 Boss

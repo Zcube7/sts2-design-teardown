@@ -1,0 +1,9 @@
+﻿character,name_zh,playable,hp,gold,max_energy,orb_slots,unlocks_after_run_as,deck_size,deck,deck_zh,starter_relic,starter_relic_zh,starter_relic_desc,card_pool
+Ironclad,铁甲战士,true,80,99,3,0,,10,StrikeIroncladx5 DefendIroncladx4 Bashx1,打击x5 防御x4 痛击x1,BurningBlood,燃烧之血,在战斗结束时，回复[green]{Heal}[/green]点生命。,IroncladCardPool
+Silent,静默猎手,true,70,99,3,0,,12,StrikeSilentx5 DefendSilentx5 Neutralizex1 Survivorx1,打击x5 防御x5 中和x1 生存者x1,RingOfTheSnake,蛇之戒指,在每场战斗开始时，额外抽[blue]{Cards}[/blue]张牌。,SilentCardPool
+Defect,故障机器人,true,75,99,3,3,Necrobinder,10,StrikeDefectx4 DefendDefectx4 Zapx1 Dualcastx1,打击x4 防御x4 电击x1 双重释放x1,CrackedCore,破损核心,在每场战斗开始时，[gold]生成[/gold][blue]{Lightning}[/blue]个[gold]闪电[/gold]充能球。,DefectCardPool
+Regent,储君,true,75,99,3,0,Silent,10,StrikeRegentx4 DefendRegentx4 FallingStarx1 Veneratex1,打击x4 防御x4 陨星x1 崇拜x1,DivineRight,天赋君权,在每场战斗开始时，获得{Stars:starIcons()}。,RegentCardPool
+Necrobinder,亡灵契约师,true,66,99,3,0,Regent,10,StrikeNecrobinderx4 DefendNecrobinderx4 Bodyguardx1 Unleashx1,打击x4 防御x4 护卫x1 出击x1,BoundPhylactery,缚魂命匣,在你的回合开始时，[gold]召唤[/gold][blue]{Summon}[/blue],NecrobinderCardPool
+Deprived,被剥夺者,false,1000,99,100,0,,0,,,,,,
+RandomCharacter,随机,false,1,1,3,0,,10,StrikeIroncladx1 StrikeSilentx1 StrikeRegentx1 StrikeNecrobinderx1 StrikeDefectx1 DefendIroncladx1 DefendSilentx1 DefendRegentx1 DefendNecrobinderx1 DefendDefectx1,打击x1 打击x1 打击x1 打击x1 打击x1 防御x1 防御x1 防御x1 防御x1 防御x1,Circlet,头环,这是一个头环。,IroncladCardPool
+DeprecatedCharacter,已弃用角色,false,1000,99,100,0,,0,,,,,,

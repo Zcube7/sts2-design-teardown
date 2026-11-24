@@ -1,0 +1,149 @@
+﻿hook,phase,kind,return,dispatch_scope,passes,bool_rule,choice_context,call_sites,caller_files,model_overrides,source
+AfterActEntered,地图/房间,事件(通知),Task,跑局(无战斗对象),AfterActEntered,,,1,MegaCrit.Sts2.Core.Runs/RunManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:212
+BeforeAttack,伤害与格挡,事件(通知),Task,战斗(结束后静默),BeforeAttack,,,2,MegaCrit.Sts2.Core.Commands.Builders/AttackCommand.cs; MegaCrit.Sts2.Core.Commands.Builders/AttackContext.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:224
+AfterAttack,伤害与格挡,事件(通知),Task,战斗(结束后静默),AfterAttack,,,2,MegaCrit.Sts2.Core.Commands.Builders/AttackCommand.cs; MegaCrit.Sts2.Core.Commands.Builders/AttackContext.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:236
+AfterBlockBroken,伤害与格挡,事件(通知),Task,"战斗(直派,结束中仍触发)",AfterBlockBroken,,,2,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:251
+AfterBlockCleared,回合流程,事件(通知),Task,战斗(结束后静默),AfterBlockCleared,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,6,MegaCrit.Sts2.Core.Hooks/Hook.cs:263
+BeforeBlockGained,伤害与格挡,事件(通知),Task,战斗(结束后静默),BeforeBlockGained,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:275
+AfterBlockGained,伤害与格挡,事件(通知),Task,战斗(结束后静默),AfterBlockGained,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:287
+BeforeCardAutoPlayed,出牌与费用,事件(通知),Task,战斗(结束后静默),BeforeCardAutoPlayed,,,1,MegaCrit.Sts2.Core.Commands/CardCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:299
+AfterCardChangedPiles,牌堆流转,事件(通知),Task,跑局+战斗,AfterCardChangedPiles → AfterCardChangedPilesLate,,,4,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs; MegaCrit.Sts2.Core.Commands/CardCmd.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:311
+AfterCardDiscarded,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterCardDiscarded,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CardCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:330
+AfterCardDrawn,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterCardDrawnEarly → AfterCardDrawn,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,13,MegaCrit.Sts2.Core.Hooks/Hook.cs:346
+AfterCardEnteredCombat,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterCardEnteredCombat,,,2,MegaCrit.Sts2.Core.Commands/CardCmd.cs; MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,15,MegaCrit.Sts2.Core.Hooks/Hook.cs:367
+AfterCardExhausted,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterCardExhausted,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CardCmd.cs,9,MegaCrit.Sts2.Core.Hooks/Hook.cs:381
+AfterCardGeneratedForCombat,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterCardGeneratedForCombat,,,2,MegaCrit.Sts2.Core.Commands/CardCmd.cs; MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,8,MegaCrit.Sts2.Core.Hooks/Hook.cs:395
+BeforeCardPlayed,出牌与费用,事件(通知),Task,战斗(结束后静默),BeforeCardPlayed,,,1,MegaCrit.Sts2.Core.Models/CardModel.cs,29,MegaCrit.Sts2.Core.Hooks/Hook.cs:407
+AfterCardPlayed,出牌与费用,事件(通知),Task,"战斗(直派,结束中仍触发)",AfterCardPlayed → AfterCardPlayedLate,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Models/CardModel.cs,66,MegaCrit.Sts2.Core.Hooks/Hook.cs:422
+BeforeCardRemoved,死亡/召唤,事件(通知),Task,跑局(无战斗对象),BeforeCardRemoved,,,1,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:443
+BeforeCombatStart,战斗开始/结束,事件(通知),Task,跑局+战斗,BeforeCombatStart → BeforeCombatStartLate,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,22,MegaCrit.Sts2.Core.Hooks/Hook.cs:455
+AfterCombatEnd,战斗开始/结束,事件(通知),Task,跑局+战斗,AfterCombatEnd,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,45,MegaCrit.Sts2.Core.Hooks/Hook.cs:472
+BeforeCombatRewardOffered,战斗开始/结束,事件(通知),Task,跑局(无战斗对象),BeforeCombatRewardOffered,,,1,MegaCrit.Sts2.Core.Rooms/CombatRoom.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:484
+AfterCombatVictory,战斗开始/结束,事件(通知),Task,跑局+战斗,AfterCombatVictoryEarly → AfterCombatVictory,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,6,MegaCrit.Sts2.Core.Hooks/Hook.cs:496
+AfterCreatureAddedToCombat,死亡/召唤,事件(通知),Task,"战斗(直派,结束中仍触发)",AfterCreatureAddedToCombat,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:518
+AfterCurrentHpChanged,伤害与格挡,事件(通知),Task,跑局+战斗,AfterCurrentHpChanged,,,4,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,5,MegaCrit.Sts2.Core.Hooks/Hook.cs:530
+AfterDamageGiven,伤害与格挡,事件(通知),Task,"战斗(直派,结束中仍触发)",AfterDamageGiven,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,9,MegaCrit.Sts2.Core.Hooks/Hook.cs:545
+BeforeDamageReceived,伤害与格挡,事件(通知),Task,跑局+战斗,BeforeDamageReceived,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:559
+AfterDamageReceived,伤害与格挡,事件(通知),Task,跑局+战斗,AfterDamageReceived → AfterDamageReceivedLate,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,21,MegaCrit.Sts2.Core.Hooks/Hook.cs:573
+BeforeDeath,死亡/召唤,事件(通知),Task,跑局+战斗,BeforeDeath,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:594
+AfterDeath,死亡/召唤,事件(通知),Task,跑局+战斗,AfterDeath,,每监听者独立选择上下文(可并行等待),3,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs; MegaCrit.Sts2.Core.Entities.Players/Player.cs,31,MegaCrit.Sts2.Core.Hooks/Hook.cs:606
+AfterGoldGained,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterGoldGained,,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:625
+AfterDiedToDoom,死亡/召唤,事件(通知),Task,"战斗(直派,结束中仍触发)",AfterDiedToDoom,,每监听者独立选择上下文(可并行等待),2,MegaCrit.Sts2.Core.Models.Powers/DoomPower.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:640
+AfterEnergyReset,回合流程,事件(通知),Task,战斗(结束后静默),AfterEnergyReset → AfterEnergyResetLate,,,2,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Models.Relics/BoundPhylactery.cs,10,MegaCrit.Sts2.Core.Hooks/Hook.cs:659
+AfterEnergySpent,出牌与费用,事件(通知),Task,战斗(结束后静默),AfterEnergySpent,,,1,MegaCrit.Sts2.Core.Models/CardModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:676
+BeforeFlush,回合流程,事件(通知),Task,战斗(结束后静默),BeforeFlush → BeforeFlushLate,,每监听者独立选择上下文(可并行等待),1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:688
+AfterFlush,回合流程,事件(通知),Task,战斗(结束后静默),AfterFlush,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:716
+AfterForge,角色资源,事件(通知),Task,战斗(结束后静默),AfterForge,,,1,MegaCrit.Sts2.Core.Commands/ForgeCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:730
+BeforeHandDraw,回合流程,事件(通知),Task,战斗(结束后静默),BeforeHandDraw → BeforeHandDrawLate,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,18,MegaCrit.Sts2.Core.Hooks/Hook.cs:744
+AfterHandEmptied,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterHandEmptied,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:767
+AfterItemPurchased,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterItemPurchased,,,2,MegaCrit.Sts2.Core.Entities.Merchant/MerchantCardRemovalEntry.cs; MegaCrit.Sts2.Core.Entities.Merchant/MerchantEntry.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:781
+AfterMapGenerated,地图/房间,事件(通知),Task,跑局(无战斗对象),AfterMapGenerated,,,2,MegaCrit.Sts2.Core.Runs/RunManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:793
+AfterModifyingBlockAmount,伤害与格挡,事件(通知),Task,战斗(结束后静默),AfterModifyingBlockAmount,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:805
+AfterModifyingCardPlayCount,出牌与费用,事件(通知),Task,战斗(结束后静默),AfterModifyingCardPlayCount,,,2,MegaCrit.Sts2.Core.Models/CardModel.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:820
+AfterModifyingCardRewardOptions,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterModifyingCardRewardOptions,,,2,MegaCrit.Sts2.Core.Factories/CardFactory.cs; MegaCrit.Sts2.Core.Rewards/CardReward.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:835
+AfterModifyingDamageAmount,伤害与格挡,事件(通知),Task,跑局+战斗,AfterModifyingDamageAmount,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:850
+AfterModifyingEnergyGain,角色资源,事件(通知),Task,战斗(结束后静默),AfterModifyingEnergyGain,,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:865
+AfterModifyingGoldGained,奖励/商店/营火/牌组,事件(通知),Task,跑局+战斗,AfterModifyingGoldGained,,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:880
+AfterModifyingHandDraw,回合流程,事件(通知),Task,战斗(结束后静默),AfterModifyingHandDraw,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:895
+AfterModifyingHpLostBeforeOsty,伤害与格挡,事件(通知),Task,跑局+战斗,AfterModifyingHpLostBeforeOsty,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:910
+AfterModifyingHpLostAfterOsty,伤害与格挡,事件(通知),Task,跑局+战斗,AfterModifyingHpLostAfterOsty,,,2,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,5,MegaCrit.Sts2.Core.Hooks/Hook.cs:925
+AfterModifyingOrbPassiveTriggerCount,角色资源,事件(通知),Task,战斗(结束后静默),AfterModifyingOrbPassiveTriggerCount,,,1,MegaCrit.Sts2.Core.Models/OrbModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:940
+AfterModifyingPowerAmountGiven,能力,事件(通知),Task,战斗(结束后静默),AfterModifyingPowerAmountGiven,,,2,MegaCrit.Sts2.Core.Commands/PowerCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:955
+AfterModifyingPowerAmountReceived,能力,事件(通知),Task,战斗(结束后静默),AfterModifyingPowerAmountReceived,,,2,MegaCrit.Sts2.Core.Commands/PowerCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:970
+AfterModifyingRewards,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterModifyingRewards,,,1,MegaCrit.Sts2.Core.Rewards/RewardsSet.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:985
+AfterOrbChanneled,角色资源,事件(通知),Task,战斗(结束后静默),AfterOrbChanneled,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/OrbCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1000
+AfterOrbEvoked,角色资源,事件(通知),Task,战斗(结束后静默),AfterOrbEvoked,,,1,MegaCrit.Sts2.Core.Commands/OrbCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1014
+AfterOstyRevived,死亡/召唤,事件(通知),Task,战斗(结束后静默),AfterOstyRevived,,,1,MegaCrit.Sts2.Core.Commands/OstyCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1026
+AfterPlayerTurnStart,回合流程,事件(通知),Task,战斗(结束后静默),AfterPlayerTurnStartEarly → AfterPlayerTurnStart → AfterPlayerTurnStartLate,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,22,MegaCrit.Sts2.Core.Hooks/Hook.cs:1038
+AfterAutoPostPlayPhaseEntered,回合流程,事件(通知),Task,战斗(结束后静默),AfterAutoPostPlayPhaseEntered,,共用调用方选择上下文(串行),2,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Combat/PlayerTurnPhase.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:1066
+AfterAutoPrePlayPhaseEntered,回合流程,事件(通知),Task,战斗(结束后静默),AfterAutoPrePlayPhaseEnteredEarly → AfterAutoPrePlayPhaseEntered → AfterAutoPrePlayPhaseEnteredLate,,共用调用方选择上下文(串行),3,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Combat/PlayerTurnPhase.cs; MegaCrit.Sts2.Core.Entities.Players/PlayerCombatState.cs,5,MegaCrit.Sts2.Core.Hooks/Hook.cs:1084
+AfterPotionDiscarded,牌堆流转,事件(通知),Task,跑局+战斗,AfterPotionDiscarded,,,1,MegaCrit.Sts2.Core.Commands/PotionCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1116
+AfterPotionProcured,药水,事件(通知),Task,跑局+战斗,AfterPotionProcured,,,1,MegaCrit.Sts2.Core.Commands/PotionCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1128
+BeforePotionUsed,药水,事件(通知),Task,跑局+战斗,BeforePotionUsed,,,1,MegaCrit.Sts2.Core.Models/PotionModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1140
+AfterPotionUsed,药水,事件(通知),Task,跑局+战斗,AfterPotionUsed,,,1,MegaCrit.Sts2.Core.Models/PotionModel.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1152
+BeforePowerAmountChanged,能力,事件(通知),Task,战斗(结束后静默),BeforePowerAmountChanged,,,2,MegaCrit.Sts2.Core.Commands/PowerCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1164
+AfterPowerAmountChanged,能力,事件(通知),Task,战斗(结束后静默),AfterPowerAmountChanged,,,2,MegaCrit.Sts2.Core.Commands/PowerCmd.cs,15,MegaCrit.Sts2.Core.Hooks/Hook.cs:1176
+AfterPreventingBlockClear,回合流程,事件(通知),Task,战斗(结束后静默),,,,1,MegaCrit.Sts2.Core.Entities.Creatures/Creature.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1188
+AfterPreventingDeath,死亡/召唤,事件(通知),Task,跑局+战斗,,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1200
+AfterPreventingDraw,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterPreventingDraw,,,1,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1212
+AfterRestSiteHeal,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterRestSiteHeal,,,2,MegaCrit.Sts2.Core.Entities.RestSite/HealRestSiteOption.cs; MegaCrit.Sts2.Core.Entities.RestSite/MendRestSiteOption.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:1224
+AfterRestSiteSmith,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterRestSiteSmith,,,1,MegaCrit.Sts2.Core.Entities.RestSite/SmithRestSiteOption.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1236
+AfterRewardTaken,奖励/商店/营火/牌组,事件(通知),Task,跑局(无战斗对象),AfterRewardTaken,,,1,MegaCrit.Sts2.Core.Rewards/Reward.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1248
+BeforeRoomEntered,地图/房间,事件(通知),Task,跑局(无战斗对象),BeforeRoomEntered,,,1,MegaCrit.Sts2.Core.Runs/RunManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1260
+AfterRoomEntered,地图/房间,事件(通知),Task,跑局(无战斗对象),AfterRoomEntered,,,5,MegaCrit.Sts2.Core.Rooms/CombatRoom.cs; MegaCrit.Sts2.Core.Rooms/EventRoom.cs; MegaCrit.Sts2.Core.Rooms/MerchantRoom.cs,37,MegaCrit.Sts2.Core.Hooks/Hook.cs:1272
+AfterShuffle,牌堆流转,事件(通知),Task,战斗(结束后静默),AfterShuffle,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:1286
+BeforeSideTurnStart,回合流程,事件(通知),Task,战斗(结束后静默),BeforeSideTurnStart,,每监听者独立选择上下文(可并行等待),2,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Models.Relics/BoundPhylactery.cs,27,MegaCrit.Sts2.Core.Hooks/Hook.cs:1300
+AfterSideTurnStart,回合流程,事件(通知),Task,战斗(结束后静默),AfterSideTurnStart → AfterSideTurnStartLate,,,2,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Combat/PlayerTurnPhase.cs,51,MegaCrit.Sts2.Core.Hooks/Hook.cs:1319
+AfterStarsGained,角色资源,事件(通知),Task,战斗(结束后静默),AfterStarsGained,,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1336
+AfterStarsSpent,出牌与费用,事件(通知),Task,战斗(结束后静默),AfterStarsSpent,,,1,MegaCrit.Sts2.Core.Models/CardModel.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:1348
+AfterSummon,死亡/召唤,事件(通知),Task,战斗(结束后静默),AfterSummon,,共用调用方选择上下文(串行),1,MegaCrit.Sts2.Core.Commands/OstyCmd.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1362
+AfterTakingExtraTurn,回合流程,事件(通知),Task,战斗(结束后静默),AfterTakingExtraTurn,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1376
+BeforeSideTurnEnd,回合流程,事件(通知),Task,战斗(结束后静默),BeforeSideTurnEndVeryEarly → BeforeSideTurnEndEarly → BeforeSideTurnEnd,,每监听者独立选择上下文(可并行等待),3,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Combat/PlayerTurnPhase.cs,19,MegaCrit.Sts2.Core.Hooks/Hook.cs:1388
+AfterSideTurnEnd,回合流程,事件(通知),Task,战斗(结束后静默),AfterSideTurnEnd → AfterSideTurnEndLate,,每监听者独立选择上下文(可并行等待),3,MegaCrit.Sts2.Core.Combat/CombatManager.cs; MegaCrit.Sts2.Core.Combat/PlayerTurnPhase.cs,67,MegaCrit.Sts2.Core.Hooks/Hook.cs:1423
+ModifyAttackHitCount,伤害与格挡,数值修正,decimal,战斗(结束后静默),ModifyAttackHitCount,,,1,MegaCrit.Sts2.Core.Commands.Builders/AttackCommand.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1453
+ModifyBlock,伤害与格挡,数值修正,decimal,战斗(结束后静默),ModifyBlockAdditive → ModifyBlockMultiplicative,,,4,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs; MegaCrit.Sts2.Core.Localization.DynamicVars/BlockVar.cs; MegaCrit.Sts2.Core.Localization.DynamicVars/CalculatedBlockVar.cs,10,MegaCrit.Sts2.Core.Hooks/Hook.cs:1466
+ModifyCardBeingAddedToDeck,奖励/商店/营火/牌组,改写(CardModel),CardModel,跑局(无战斗对象),TryModifyCardBeingAddedToDeck → TryModifyCardBeingAddedToDeckLate,,,2,MegaCrit.Sts2.Core.Commands/CardCmd.cs; MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:1501
+ModifyCardPlayCount,出牌与费用,数值修正,int,战斗(结束后静默),ModifyCardPlayCount,,,1,MegaCrit.Sts2.Core.Models/CardModel.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:1528
+ModifyCardPlayResultLocation,出牌与费用,改写(CardLocation),CardLocation,战斗(结束后静默),ModifyCardPlayResultLocation,,,2,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs; MegaCrit.Sts2.Core.Models/CardModel.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:1547
+ModifyCardRewardAlternatives,奖励/商店/营火/牌组,改写(IEnumerable<AbstractModel>),IEnumerable<AbstractModel>,跑局(无战斗对象),TryModifyCardRewardAlternatives,,,1,MegaCrit.Sts2.Core.Entities.CardRewardAlternatives/CardRewardAlternative.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1566
+ModifyCardRewardCreationOptions,奖励/商店/营火/牌组,改写(CardCreationOptions),CardCreationOptions,跑局(无战斗对象),ModifyCardRewardCreationOptions → ModifyCardRewardCreationOptionsLate,,,3,MegaCrit.Sts2.Core.Models.Relics/ScrollBoxes.cs; MegaCrit.Sts2.Core.Factories/CardFactory.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:1582
+TryModifyCardRewardOptions,奖励/商店/营火/牌组,判定(否决/许可),bool,跑局(无战斗对象),TryModifyCardRewardOptions → TryModifyCardRewardOptionsLate,任一返回 true 即生效(遍历全部),,2,MegaCrit.Sts2.Core.Factories/CardFactory.cs; MegaCrit.Sts2.Core.Rewards/CardReward.cs,10,MegaCrit.Sts2.Core.Hooks/Hook.cs:1598
+ModifyCardRewardUpgradeOdds,奖励/商店/营火/牌组,数值修正,decimal,跑局(无战斗对象),ModifyCardRewardUpgradeOdds,,,1,MegaCrit.Sts2.Core.Factories/CardFactory.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1626
+ModifyDamage,伤害与格挡,数值修正,decimal,跑局+战斗,EnchantDamageAdditive → EnchantDamageMultiplicative → ModifyDamageAdditive → ModifyDamageMultiplicative → ModifyDamageCap,,,7,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs; MegaCrit.Sts2.Core.Localization.DynamicVars/CalculatedDamageVar.cs; MegaCrit.Sts2.Core.Localization.DynamicVars/DamageVar.cs,43,MegaCrit.Sts2.Core.Hooks/Hook.cs:1639
+ModifyEnergyCostInCombat,出牌与费用,数值修正,decimal,战斗(结束后静默),TryModifyEnergyCostInCombat → TryModifyEnergyCostInCombatLate,,,1,MegaCrit.Sts2.Core.Entities.Cards/CardEnergyCost.cs,11,MegaCrit.Sts2.Core.Hooks/Hook.cs:1727
+ModifyKeywordsInCombat,出牌与费用,改写(void),void,"战斗(直派,结束中仍触发)",TryModifyKeywordsInCombat,,,1,MegaCrit.Sts2.Core.Models/CardModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1748
+ModifyEnergyGain,角色资源,数值修正,decimal,战斗(结束后静默),ModifyEnergyGain,,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1759
+ModifyGoldGained,奖励/商店/营火/牌组,数值修正,decimal,跑局+战斗,ModifyGoldGained,,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1779
+ModifyExtraRestSiteHealText,奖励/商店/营火/牌组,改写(IReadOnlyList<LocString>),IReadOnlyList<LocString>,跑局(无战斗对象),ModifyExtraRestSiteHealText,,,1,MegaCrit.Sts2.Core.Entities.RestSite/HealRestSiteOption.cs,5,MegaCrit.Sts2.Core.Hooks/Hook.cs:1799
+ModifyGeneratedMap,地图/房间,改写(ActMap),ActMap,跑局(无战斗对象),ModifyGeneratedMap,,,1,MegaCrit.Sts2.Core.Runs/RunManager.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:1811
+ModifyGeneratedMapLate,地图/房间,改写(ActMap),ActMap,跑局(无战斗对象),ModifyGeneratedMapLate,,,1,MegaCrit.Sts2.Core.Runs/RunManager.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1824
+ModifyHandDraw,回合流程,数值修正,decimal,战斗(结束后静默),ModifyHandDraw → ModifyHandDrawLate,,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,18,MegaCrit.Sts2.Core.Hooks/Hook.cs:1837
+ModifyHpLost,伤害与格挡,数值修正,decimal,跑局+战斗,ModifyHpLostBeforeOsty → ModifyHpLostBeforeOstyLate → ModifyHpLostAfterOsty → ModifyHpLostAfterOstyLate,,,3,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:1870
+ModifyMaxEnergy,角色资源,数值修正,decimal,战斗(结束后静默),ModifyMaxEnergy,,,1,MegaCrit.Sts2.Core.Entities.Players/PlayerCombatState.cs,16,MegaCrit.Sts2.Core.Hooks/Hook.cs:1923
+ModifyMerchantCardCreationResults,奖励/商店/营火/牌组,改写(void),void,跑局(无战斗对象),ModifyMerchantCardCreationResults,,,2,MegaCrit.Sts2.Core.Entities.Merchant/MerchantCardEntry.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:1936
+ModifyMerchantCardPool,奖励/商店/营火/牌组,改写(IEnumerable<CardModel>),IEnumerable<CardModel>,跑局(无战斗对象),ModifyMerchantCardPool,,,2,MegaCrit.Sts2.Core.Factories/CardFactory.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1947
+ModifyMerchantCardRarity,奖励/商店/营火/牌组,改写(CardRarity),CardRarity,跑局(无战斗对象),ModifyMerchantCardRarity,,,2,MegaCrit.Sts2.Core.Factories/CardFactory.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:1959
+ModifyMerchantPrice,奖励/商店/营火/牌组,数值修正,decimal,跑局(无战斗对象),ModifyMerchantPrice,,,1,MegaCrit.Sts2.Core.Entities.Merchant/MerchantEntry.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:1971
+ModifyNextEvent,地图/房间,改写(EventModel),EventModel,跑局(无战斗对象),ModifyNextEvent,,,1,MegaCrit.Sts2.Core.Models/ActModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1983
+ModifyOddsIncreaseForUnrolledRoomType,地图/房间,改写(float),float,跑局(无战斗对象),ModifyOddsIncreaseForUnrolledRoomType,,,1,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:1996
+ModifyOrbPassiveTriggerCount,角色资源,数值修正,int,战斗(结束后静默),ModifyOrbPassiveTriggerCounts,,,1,MegaCrit.Sts2.Core.Models/OrbModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2008
+ModifyOrbValue,角色资源,数值修正,decimal,战斗(结束后静默),ModifyOrbValue,,,1,MegaCrit.Sts2.Core.Models/OrbModel.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2027
+ModifyPowerAmountGiven,能力,数值修正,decimal,战斗(结束后静默),ModifyPowerAmountGivenAdditive → ModifyPowerAmountGivenMultiplicative,,,3,MegaCrit.Sts2.Core.Commands/PowerCmd.cs; MegaCrit.Sts2.Core.Localization.DynamicVars/PowerVar.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2041
+ModifyPowerAmountReceived,能力,数值修正,decimal,战斗(结束后静默),TryModifyPowerAmountReceived,,,2,MegaCrit.Sts2.Core.Commands/PowerCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2070
+ModifyRestSiteHealAmount,奖励/商店/营火/牌组,数值修正,decimal,跑局(无战斗对象),ModifyRestSiteHealAmount,,,2,MegaCrit.Sts2.Core.Entities.RestSite/HealRestSiteOption.cs; MegaCrit.Sts2.Core.Entities.RestSite/MendRestSiteOption.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2089
+ModifyRestSiteOptions,奖励/商店/营火/牌组,改写(IEnumerable<AbstractModel>),IEnumerable<AbstractModel>,跑局(无战斗对象),TryModifyRestSiteOptions,,,1,MegaCrit.Sts2.Core.Entities.RestSite/RestSiteOption.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:2102
+ModifyRestSiteHealRewards,奖励/商店/营火/牌组,改写(IEnumerable<AbstractModel>),IEnumerable<AbstractModel>,跑局(无战斗对象),TryModifyRestSiteHealRewards,,,1,MegaCrit.Sts2.Core.Entities.RestSite/HealRestSiteOption.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2118
+ModifyRewards,奖励/商店/营火/牌组,改写(IEnumerable<AbstractModel>),IEnumerable<AbstractModel>,跑局(无战斗对象),TryModifyRewards → TryModifyRewardsLate,,,1,MegaCrit.Sts2.Core.Rewards/RewardsSet.cs,9,MegaCrit.Sts2.Core.Hooks/Hook.cs:2134
+ModifyShuffleOrder,牌堆流转,改写(void),void,战斗(结束后静默),ModifyShuffleOrder,,,2,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs; MegaCrit.Sts2.Core.Entities.Cards/CardPile.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2157
+ModifyStarCost,出牌与费用,数值修正,decimal,战斗(结束后静默),TryModifyStarCost,,,1,MegaCrit.Sts2.Core.Models/CardModel.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2168
+ModifySummonAmount,死亡/召唤,数值修正,decimal,战斗(结束后静默),ModifySummonAmount,,,2,MegaCrit.Sts2.Core.Commands/OstyCmd.cs; MegaCrit.Sts2.Core.Localization.DynamicVars/SummonVar.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2185
+ModifyUnblockedDamageTarget,伤害与格挡,改写(Creature),Creature,"战斗(直派,结束中仍触发)",ModifyUnblockedDamageTarget,,,1,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2201
+ModifyUnknownMapPointRoomTypes,地图/房间,改写(IReadOnlySet<RoomType>),IReadOnlySet<RoomType>,跑局(无战斗对象),ModifyUnknownMapPointRoomTypes,,,1,MegaCrit.Sts2.Core.Odds/UnknownMapPointOdds.cs,3,MegaCrit.Sts2.Core.Hooks/Hook.cs:2214
+ModifyXValue,出牌与费用,数值修正,int,战斗(结束后静默),ModifyXValue,,,2,MegaCrit.Sts2.Core.Models/CardModel.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2224
+ShouldAddToDeck,奖励/商店/营火/牌组,判定(否决/许可),bool,跑局(无战斗对象),ShouldAddToDeck,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2237
+ShouldAfflict,牌堆流转,判定(否决/许可),bool,战斗(结束后静默),ShouldAfflict,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Commands/CardCmd.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2254
+ShouldAllowAncient,地图/房间,判定(否决/许可),bool,跑局(无战斗对象),ShouldAllowAncient,任一返回 false 即否决,,2,MegaCrit.Sts2.Core.Models/AncientEventModel.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2269
+ShouldAllowHitting,伤害与格挡,判定(否决/许可),bool,战斗(结束后静默),ShouldAllowHitting,任一返回 false 即否决,,2,MegaCrit.Sts2.Core.Entities.Creatures/Creature.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:2284
+ShouldAllowMerchantCardRemoval,奖励/商店/营火/牌组,判定(否决/许可),bool,跑局(无战斗对象),ShouldAllowMerchantCardRemoval,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Nodes.Screens.Shops/NMerchantCardRemoval.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2299
+ShouldAllowSelectingMoreCardRewards,奖励/商店/营火/牌组,判定(否决/许可),bool,跑局(无战斗对象),ShouldAllowSelectingMoreCardRewards,任一返回 true 即生效,,1,MegaCrit.Sts2.Core.Rewards/CardReward.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2314
+ShouldAllowTargeting,伤害与格挡,判定(否决/许可),bool,战斗(结束后静默),ShouldAllowTargeting,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Nodes.Combat/NTargetManager.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2329
+ShouldClearBlock,回合流程,判定(否决/许可),bool,战斗(结束后静默),ShouldClearBlock,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Entities.Creatures/Creature.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:2346
+ShouldCreatureBeRemovedFromCombatAfterDeath,死亡/召唤,判定(否决/许可),bool,"战斗(直派,结束中仍触发)",ShouldCreatureBeRemovedFromCombatAfterDeath,任一返回 false 即否决,,3,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs; MegaCrit.Sts2.Core.Entities.Players/PlayerCombatState.cs; MegaCrit.Sts2.Core.Models/MonsterModel.cs,6,MegaCrit.Sts2.Core.Hooks/Hook.cs:2367
+ShouldDie,死亡/召唤,判定(否决/许可),bool,跑局+战斗,ShouldDie → ShouldDieLate,任一返回 false 即否决,,2,MegaCrit.Sts2.Core.Commands/CreatureCmd.cs; MegaCrit.Sts2.Core.Models.Powers/DoomPower.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2382
+ShouldDisableRemainingRestSiteOptions,奖励/商店/营火/牌组,判定(否决/许可),bool,跑局(无战斗对象),ShouldDisableRemainingRestSiteOptions,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Multiplayer.Game/RestSiteSynchronizer.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2407
+ShouldDraw,牌堆流转,判定(否决/许可),bool,战斗(结束后静默),ShouldDraw,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Commands/CardPileCmd.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2422
+ShouldEtherealTrigger,出牌与费用,判定(否决/许可),bool,战斗(结束后静默),ShouldEtherealTrigger,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2439
+ShouldFlush,回合流程,判定(否决/许可),bool,战斗(结束后静默),ShouldFlush,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,4,MegaCrit.Sts2.Core.Hooks/Hook.cs:2454
+ShouldGenerateTreasure,地图/房间,判定(否决/许可),bool,跑局(无战斗对象),ShouldGenerateTreasure,任一返回 false 即否决,,2,MegaCrit.Sts2.Core.Multiplayer.Game/OneOffSynchronizer.cs; MegaCrit.Sts2.Core.Multiplayer.Game/TreasureRoomRelicSynchronizer.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2469
+ShouldGainStars,角色资源,判定(否决/许可),bool,战斗(结束后静默),ShouldGainStars,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Commands/PlayerCmd.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2484
+ShouldPayExcessEnergyCostWithStars,出牌与费用,判定(否决/许可),bool,战斗(结束后静默),ShouldPayExcessEnergyCostWithStars,任一返回 true 即生效,,2,MegaCrit.Sts2.Core.Entities.Players/PlayerCombatState.cs; MegaCrit.Sts2.Core.Models/CardModel.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2499
+ShouldPlay,出牌与费用,判定(否决/许可),bool,战斗(结束后静默),ShouldPlay,任一返回 false 即否决,,2,MegaCrit.Sts2.Core.Commands/CardCmd.cs; MegaCrit.Sts2.Core.Models/CardModel.cs,7,MegaCrit.Sts2.Core.Hooks/Hook.cs:2514
+ShouldPlayerResetEnergy,回合流程,判定(否决/许可),bool,战斗(结束后静默),ShouldPlayerResetEnergy,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2531
+ShouldProceedToNextMapPoint,地图/房间,判定(否决/许可),bool,跑局(无战斗对象),ShouldProceedToNextMapPoint,任一返回 false 即否决,,2,MegaCrit.Sts2.Core.Nodes.Screens/NRewardsScreen.cs; MegaCrit.Sts2.Core.Nodes.Screens.Map/NMapScreen.cs,0,MegaCrit.Sts2.Core.Hooks/Hook.cs:2546
+ShouldProcurePotion,药水,判定(否决/许可),bool,跑局+战斗,ShouldProcurePotion,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Commands/PotionCmd.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2561
+ShouldRefillMerchantEntry,奖励/商店/营火/牌组,判定(否决/许可),bool,跑局(无战斗对象),ShouldRefillMerchantEntry,任一返回 true 即生效,,1,MegaCrit.Sts2.Core.Entities.Merchant/MerchantEntry.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2576
+ShouldStopCombatFromEnding,战斗开始/结束,判定(否决/许可),bool,"战斗(直派,结束中仍触发)",ShouldStopCombatFromEnding,任一返回 true 即生效,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,5,MegaCrit.Sts2.Core.Hooks/Hook.cs:2595
+ShouldTakeExtraTurn,回合流程,判定(否决/许可),bool,战斗(结束后静默),ShouldTakeExtraTurn,任一返回 true 即生效,,1,MegaCrit.Sts2.Core.Combat/CombatManager.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2610
+ShouldForcePotionReward,药水,判定(否决/许可),bool,跑局(无战斗对象),ShouldForcePotionReward,任一返回 true 即生效(遍历全部),,1,MegaCrit.Sts2.Core.Odds/PotionRewardOdds.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2625
+ShouldAllowFreeTravel,地图/房间,判定(否决/许可),bool,跑局(无战斗对象),ShouldAllowFreeTravel,任一返回 true 即生效(遍历全部),,1,MegaCrit.Sts2.Core.Map/MapTravel.cs,2,MegaCrit.Sts2.Core.Hooks/Hook.cs:2638
+ShouldPowerBeRemovedOnDeath,能力,判定(否决/许可),bool,"战斗(直派,结束中仍触发)",ShouldPowerBeRemovedOnDeath,任一返回 false 即否决,,1,MegaCrit.Sts2.Core.Entities.Creatures/Creature.cs,1,MegaCrit.Sts2.Core.Hooks/Hook.cs:2648

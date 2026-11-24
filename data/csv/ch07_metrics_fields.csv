@@ -1,0 +1,117 @@
+﻿channel,endpoint,record,field,json_name,type,note,source
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,BuildId,buildId,string,ReleaseInfo.Version，如 v0.111.1,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:8
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,PlayerId,playerId,string,progress.save 里的 UniqueId：7 位随机大写字母数字，不是 Steam ID,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:10
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Character,character,ModelId,本机玩家角色（只写 Entry，不带 CHARACTER. 前缀）,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:12
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Win,win,bool,是否胜利,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:14
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,NumPlayers,numPlayers,int,本局人数,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:16
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Team,team,List<ModelId>,多人时全队角色列表；单人为空,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:18
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,BuildType,buildType,string,Steam 分支名（PlatformBranch）,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:20
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Ascension,ascension,int,进阶等级,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:22
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,TotalPlaytime,totalPlaytime,float,存档累计游戏时长,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:24
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,TotalWinRate,totalWinRate,float,存档总胜场/总局数,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:26
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,NumReloads,numReloads,int,本局读档（SL）次数,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:28
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,RunPlaytime,runPlaytime,float,胜利用 WinTime，否则 RunTime,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:30
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,FloorReached,floorReached,int,经过的地图点数,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:32
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,KilledByEncounter,killedByEncounter,ModelId,失败且最后一个房间是战斗时记录遭遇 ID,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:34
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,CardChoices,cardChoices,List<CardChoiceMetric>,每次选卡：picked/skipped（卡牌 Entry）,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:36
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,CampfireUpgrades,campfireUpgrades,List<string>,营火升级的卡,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:38
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,EventChoices,eventChoices,List<EventChoiceMetric>,普通事件选项（id/act/picked，picked 取本地化 key 的选项段）,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:40
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,AncientChoices,ancientChoices,List<AncientMetric>,Ancient 事件的 picked/skipped,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:42
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,RelicBuys,relicBuys,List<string>,商店买的遗物,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:44
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,PotionBuys,potionBuys,List<string>,商店买的药水,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:46
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,ColorlessBuys,colorlessBuys,List<string>,商店买的无色卡,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:48
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,PotionDiscards,potionDiscards,List<string>,丢弃的药水,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:50
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Encounters,encounters,List<EncounterMetric>,每场战斗 id/damage(0-100 钳制)/turns,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:52
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,ActWins,actWins,List<ActWinMetric>,每幕 act/win,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:54
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Deck,deck,IEnumerable<ModelId>,终局牌组（卡牌 Entry 列表）,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:56
+run_metrics（每局结束 PUT）,https://sts2-metric-upload.megacrit.com/record_data/,RunMetrics,Relics,relics,IEnumerable<ModelId>,终局遗物（Entry 列表）,MegaCrit.Sts2.Core.Runs.Metrics/RunMetrics.cs:58
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,CardChoiceMetric,picked,picked,List<string>,,MegaCrit.Sts2.Core.Runs.Metrics/CardChoiceMetric.cs:8
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,CardChoiceMetric,skipped,skipped,List<string>,,MegaCrit.Sts2.Core.Runs.Metrics/CardChoiceMetric.cs:10
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,EncounterMetric,id,id,string,,MegaCrit.Sts2.Core.Runs.Metrics/EncounterMetric.cs:7
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,EncounterMetric,damage,damage,int,,MegaCrit.Sts2.Core.Runs.Metrics/EncounterMetric.cs:9
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,EncounterMetric,turns,turns,int,,MegaCrit.Sts2.Core.Runs.Metrics/EncounterMetric.cs:11
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,EventChoiceMetric,id,id,string,,MegaCrit.Sts2.Core.Runs.Metrics/EventChoiceMetric.cs:10
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,EventChoiceMetric,act,act,string,,MegaCrit.Sts2.Core.Runs.Metrics/EventChoiceMetric.cs:12
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,EventChoiceMetric,picked,picked,string,,MegaCrit.Sts2.Core.Runs.Metrics/EventChoiceMetric.cs:14
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,AncientMetric,picked,picked,string,,MegaCrit.Sts2.Core.Runs.Metrics/AncientMetric.cs:10
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,AncientMetric,skipped,skipped,List<string>,,MegaCrit.Sts2.Core.Runs.Metrics/AncientMetric.cs:12
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,ActWinMetric,act,act,string,,MegaCrit.Sts2.Core.Runs.Metrics/ActWinMetric.cs:5
+run_metrics 子结构,https://sts2-metric-upload.megacrit.com/record_data/,ActWinMetric,win,win,bool,,MegaCrit.Sts2.Core.Runs.Metrics/ActWinMetric.cs:7
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,BuildId,buildId,string,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:9
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,Os,os,string,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:12
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,Platform,platform,string,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:15
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,SystemRam,systemRam,int,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:18
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,LanguageCode,language,string,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:21
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,FastModeType,combatSpeed,FastModeType,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:24
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,Screenshake,screenshake,int,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:27
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,ShowRunTimer,runTimer,bool,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:30
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,PhobiaMode,phobiaMode,bool,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:33
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,ShowCardIndices,cardIndices,bool,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:36
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,DisplayCount,displayCount,int,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:39
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,DisplayResolution,displayResolution,Vector2I,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:42
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,Fullscreen,fullscreen,bool,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:45
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,AspectRatio,aspectRatio,AspectRatioSetting,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:48
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,ResizeWindows,resizeWindows,bool,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:51
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,VSync,vSync,VSyncType,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:54
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,FpsLimit,fpsLimit,int,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:57
+settings（第 5 局结束时只传一次）,https://sts2-metric-upload.megacrit.com/record_settings/,SettingsDataMetric,Msaa,msaa,int,,MegaCrit.Sts2.Core.Runs.Metrics/SettingsDataMetric.cs:60
+epoch（揭示纪元时）,https://sts2-metric-upload.megacrit.com/record_epoch/,EpochMetric,BuildId,buildId,string,,MegaCrit.Sts2.Core.Timeline/EpochMetric.cs:7
+epoch（揭示纪元时）,https://sts2-metric-upload.megacrit.com/record_epoch/,EpochMetric,Epoch,epoch,string,,MegaCrit.Sts2.Core.Timeline/EpochMetric.cs:10
+epoch（揭示纪元时）,https://sts2-metric-upload.megacrit.com/record_epoch/,EpochMetric,TotalEpochs,totalEpochs,int,,MegaCrit.Sts2.Core.Timeline/EpochMetric.cs:13
+epoch（揭示纪元时）,https://sts2-metric-upload.megacrit.com/record_epoch/,EpochMetric,TotalPlaytime,totalPlaytime,long,,MegaCrit.Sts2.Core.Timeline/EpochMetric.cs:16
+epoch（揭示纪元时）,https://sts2-metric-upload.megacrit.com/record_epoch/,EpochMetric,TotalRuns,totalRuns,int,,MegaCrit.Sts2.Core.Timeline/EpochMetric.cs:19
+achievement（解锁成就时；当前成就未开放）,https://sts2-metric-upload.megacrit.com/record_achievement/,AchievementMetric,BuildId,buildId,string,,MegaCrit.Sts2.Core.Achievements/AchievementMetric.cs:7
+achievement（解锁成就时；当前成就未开放）,https://sts2-metric-upload.megacrit.com/record_achievement/,AchievementMetric,Achievement,achievement,string,,MegaCrit.Sts2.Core.Achievements/AchievementMetric.cs:10
+achievement（解锁成就时；当前成就未开放）,https://sts2-metric-upload.megacrit.com/record_achievement/,AchievementMetric,TotalAchievements,totalAchievements,int,,MegaCrit.Sts2.Core.Achievements/AchievementMetric.cs:13
+achievement（解锁成就时；当前成就未开放）,https://sts2-metric-upload.megacrit.com/record_achievement/,AchievementMetric,TotalPlaytime,totalPlaytime,long,,MegaCrit.Sts2.Core.Achievements/AchievementMetric.cs:16
+achievement（解锁成就时；当前成就未开放）,https://sts2-metric-upload.megacrit.com/record_achievement/,AchievementMetric,TotalRuns,totalRuns,int,,MegaCrit.Sts2.Core.Achievements/AchievementMetric.cs:19
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,description,description,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:7
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,category,category,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:10
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,gameVersion,game_version,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:13
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,uniqueId,unique_id,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:16
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,commit,commit,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:19
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,platformBranch,platform_branch,string?,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:22
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,sessionId,session_id,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:25
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,isModded,is_modded,bool,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:28
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,isFullConsole,is_full_console,bool,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:31
+feedback（玩家主动提交反馈，multipart 附截图+日志 zip）,https://feedback.sts2.megacrit.com/feedback,FeedbackData,lang,lang,string,,MegaCrit.Sts2.Core.Nodes.Screens.FeedbackScreen/FeedbackData.cs:34
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,sdk,sdk,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:129
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,session_id,session_id,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:130
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,os,os,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:131
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,godot_version,godot_version,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:132
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,assembly.main_hash,assembly.main_hash,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:133
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,branch,branch,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:136
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,build.commit,build.commit,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:137
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,build.main_hash,build.main_hash,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:138
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,build.date,build.date,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:139
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,autoslay,autoslay,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:200
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,autoslay.seed,autoslay.seed,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:208
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,platform.branch,platform.branch,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:302
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,source,source,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:444
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,loc.language,loc.language,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:477
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,game.scene,game.scene,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:481
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Tag,game.in_run,game.in_run,tag,,MegaCrit.Sts2.Core.Debug/SentryService.cs:486
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.seed,game.seed,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:487
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.ascension,game.ascension,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:488
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.act,game.act,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:489
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.act_name,game.act_name,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:490
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.floor,game.floor,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:491
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.mode,game.mode,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:492
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.room_type,game.room_type,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:494
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.event,game.event,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:497
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.characters,game.characters,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:502
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,game.player_count,game.player_count,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:503
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,combat.encounter,combat.encounter,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:513
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,combat.round,combat.round,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:514
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,combat.enemy_count,combat.enemy_count,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:515
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,combat.enemies,combat.enemies,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:516
+sentry 上下文（崩溃/异常时附带；DSN 已打码不列）,<Sentry DSN，见 project.binary sentry/config/dsn，已打码>,Scope.Extra,combat.player_hp,combat.player_hp,extra,,MegaCrit.Sts2.Core.Debug/SentryService.cs:520
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Tag,net.role,net.role,tag,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:247
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Tag,divergence.type,divergence.type,tag,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:248
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.context,divergence.context,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:249
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.checksum_id,divergence.checksum_id,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:250
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.local_checksum,divergence.local_checksum,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:251
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.remote_checksum,divergence.remote_checksum,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:252
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.local_net_id,divergence.local_net_id,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:253
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.remote_net_id,divergence.remote_net_id,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:254
+sentry 联机不同步上报（附 local/remote/previous state 的 gz 文本）,<Sentry DSN，已打码>,Scope.Extra,divergence.lobby_id,divergence.lobby_id,extra,,MegaCrit.Sts2.Core.Multiplayer.Game/ChecksumTracker.cs:255

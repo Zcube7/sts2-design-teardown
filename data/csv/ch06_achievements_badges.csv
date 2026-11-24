@@ -1,0 +1,59 @@
+﻿kind,id,enum_value,title_zh,condition_zh,condition_code,tiers,requires_win,multiplayer_only,status,source
+成就,IRONCLAD_WIN,0,铁甲战士,用铁甲战士打通游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,SILENT_WIN,1,静默猎手,用静默猎手打通游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,REGENT_WIN,2,储君,用储君打通游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,NECROBINDER_WIN,3,亡灵契约师,用亡灵契约师打通游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,DEFECT_WIN,4,故障机器人,用故障机器人打通游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,DEFEAT_UNDERDOCKS_ENEMIES,14,暗港,打败暗港的所有敌人。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,DEFEAT_OVERGROWTH_ENEMIES,15,密林,打败密林的所有敌人。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,DEFEAT_HIVE_ENEMIES,16,巢穴,打败巢穴的所有敌人。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,DEFEAT_GLORY_ENEMIES,17,荣耀,打败荣耀的所有敌人。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,DEFEAT_ONE_BOSS,18,小小开始,打败一名Boss。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,FLOOR_TEN_THOUSAND,20,好多楼梯,在尖塔中攀登1万层。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,CHARACTER_SKILL_SILENT1,21,安得奇巧,通过奇巧机制用一张牌打出5张牌。,一张牌连锁触发 ≥5 次奇巧弃牌自动打出,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillSilent1Achievement.cs:49
+成就,CHARACTER_SKILL_SILENT2,22,几滴就好,对一个敌人施加99层中毒。,单个敌人中毒 ≥99,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillSilent2Achievement.cs:24
+成就,CHARACTER_SKILL_IRONCLAD1,23,契约完成,在一场战斗中消耗20张牌。,一场战斗内消耗 ≥20 张牌,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillIronclad1Achievement.cs:26
+成就,CHARACTER_SKILL_IRONCLAD2,24,最重之刃,一击造成999点伤害。,单次造成 ≥999 伤害,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillIronclad2Achievement.cs
+成就,CHARACTER_SKILL_NECROBINDER1,25,已经死了,对单个敌人造成999点灾厄。,单个敌人灾厄 ≥999,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillNecrobinder1Achievement.cs:24
+成就,CHARACTER_SKILL_NECROBINDER2,26,喝奶补钙,对奥斯提施加50点力量。,奥斯提力量 ≥50,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillNecrobinder2Achievement.cs:25
+成就,CHARACTER_SKILL_REGENT1,27,王者之刃,打造出一张至少999点伤害的君王之剑。,君王之剑基础伤害 ≥999,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillRegent1Achievement.cs:30
+成就,CHARACTER_SKILL_REGENT2,28,群日凌空,拥有20辉星。,拥有 ≥20 辉星,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/SkillRegent2Achievement.cs
+成就,NO_RELIC_WIN,29,身无杂物,不获得任何遗物打通游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,ALL_CARDS_UPGRADED,30,完美牌组,以全部升级的牌组赢得一局游戏。,（判定写在 AchievementsHelper，当前为空函数）,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Achievements/AchievementsHelper.cs
+成就,PLAY20_CARDS_SINGLE_TURN,31,打牌真开心啊,在一回合内打出20张牌。,一回合打出 ≥20 张牌,,,,枚举在；Unlock() 为空函数（抢先体验禁用）,MegaCrit.Sts2.Core.Models.Achievements/Play20CardsSingleTurnAchievement.cs:24
+成就,ALL_OTHER_ACHIEVEMENTS,,永存者,完成其他所有成就。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,COMPLETE_ACT4,,真结局,完成第四阶段。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,COMPLETE_TIMELINE,,历史学家,完成时间线。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,DEFECT_ASCENSION10,,回响,用故障机器人赢得一局进阶10的游戏。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,DISCOVER_ALL_CARDS,,收藏家,发现所有卡牌。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,DISCOVER_ALL_EVENTS,,探险家,遇到所有事件。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,DISCOVER_ALL_RELICS,,考古学家,发现所有遗物。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,IRONCLAD_ASCENSION10,,恶魔,用铁甲战士赢得一局进阶10的游戏。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,NECROBINDER_ASCENSION10,,巫妖,用亡灵契约师赢得一局进阶10的游戏。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,REGENT_ASCENSION10,,帝王,用储君赢得一局进阶10的游戏。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+成就,SILENT_ASCENSION10,,幽魂,用静默猎手赢得一局进阶10的游戏。,,,,,只有本地化文本，枚举里没有（暂时移除）,localization/zhs/achievements.json
+徽章,BIG_DECK,,大牌组,以40张或更多张牌的牌组获胜。 / 以60张或更多张牌的牌组获胜。 / 以100张或更多张牌的牌组获胜。,牌组张数,铜≥40 / 银≥60 / 金≥100,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/BigDeck.cs
+徽章,CCCCOMBO,,连连连连段攻击,在一回合内打出20张牌。,一回合打出 ≥20 张牌（CccComboModel 战斗中记标记）,铜,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/CccCombo.cs
+徽章,CURSES,,诅咒局！,以5张或更多张诅咒牌获胜。,牌组诅咒牌 ≥5,铜,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Curses.cs
+徽章,DAMAGE_LEADER,,伤害第一,在多人游戏中，对敌人造成最多伤害。,全队造成伤害最多（第 1 幕至少走过 5 个点）,铜,False,True,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/DamageLeader.cs
+徽章,DEBUFFER,,弱化专家,在多人游戏中，施加最多负面效果。,全队施加减益次数最多（第 1 幕至少 5 个点；DebufferModel 计数，临时能力不算）,铜,False,True,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Debuffer.cs
+徽章,DOUBLE_SNECKO,,二蛇之眼,同时获得真假版本的异蛇之眼。,同时持有异蛇之眼与假异蛇之眼,铜,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/DoubleSnecko.cs
+徽章,ELITE,,精英猎手,杀死3名或更多精英。 / 杀死6名或更多精英。 / 杀死9名或更多精英。,击杀精英数（死于精英那场不算）,铜≥3 / 银≥6 / 金≥9,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/EliteKiller.cs
+徽章,FAMISHED,,饥肠辘辘,以少于初始生命值一半的最大生命值获胜。,最大生命 < 角色初始生命的一半（向上取整）,铜,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Famished.cs
+徽章,GLUTTON,,吃饱,获胜时最大生命值提高了至少15点。 / 获胜时最大生命值提高了至少30点。 / 获胜时最大生命值提高了至少50点。,最大生命比初始多,铜≥15 / 银≥30 / 金≥50,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Glutton.cs
+徽章,HEALER,,治愈者,愈合过盟友一次。 / 愈合一名盟友两次。 / 反复愈合过盟友（至少3次）。,休息处选「愈合」（MEND，多人专属）次数,铜1 / 银2 / 金≥3,False,True,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Healer.cs
+徽章,HIGHLANDER,,宇宙,获胜时牌组中没有相同牌（初始牌除外）。,除基础牌外没有重复牌,铜,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Highlander.cs
+徽章,HONED,,熟能生巧,获胜时牌组中有至少5张相同牌（初始牌除外）。,除基础牌外某张牌 ≥5 张,铜,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Honed.cs
+徽章,ILIKESHINY,,我爱亮闪闪,收集25件或更多遗物。,遗物 ≥25 件,铜,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/ILikeShiny.cs
+徽章,KACHING,,感谢惠顾！,在商人处花费超过1000金币。,在商店累计花费 ≥1000 金币,铜,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/KaChing.cs
+徽章,MONEY_MONEY,,好多好多钱,获胜时拥有至少200金币。 / 获胜时拥有至少400金币。 / 获胜时拥有至少600金币。,结算时持有金币,铜≥200 / 银≥400 / 金≥600,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/MoneyMoney.cs
+徽章,MYSTERY_MACHINE,,寻谜问道,造访过15个或更多个？房间。,走过 ≥15 个 ? 房间,铜,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/MysteryMachine.cs
+徽章,PERFECT,,完胜,在不失去生命的情况下击败BOSS。 / 在不失去生命的情况下击败2个BOSS。 / 在不失去生命的情况下击败3个BOSS。,无伤击败 Boss 的场数,铜1 / 银2 / 金≥3,False,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Perfect.cs
+徽章,RESTFUL,,休养生息,获胜时，在每个休息处都选择了休息。,每个休息处都选了休息（且至少到过 1 个）,铜,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Restful.cs
+徽章,RESTLESS,,战斗不息,获胜时，一次都没有休息过。,到过休息处但一次都没休息,铜,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Restless.cs
+徽章,SPEEDY,,高速,在50分钟内赢得一局游戏。 / 在40分钟内赢得一局游戏。 / 在30分钟内赢得一局游戏。,通关用时（秒）,铜≤3000 / 银≤2400 / 金≤1800,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/Speedy.cs
+徽章,TABLET,,真理石板,获胜时只有1点最大生命值。,最大生命恰为 1,金,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/TabletBadge.cs
+徽章,TEAM_PLAYER,,团队型选手,牌组中有至少3张多人专属牌。,牌组中多人专属牌 ≥3,银,False,True,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/TeamPlayer.cs
+徽章,TINY_DECK,,小牌组,获胜时牌组中的牌数不超过20张。 / 获胜时牌组中的牌数不超过10张。 / 获胜时牌组中的牌数不超过5张。,牌组张数,铜≤20 / 银≤10 / 金≤5,True,False,在 BadgePool（23 个）中,MegaCrit.Sts2.Core.Models.Badges/TinyDeck.cs
+徽章,WHOMPER,,势大力沉,单次攻击造成超过100点伤害。,单次攻击 >100 伤害（常量 100）,铜,False,False,类存在但 IsObtained() 恒为 false，且不在 BadgePool,MegaCrit.Sts2.Core.Models.Badges/Whomper.cs
+徽章,FAVORITE_CARD,,最爱好牌,获胜时有一张牌打出过超过100次。,,,,,只有本地化文本，无实现,localization/zhs/badges.json

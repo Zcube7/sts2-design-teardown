@@ -1,0 +1,330 @@
+[
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "1. **多段攻击加段数不加单段**：蜂群术士「蜂群」3×7 → 3×8，追踪手 1×8 → 1×9；而墨宝旋风 2×3 → 3×3 这种加单段的反而是 +50%。",
+    "fix_new": "1. **多段攻击绝大多数是单段 +1、段数不变**：幕内怪物 51 个多段招式里 41 个是单段 +1（如女王「将头砍下」3×5 → 4×5、高塔炮手「弹雨」3×5 → 4×5、墨宝旋风 2×3 → 3×3，后者相当于 +50%），只有 3 个加段数（蜂群术士「蜂群」3×7 → 3×8、劫掠者追踪手 1×8 → 1×9、外骨骼虫 1×3 → 1×4），7 个两者都不变。",
+    "severity": "error",
+    "reason": "规律说反了：进阶对多段攻击的主流写法是单段 +1，加段数的只有 3 个",
+    "evidence": "data/csv/ch04_monster_moves.csv 幕内 102 怪的多段招式 dmg_a0→dmg_a10：41 个改单段、3 个改段数、7 个不变；如 Queen.cs:56 OffWithYourHeadDamage 4/3（段数常量 5）、TurretOperator.cs:33 FireDamage 4/3（_fireRepeat=5）、Entomancer.cs:29-31 BeesRepeat 8/7 + BeesDamage 3/3、TrackerRubyRaider.cs:23-25、Exoskeleton.cs:36 SkitterRepeats 4/3"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "其中 10 处是多段攻击的单段伤害，如同族信徒 5/5、2/2，火炬头光束 8/8；其余是段数、偷取量、女王给火炬头的 1/1 力量和两个孤儿怪的 HP",
+    "fix_new": "其中 10 处是伤害值：6 处是多段攻击的单段伤害，如同族信徒回旋镖 2/2、火炬头光束 8/8，4 处是单次攻击，如同族信徒快斩 5/5、花园幽灵鳗啃咬 5/5 与甩动 7/7、碾碎爪巨化打击 4/4；其余是段数 3 处、偷取量 2 处、女王给火炬头的 1/1 力量和两个孤儿怪的 HP",
+    "severity": "minor",
+    "reason": "18 处总数对，但「10 处都是多段攻击的单段伤害」不对，其中 4 处是单次攻击（同族信徒 5/5 就是单次的快斩）",
+    "evidence": "grep GetValueIfAscension(…, X, X) 共 18 处：KinFollower.cs:67 QuickSlashDamage 5/5（SingleAttack）、:69 BoomerangDamage 2/2；PhantasmalGardener.cs:40 BiteDamage 5/5、:42 LashDamage 7/7、:46 FlailRepeat 3/3；Crusher.cs:81 EnlargingStrikeDamage 4/4；Byrdonis.cs:26 PeckRepeat、SoulNexus.cs:30 MaelstromRepeat；TheForgotten.cs:33 / TheLost.cs:27 偷取量"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "横冲直撞阈值 150 → 160，破防需要打的量都是 102（`Monsters/CeremonialBeast.cs:55-59`）；",
+    "fix_new": "横冲直撞阈值 150 → 160，A0 和 A10 破防需要打的量都是 102（`Monsters/CeremonialBeast.cs:55-59`）；但阈值 `PlowAmount` 挂在 DeadlyEnemies（A9）上、HP 挂在 ToughEnemies（A8）上，只到 A8 时要打 262 − 150 = 112；",
+    "severity": "error",
+    "reason": "仪式兽的阈值并不是跟 HP 一起由强韧敌人管，而是挂在致命敌人上，A8 时比例被打破",
+    "evidence": "CeremonialBeast.cs:55 MinInitialHp => GetValueIfAscension(AscensionLevel.ToughEnemies, 262, 252)；:59 PlowAmount => GetValueIfAscension(AscensionLevel.DeadlyEnemies, 160, 150)"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "反过来巨斧机器人开机格挡、劫掠者斧手格挡、卵盛碗虫格挡、感染棱柱格挡、胧光怪格挡挂在 DeadlyEnemies 上。",
+    "fix_new": "反过来巨斧机器人开机格挡、劫掠者斧手格挡、卵盛碗虫格挡、感染棱柱格挡、胧光怪格挡，以及仪式兽的横冲直撞阈值（`CeremonialBeast.cs:59`）挂在 DeadlyEnemies 上。",
+    "severity": "minor",
+    "reason": "「挂错级别」清单漏了仪式兽阈值（与上一条配套）",
+    "evidence": "CeremonialBeast.cs:59 PlowAmount 用 AscensionLevel.DeadlyEnemies；其余 5 项已核对：Axebot.cs:40、AxeRubyRaider.cs:26、BowlbugEgg.cs:25、InfestedPrism.cs:48、TheObscura.cs:44 均为 DeadlyEnemies"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "41.2（且每次未格挡伤害扣 1 最大生命，纸伤难愈）",
+    "fix_new": "41.2（且每只自带 2 层纸伤难愈：每次造成未格挡伤害让玩家失去 2 点最大生命；静态描述写的是 1，`smartDescription` 走 `{Amount}` 显示 2）",
+    "severity": "error",
+    "reason": "纸伤难愈层数是 2，扣 2 点最大生命，不是 1",
+    "evidence": "Monsters/ScrollOfBiting.cs:76 PowerCmd.Apply<PaperCutsPower>(…, base.Creature, 2m, …)；Powers/PaperCutsPower.cs AfterDamageGiven → CreatureCmd.LoseMaxHp(target, base.Amount)；localization/zhs/powers.json PAPER_CUTS_POWER.description 写死 1，smartDescription 用 {Amount}"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 单招最高伤害 | 实验体第三形态「大力猛扑」 | 45（A10 不变） |",
+    "fix_new": "| 单招最高伤害（固定数值） | 实验体第三形态「大力猛扑」 | 45（A10 不变）；会成长的招式能超过它：实验体形态二「多次爪击」第 3 次就是 10×5 = 50，瀑布巨兽压力炮每用一次 +5 |",
+    "severity": "overclaim",
+    "reason": "45 只是固定数值招式里最高；多次爪击每用一次多 1 段，第 3 次即 50（A10 55）",
+    "evidence": "TestSubject.cs:93-95 MultiClawDamage 10/11、BaseMultiClawCount 3，:162 MultiClawTotalCount = Base + Extra，:303 ExtraMultiClawCount++；:99 BigPounceDamage => 45；WaterfallGiant.cs:279 CurrentPressureGunDamage += 5"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "形态三的 45 点猛扑是全游戏单招最高，而且 A10 也不加（固定 45）。",
+    "fix_new": "形态三的 45 点猛扑是全游戏固定数值最高的单招，而且 A10 也不加（固定 45）；但形态二的多次爪击第 3 次就是 10(11)×5 = 50(55)，会成长的招式能超过它。",
+    "severity": "overclaim",
+    "reason": "同上，「全游戏单招最高」需限定为固定数值",
+    "evidence": "TestSubject.cs:198 MULTI_CLAW_MOVE 意图 MultiAttackIntent(MultiClawDamage, () => MultiClawTotalCount)；:296-304 每次 +1 段"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 噬咬 20 | 大力猛扑 45 |",
+    "fix_new": "| 噬咬 20 | 大力猛扑 45（多次爪击第 3 次 10×5 = 50） |",
+    "severity": "minor",
+    "reason": "Boss 一览表同一处口径，补上会成长的多次爪击",
+    "evidence": "TestSubject.cs:162,296-304"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "**HP 预算按幕大约 ×1.6~1.7 递增**",
+    "fix_new": "**HP 预算按幕大约 ×1.5~1.9 递增**（6 个幕间倍率 1.51~1.86，均值约 1.63）",
+    "severity": "overclaim",
+    "reason": "结论速览把范围收窄了；正文 3.2 节自己列的 6 个倍率是 1.72/1.54/1.61/1.86/1.51/1.54",
+    "evidence": "data/csv/ch04_hp_budget_by_act.csv hp_mean_a0：普通 74/127/195、精英 90/145/270、Boss 244/369/570；本章 3.2「幕间倍率」行与第 6 节第 4 条都写 ×1.5~1.9"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "大约是本幕普通的 0.6~0.65 倍。",
+    "fix_new": "大约是本幕普通的 0.6~0.7 倍（密林 0.65、暗港 0.68、巢穴 0.63、荣耀 0.61）。",
+    "severity": "minor",
+    "reason": "暗港 45/66 = 0.68，超出 0.6~0.65",
+    "evidence": "ch04_hp_budget_by_act.csv：弱/普通 hp_mean_a0 = 48/74、45/66、80/127、119/195"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "- **首回合伤害普遍偏低**，Boss 尤甚（暗港 Boss 首回合 0）：",
+    "fix_new": "- **首回合伤害普遍偏低**，密林、暗港、巢穴的 Boss 尤甚（暗港 Boss 首回合 0）；荣耀是例外，Boss 首回合 22.7、精英 25.0，都不低于各自的 6 回合均值（19.9、24.5）：",
+    "severity": "overclaim",
+    "reason": "荣耀 Boss 首回合伤害高于其 6 回合均值（火炬头首招强力冲撞 26、实验体噬咬 20、永世沙漏消退 22）",
+    "evidence": "ch04_hp_budget_by_act.csv 荣耀 Boss dmg_t1_mean_a0 = 22.7 > dmg_avg6_mean_a0 = 19.9；荣耀精英 25.0 > 24.5"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| Burrower / Chomper | 地道虫（弱）、一对自动机械；另有未被任何幕引用的「地道组合」TunnelerNormal | |",
+    "fix_new": "| Burrower / Chomper | 地道虫（弱）只带 Burrower，一对自动机械只带 Chomper，两者互不相拦；同时带两个标签的「地道组合」TunnelerNormal 不在任何幕里 | 当前池子里两个标签各只有 1 个成员，不起作用 |",
+    "severity": "overclaim",
+    "reason": "原写法暗示地道虫与一对自动机械互相防相邻，实际两者没有共同标签",
+    "evidence": "Encounters/TunnelerWeak.cs:10 只有 EncounterTag.Burrower；ChompersNormal.cs:10 只有 EncounterTag.Chomper；TunnelerNormal.cs:12-13 两个都有但不在 Overgrowth/Underdocks/Hive/Glory 的 GenerateAllEncounters 里"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "- **几乎所有标签都是「弱版 ↔ 普通版」成对**，作用就是：弱遭遇最后一场和普通遭遇第一场不要是同一族怪的强化版。",
+    "fix_new": "- **15 个标签里 8 个是「弱版 ↔ 普通版」成对**（史莱姆、爬虫、缩小、蛞蝓、海洋混混、工虫、外骨骼、卷轴），蘑菇、贾克斯果只挂在普通遭遇上；史莱姆（3 个普通）、工虫（2 个普通）、蘑菇、贾克斯果还在普通遭遇之间防相邻。作用是同一族怪（包括弱版 → 强化版）不要背靠背出现。",
+    "severity": "overclaim",
+    "reason": "只有 8/15 是弱↔普通成对；蘑菇、贾克斯果只连普通遭遇，且普通名单 9~12 个连续名额里同样靠标签防相邻",
+    "evidence": "grep EncounterTag.*：Mushroom = FlyconidNormal.cs:21 + SnappingJaxfruitNormal.cs:14；Jaxfruit = SnappingJaxfruitNormal.cs:15 + SlitheringStranglerNormal.cs:36；Slimes = SlimesWeak + SlimesNormal + FlyconidNormal + SlitheringStranglerNormal；Workers = BowlbugsWeak + BowlbugsNormal + SlumberingBeetleNormal"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "- 单成员标签（Thieves、Knights）在当前池子里不起作用，推断是给后续内容预留的。",
+    "fix_new": "- 在当前池子里只有 1 个成员、实际不起作用的标签有 5 个：Nibbit、Thieves、Knights、Burrower、Chomper（后两者唯一的交集 TunnelerNormal 不在任何幕里），推断是给后续内容预留或砍掉内容的残留。",
+    "severity": "overclaim",
+    "reason": "漏了 Burrower、Chomper（池内各 1 个成员），Nibbit 同理",
+    "evidence": "TunnelerWeak.cs:10、ChompersNormal.cs:10、NibbitsWeak.cs:10、ThievingHopperWeak.cs:12、KnightsElite.cs:14；TunnelerNormal 只在 AbstractModelSubtypes.cs 注册"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "主要解决「弱版后面紧跟强化版」的观感问题。",
+    "fix_new": "主要解决同一族怪背靠背出现（包括「弱版后面紧跟强化版」）的观感问题；15 个标签里有 5 个在当前池子里只有 1 个成员，形同虚设。",
+    "severity": "minor",
+    "reason": "与 2.2 节修正保持一致",
+    "evidence": "同上标签清单"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 一群史莱姆 / 一大群史莱姆 / 真菌与史莱姆 | 树叶、树枝两种史莱姆随机搭配 |",
+    "fix_new": "| 一群史莱姆 / 真菌与史莱姆 | 一群史莱姆 = 树叶史莱姆（小）+ 树枝史莱姆（小）+ 随机 1 只中史莱姆；真菌与史莱姆 = 随机 1 只中史莱姆 + 飞蝇菌子。一大群史莱姆组成固定（中树枝 + 中树叶 + 小树叶 + 小树枝），只随机两只小史莱姆的先后（`Encounters/SlimesNormal.cs`） |",
+    "severity": "minor",
+    "reason": "一大群史莱姆的组成不随机，只有站位顺序随机",
+    "evidence": "SlimesNormal.GenerateMonsters：flag = Rng.NextBool() 只决定 LeafSlimeS/TwigSlimeS 谁在前，四只固定为 TwigSlimeM、LeafSlimeM、LeafSlimeS、TwigSlimeS；SlimesWeak.cs:51-56 两只小的都上 + NextItem(_mediumSlimes)；FlyconidNormal NextItem(_mediumSlimes) + Flyconid"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 出现在四幕遭遇里 | 92 | 含残杀千足虫三段（各算一个类），其中 Boss 战相关 15 个 |",
+    "fix_new": "| 出现在四幕遭遇里 | 91 | 按各遭遇 `GenerateMonsters()` 的开局组成计，含残杀千足虫三段（各算一个类），其中 Boss 战相关 15 个 |",
+    "severity": "minor",
+    "reason": "按开局组成只有 91 个；第 92 个是扭动虫 Wriggler，它只在异蛙寄生虫死后孵出（召唤物）或事件战斗里出现",
+    "evidence": "scripts/ch04_monster_stats.py 的 COMPOSITION（已逐个对照 80 个 GenerateMonsters，全部一致）展开后 91 个类；Wriggler 来自 Powers/InfestedPower.cs:28-30 与 Encounters/DenseVegetationEventEncounter.cs:24；若按 AllPossibleMonsters 口径，利齿之眼也会算进来（FogmogNormal.cs:19-23），口径不一致"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 只作为召唤物出现 | 10 | 利齿之眼、气态炸弹、结实的卵、寄生惧魔、胖地精、卑鄙地精、守护/噪音/戳刺/电击机器人 |",
+    "fix_new": "| 只作为召唤物出现 | 11 | 利齿之眼、气态炸弹、结实的卵、寄生惧魔、胖地精、卑鄙地精、守护/噪音/戳刺/电击机器人，以及扭动虫（异蛙寄生虫死后孵出；也是事件战斗「扭动虫」的怪） |",
+    "severity": "minor",
+    "reason": "与上一条配套，总数仍是 121，且与 4.1 节「幕内 102 种」= 91 + 11 对得上",
+    "evidence": "Powers/InfestedPower.cs:28-30（Wriggler 孵化）；ch04_monster_stats.csv acts 非空的 102 行"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "小怪给 2~6 点区间。",
+    "fix_new": "小怪多给 2~6 点区间（个别只有 1 点，如同族信徒 58~59；最宽 7~8 点，如咬人卷轴 30~37、巨斧机器人 70~78）。",
+    "severity": "minor",
+    "reason": "幕内怪物 HP 区间宽度实际是 1~8",
+    "evidence": "KinFollower.cs MinInitialHp 58 / MaxInitialHp 59；BowlbugEgg 21~22；ScrollOfBiting.cs:37-39 30~37；Axebot.cs:48-50 70~78"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 密林 | 普通 | 12 | 2.0 | 33–97 |",
+    "fix_new": "| 密林 | 普通 | 12 | 2.0 | 36–97 |",
+    "severity": "minor",
+    "reason": "HP 区间下限没考虑「同侧 HP 不重复」：三只墨宝最少 11+12+13 = 36。脚本已改（hp_bounds），重跑后 ch04_hp_budget_by_act.csv 为 36",
+    "evidence": "Entities.Creatures/Creature.cs:372-384 SetUniqueMonsterHpValue 剔除队友已用的 MaxHp；Inklet.cs:32-34 HP 11~17"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 密林 | Boss | 3 | 1.7 | 173–308 |",
+    "fix_new": "| 密林 | Boss | 3 | 1.7 | 173–307 |",
+    "severity": "minor",
+    "reason": "两个同族信徒 HP 区间 58~59 只有两个值，必然一个 58 一个 59，同族小队恒为 190+58+59 = 307",
+    "evidence": "Creature.cs:372-384；KinFollower MinInitialHp 58 / MaxInitialHp 59；重跑后 CSV 密林 Boss hp_hi_a0 = 307"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 暗港 | 弱 | 4 | 1.5 | 37–54 |",
+    "fix_new": "| 暗港 | 弱 | 4 | 1.5 | 37–53 |",
+    "severity": "minor",
+    "reason": "两只噬尸蛞蝓（25~27）HP 不重复，上限 26+27 = 53",
+    "evidence": "Creature.cs:372-384；重跑后 CSV 暗港弱 hp_hi_a0 = 53"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 巢穴 | 普通 | 10 | 1.9 | 96–177 |",
+    "fix_new": "| 巢穴 | 普通 | 10 | 1.9 | 101–177 |",
+    "severity": "minor",
+    "reason": "四只外骨骼虫（24~28）HP 不重复，最少 24+25+26+27 = 102；本池最低变成盛碗虫群 45+21+35 = 101",
+    "evidence": "Creature.cs:372-384；Exoskeleton.cs:30-32；重跑后 CSV 巢穴普通 hp_lo_a0 = 101"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 巢穴 | 精英 | 3 | 1.7 | 120–161 |",
+    "fix_new": "| 巢穴 | 精英 | 3 | 1.7 | 126–161 |",
+    "severity": "minor",
+    "reason": "千足虫三段 HP 先不重复、再调成偶数并错开，A0 只能取 40/42/44/46 中三个不同值，最少 126",
+    "evidence": "DecimillipedeSegment.cs:64-66 HP 40~46，:120-141 奇数 +1、撞值 +2；重跑后 CSV 巢穴精英 hp_lo_a0 = 126"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 荣耀 | 弱 | 3 | 2.0 | 90–162 |",
+    "fix_new": "| 荣耀 | 弱 | 3 | 2.0 | 93–162 |",
+    "severity": "minor",
+    "reason": "三只咬人卷轴（30~37）HP 不重复，最少 30+31+32 = 93",
+    "evidence": "Creature.cs:372-384；ScrollOfBiting.cs:37-39；重跑后 CSV 荣耀弱 hp_lo_a0 = 93"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 荣耀 | 普通 | 9 | 1.7 | 120–261 |",
+    "fix_new": "| 荣耀 | 普通 | 9 | 1.7 | 126–261 |",
+    "severity": "minor",
+    "reason": "四只咬人卷轴 HP 不重复，最少 30+31+32+33 = 126",
+    "evidence": "Creature.cs:372-384；重跑后 CSV 荣耀普通 hp_lo_a0 = 126"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 普通战 HP 最低 | 墨宝 ×3（密林） | 33~51 |",
+    "fix_new": "| 普通战 HP 最低 | 墨宝 ×3（密林） | 36~48（三只 HP 必不相同） |",
+    "severity": "minor",
+    "reason": "与本章 2.5 节「三只墨宝的血量一定互不相同」自相矛盾：区间应为 11+12+13 ~ 15+16+17",
+    "evidence": "Creature.cs:372-384；Inklet.cs:32-34；重跑后 ch04_encounter_pools.csv InkletsNormal hp_min_a0 = 36、hp_max_a0 = 48"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "所以三只墨宝的血量一定互不相同。",
+    "fix_new": "所以单机下三只墨宝的血量一定互不相同。联机时先生成的队友 MaxHp 已经按人数放大（`Combat/CombatState.cs:499-500` 先掷再缩放），剔除不再命中，可能撞值（推断自调用顺序）。",
+    "severity": "minor",
+    "reason": "「一定」只在单机成立",
+    "evidence": "CombatState.cs:499-500 每个敌人依次 SetUniqueMonsterHpValue → ScaleMonsterHpForMultiplayer，后生成的怪比对的是已缩放的 MaxHp"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "之后循环 撕扯 8×2 → 前扑啃咬 28(31) → 分泌唾液 +2 力量 → 撕扯 …",
+    "fix_new": "之后四拍循环 撕扯 8(9)×2 → 前扑啃咬 28(31) → 分泌唾液 +2(3) 力量 → 撕扯（THRASH_MOVE_2）→ 撕扯 → 前扑啃咬 …（唾液之后连撕两次）",
+    "severity": "minor",
+    "reason": "原写法读成三拍循环；实际唾液后接第二个撕扯状态再接撕扯，是四拍（与 4.5 表「1 + 4」一致）",
+    "evidence": "TheInsatiable.cs:93-111 THRASH→LUNGING_BITE→SALIVATE→THRASH_MOVE_2→THRASH；:62 ThrashDamage 9/8、:66 SalivateStrength 3/2"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "拖到第 7 回合击杀，爆炸约 15+3×6 = 33。",
+    "fix_new": "巨兽行动满 7 次后（第 8 个玩家回合）击杀，爆炸约 15+3×6 = 33；第 7 个玩家回合击杀是 15+3×5 = 30（A9 起首层 20）。",
+    "severity": "minor",
+    "reason": "回合计数差一：玩家第 7 回合击杀时巨兽只行动了 6 次（增压 15 + 5 个招式各 +3）",
+    "evidence": "WaterfallGiant.cs:229 增压给 PressurizeAmount（:75 DeadlyEnemies 20/15），:239/250/260/269/280 其余招式各 +3；:286 即将爆发时读取层数"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 暗港 | 瀑布巨兽 | 240（250） | 6 | 增压 |",
+    "fix_new": "| 暗港 | 瀑布巨兽 | 240（250） | 1 + 5 | 增压 |",
+    "severity": "minor",
+    "reason": "开场增压不在循环里（PRESSURE_UP 回到 STOMP），与仪式兽「1 + 3」、沙虫「1 + 4」同口径应写 1 + 5",
+    "evidence": "WaterfallGiant.cs:206-211 PRESSURIZE→STOMP→RAM→SIPHON→PRESSURE_GUN→PRESSURE_UP→STOMP"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 处决 15(18)；火炬头 26(32) |",
+    "fix_new": "| 处决 15(18)、将头砍下 3(4)×5 = 15(20)；火炬头 26(32) |",
+    "severity": "minor",
+    "reason": "A10 下将头砍下总伤 20 高于处决 18",
+    "evidence": "Queen.cs:56 OffWithYourHeadDamage 4/3、:140 MultiAttackIntent(…, 5)、:58 ExecutionDamage 18/15"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| 消退 22 | 26；激光 24 |",
+    "fix_new": "| 消退 22 | 消退 22(26)；激光 11(12)×2 |",
+    "severity": "minor",
+    "reason": "这一格只写了 A10 值（26、24），与表内其他行的 A0(A10) 格式不一致",
+    "evidence": "Aeonglass.cs:40 EbbDamage 26/22、:44 EyeLasersDamage 12/11、:46 EyeLasersRepeat 2"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "| `StarterMoveIdx = r, r+1, r+2 (mod 3)` |",
+    "fix_new": "| `StarterMoveIdx = r, r+1, r+2 (mod 3)`；×4 时第 4 只固定为 2，必与另一只同起手（`ScrollsOfBitingNormal.cs:25`）；噬尸蛞蝓走 `CorpseSlug.EnsureCorpseSlugsStartWithDifferentMoves`（`Monsters/CorpseSlug.cs:135-144`），同一规则 |",
+    "severity": "minor",
+    "reason": "四卷轴遭遇的错峰不完整：第 4 只写死 2",
+    "evidence": "Encounters/ScrollsOfBitingNormal.cs:22-25 scrollOfBiting4.StarterMoveIdx = 2"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "也就是暗港解锁后的下一局一定是暗港。",
+    "fix_new": "也就是暗港解锁后的下一局一定是暗港。`DiscoveredActs` 要到一局结束（死亡 / 胜利 / 放弃）结算时才写入（`Saves.Managers/ProgressSaveManager.cs:215-226`），所以在某局走过暗港并结算之前，每次开新局都会被强制进暗港。",
+    "severity": "minor",
+    "reason": "补充「第一次强制」的确切边界：标记发生在结算时而不是进入暗港时",
+    "evidence": "ProgressSaveManager.UpdateWithRunData（注释：Death, Victory, or Abandon）:215-226 遍历 MapPointHistory 调 Progress.MarkActAsSeen；全代码只有这里和控制台 unlock 命令写 DiscoveredActs"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "用于测试和没有存档的场景。",
+    "fix_new": "只用于测试（`RunState.CreateForTest`）、调试启动器（`NSceneBootstrapper`）和空局 `NullRunState`；真实开局（含首局）一律走 `GetRandomList`（`Multiplayer.Game.Lobby/StartRunLobby.cs:469`）。",
+    "severity": "minor",
+    "reason": "「没有存档的场景」不对，首局也走 GetRandomList（暗港未解锁所以必是密林）",
+    "evidence": "grep GetDefaultList：Runs/RunState.cs:577（CreateForTest）、Nodes.Debug/NSceneBootstrapper.cs:99、Runs/NullRunState.cs:25；GetRandomList 唯一调用方 StartRunLobby.cs:469"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "因为覆甲是每回合生效的格挡，人多时被打穿得更快。",
+    "fix_new": "推断是因为覆甲是每回合生效的格挡，人多时被打穿得更快。",
+    "severity": "minor",
+    "reason": "设计动机是作者推断，源码只有公式",
+    "evidence": "Powers/PlatingPower.cs:85-88 只有 ((n-1)*2+1)*amount，无注释说明理由"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "密林普通池 12 个、名额正好 12 个，每局每个都恰好排一次。",
+    "fix_new": "密林普通池 12 个、单机名额正好 12 个，每局每个都恰好排一次（联机少 1 个名额，会有 1 个排不上）。",
+    "severity": "minor",
+    "reason": "「每局」只在单机成立",
+    "evidence": "ActModel.cs:261-269 联机 num--；:373 普通遭遇循环上限 GetNumberOfRooms(isMultiplayer)"
+  },
+  {
+    "file": "sections/04_monsters_acts.md",
+    "fix_old": "遭遇组成对照 `Encounters/*.cs` 的 `GenerateMonsters()` 手工录入。",
+    "fix_new": "遭遇组成对照 `Encounters/*.cs` 的 `GenerateMonsters()` 手工录入（核查时 80 个已逐个比对一致）。HP 区间的最小 / 最大值按「同侧 HP 不重复」（`Creature.SetUniqueMonsterHpValue`）和千足虫偶数错开规则求（脚本 `hp_bounds`），期望值不受影响。",
+    "severity": "minor",
+    "reason": "说明核查时对脚本的改动",
+    "evidence": "scripts/ch04_monster_stats.py 新增 EVEN_HP / comp_expand / hp_bounds；重跑后各 HP 均值、伤害列不变，只有 hp_min/hp_max 列变化"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "而前 6 回合的期望伤害只涨 41%（13.6 → 16.0 → 19.2）",
+    "fix_new": "而普通遭遇前 6 回合的期望伤害每幕只涨约 18~20%，两幕合计 41%（13.6 → 16.0 → 19.2）",
+    "severity": "minor",
+    "reason": "前半句是每幕倍率，后半句 41% 是两幕累计，口径不对齐",
+    "evidence": "ch04_hp_budget_by_act.csv 普通 dmg_avg6_mean_a0：13.6 → 16.0（+17.6%）→ 19.2（+20%）"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "女王要先杀火炬头",
+    "fix_new": "女王给火炬头逐回合加力量、火炬头一死就切入输出循环",
+    "severity": "overclaim",
+    "reason": "第 04 章把它写成「先打小弟还是直取女王」的选择，不是必须先杀火炬头；计时器是火炬头逐回合 +1 力量",
+    "evidence": "Queen.cs:145-149 火炬头活着就循环 BURN_BRIGHT_FOR_ME（:186-192 给队友 +1 力量、自身 +20 格挡），:221-233 火炬头死亡回调切 ENRAGE"
+  }
+]

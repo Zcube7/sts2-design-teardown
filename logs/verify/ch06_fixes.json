@@ -1,0 +1,154 @@
+[
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "| 5. 局中途 | 有进行中的存档时，时间线按钮反而被禁用（必须先打完这一局） |",
+    "fix_new": "| 5. 局中途 | 有进行中的存档**且**有待揭示纪元时，时间线按钮被禁用（要先打完这一局才能揭示）；有存档但没有待揭示纪元时，时间线照常可进 |",
+    "severity": "error",
+    "reason": "有存档时时间线按钮是否可用取决于有没有待揭示纪元，不是一律禁用",
+    "evidence": "MegaCrit.Sts2.Core.Nodes.Screens.MainMenu/NMainMenu.cs:631-655：第一分支要求 !HasRunSave；有存档时落到第二分支 `if (GetDiscoveredEpochCount() == 0) _timelineButton.Enable(); else _timelineButton.Disable();`"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "普通牌概率相应提高（60 → 61.5%、50 → 54.9%、54 → 58.5%）",
+    "fix_new": "普通牌是余量、相应提高（60 → 61.5%、50 → 55%、54 → 58.5%；代码里精英普通概率常量写成 0.549，但和另外两个普通概率常量一样从未被掷骰读取，见 §12 第 3 条）",
+    "severity": "error",
+    "reason": "精英战普通牌实际概率是 1−5%−40% = 55%，54.9% 是一个从未被读取的常量，与本章 §12 第 3 条自己的结论矛盾",
+    "evidence": "MegaCrit.Sts2.Core.Odds/CardRarityOdds.cs:96-111 掷骰只取 GetBaseOdds(Rare)+offset 与 GetBaseOdds(Uncommon)，普通=余量；GetBaseOdds 是 private，只在 99-100、122-123 以 Rare/Uncommon 调用；精英罕见 0.4f（143 行）、A7 精英稀有 0.05（37 行）→ 普通 0.55；EliteCommonOdds=0.549（35 行）无人读取"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "没有金币、经验、天赋树这类局外货币。（`MegaCrit.Sts2.Core.Timeline/EpochModel.cs`）",
+    "fix_new": "没有金币、经验、天赋树这类可花费的局外货币；唯一跨局累计并能换到东西的点数是旺购积分（WongoPoints）：第 2 幕事件「欢迎来到旺购百货」购物攒分、存进 progress.save，每满 2000 当场送一个「没有任何作用」的徽章遗物，不能花、也不解锁内容（见第 5 章）。（`MegaCrit.Sts2.Core.Timeline/EpochModel.cs`；`MegaCrit.Sts2.Core.Models.Events/WelcomeToWongos.cs:111-131`；`ProgressSaveManager.cs:229`）",
+    "severity": "overclaim",
+    "reason": "旺购积分是存档里跨局累计、达标发遗物的点数，「没有任何局外货币」需加限定；它不可花费、只换无效果遗物，所以不推翻「纪元是唯一内容解锁载体」这个主结论",
+    "evidence": "ProgressSaveManager.cs:229 `Progress.WongoPoints += serializablePlayer.ExtraFields.WongoPoints;`（所有模式都累加）；WelcomeToWongos.cs:20 `_wongoPointsForBadge = 2000`、111-125 读 Progress.WongoPoints，满 2000 `RelicCmd.Obtain<WongoCustomerAppreciationBadge>`；Models.Relics/WongoCustomerAppreciationBadge.cs 只有 Rarity=Event，无任何 Hook；zhs relics.json 描述「没有任何作用。」"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "| 全局 | 统计、建筑师伤害 |",
+    "fix_new": "| 全局 | 总时长进统计页；ArchitectDamage 进胜利结算文案；WongoPoints 每满 2000 在旺购事件里送一个无效果徽章遗物（`Models.Events/WelcomeToWongos.cs:111-131`）；TestSubjectKills 是 Boss「实验体 #C{N}」名字里的编号（`Models.Monsters/TestSubject.cs:72`）；FloorsClimbed 目前没有读取处 |",
+    "severity": "minor",
+    "reason": "用途列不准：WongoPoints、TestSubjectKills 都有局内用途，FloorsClimbed 无人读取",
+    "evidence": "全局 Grep：WongoPoints 只被 WelcomeToWongos.cs:113 读；TestSubjectKills 只被 TestSubject.cs:72 `title.Add(\"Count\", Progress.TestSubjectKills + 8)` 读（zhs monsters.json TEST_SUBJECT.name「实验体 #C{Count}」）；FloorsClimbed 除存档序列化与 ProgressSaveManager.cs:231 累加外无引用"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "主菜单会**禁用单人、多人、图鉴**，只留时间线按钮可点",
+    "fix_new": "主菜单会**禁用单人、多人、图鉴**，时间线按钮可点并亮小红点（设置、退出等按钮不受影响）",
+    "severity": "overclaim",
+    "reason": "只禁用了单人/多人/图鉴三个按钮，设置、退出、补丁说明、档案按钮仍可用",
+    "evidence": "NMainMenu.cs:631-639 只对 _singleplayerButton/_multiplayerButton/_compendiumButton 调 Disable()；_settingsButton、_quitButton（360-362 行声明）不在该函数里"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "**单人/多人/图鉴按钮禁用**，只有时间线可点，并显示小红点",
+    "fix_new": "**单人/多人/图鉴按钮禁用**，时间线可点并显示小红点（设置、退出不受影响）",
+    "severity": "minor",
+    "reason": "同上，「只有时间线可点」过度",
+    "evidence": "NMainMenu.cs:631-639"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "所以 Daily/Custom 局都没有涅奥祝福。",
+    "fix_new": "所以每日挑战（固定 2 正 1 负共 3 个修饰符）一定没有涅奥祝福；自定义模式只要勾了任意修饰符也没有，一个都不勾时涅奥照常给祝福。",
+    "severity": "overclaim",
+    "reason": "涅奥只在「本局有修饰符」时改发修饰符选项；自定义模式不强制勾修饰符",
+    "evidence": "Models.Events/Neow.cs:218 `if (base.Owner.RunState.Modifiers.Count <= 0)` 走正常祝福分支；NCustomRunScreen.cs 与 StartRunLobby 开局流程都没有「修饰符数 > 0」的检查"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "注释写明：越难拿档位越高，**用于排行榜同分时的决胜**（`Models.Badges/BadgeRarity.cs`）。",
+    "fix_new": "注释写明：越难拿档位越高，**用于排行榜同分时的决胜**（`Models.Badges/BadgeRarity.cs`）。但实际的每日分数编码只用徽章**个数**，档位没有参与（`Runs/ScoreUtility.cs:150-157`），注释说的用法目前没有实现。",
+    "severity": "overclaim",
+    "reason": "只转述注释容易让人以为档位参与排行，代码里没有",
+    "evidence": "ScoreUtility.cs:154 `num3 = Math.Clamp(GetBadges(...).Count, 0, 99)`，编码里没有任何 Rarity；全局 Grep BadgeRarity 只出现在徽章类、NBadge 显示与存档"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "`EnableFtues = false` 时 `SeenFtue` 一律返回 true，即全部跳过（`ProgressSaveManager.cs:845-891`）。",
+    "fix_new": "`EnableFtues = false` 时 `SeenFtue` 一律返回 true，即全部跳过（`ProgressSaveManager.cs:845-891`）。例外是两条进阶首次提示（#12、#13）：它们走 `SeenPopup`，不看这个开关，关了教程照样会弹（`ProgressSaveManager.cs:858-865`）。",
+    "severity": "overclaim",
+    "reason": "「全部跳过」不成立，进阶弹窗用的是另一个判定函数",
+    "evidence": "ProgressSaveManager.cs:858-865 SeenPopup 只判 TestMode 与 FtueCompleted，不读 EnableFtues，注释「only used by the Ascension Unlocked popups」；StartRunLobby.cs:549 与 NCharacterSelectScreen.cs:471 调的是 SeenPopup"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "| 14 | `multiplayer_warning` | 第一次进入多人时的警告弹窗 | — | `Nodes.Multiplayer/NMultiplayerWarningPopup.cs:72,108` |",
+    "fix_new": "| 14 | `multiplayer_warning` | 一局都还没完成（`NumberOfRuns == 0`）时第一次打开多人菜单 | 多人模式警告弹窗；打完过一局再进多人就不会弹 | `Nodes.Screens.MainMenu/NMultiplayerSubmenu.cs:355`；`Nodes.Multiplayer/NMultiplayerWarningPopup.cs:108` |",
+    "severity": "citation",
+    "reason": "漏了触发条件 NumberOfRuns == 0，出处给的是弹窗本身而不是触发点",
+    "evidence": "NMultiplayerSubmenu.cs:355 `if (!SeenFtue(\"multiplayer_warning\") && Progress.NumberOfRuns == 0 && !CommandLineHelper.HasArg(\"fastmp\"))`"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "（纪元 Id、总局数、总时长、已有纪元数）",
+    "fix_new": "（纪元 Id、总局数、总时长、存档里的纪元条目数——`Progress.Epochs.Count`，含还没获得的槽位）",
+    "severity": "minor",
+    "reason": "TotalEpochs 取的是 Epochs 列表长度，里面包括 NotObtained 的槽位条目，不等于「已有纪元数」",
+    "evidence": "Runs.Metrics/MetricUtilities.cs:234 `TotalEpochs = SaveManager.Instance.Progress.Epochs.Count`；ProgressState.UnlockSlot（383-391）会为未获得槽位新建 NotObtained 条目"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "单人上限跟角色走（推断：自定义界面初始化 `SetMaxAscension(0)`，切换角色时由大厅重算） | `Nodes.Screens.CustomRun/NCustomRunScreen.cs:394-399` |",
+    "fix_new": "单人上限跟角色走：自定义选角同样调用 `SetLocalCharacter` → `SetSingleplayerAscensionAfterCharacterChanged`，按该角色 MaxAscension 定上限，也要求 4 号纪元已揭示；多人自定义走全队最小值 | `Nodes.Screens.CustomRun/NCustomRunScreen.cs:632-647`；`StartRunLobby.cs:513-548,632-638` |",
+    "severity": "citation",
+    "reason": "394-399 行没有 SetMaxAscension(0)（那里是 AddLocalHostPlayer(..., 0)），推断可以直接用代码坐实",
+    "evidence": "NCustomRunScreen.cs:647 `_lobby.SetLocalCharacter(characterModel)`；StartRunLobby.cs:632-638 SetLocalCharacter 末尾调 SetSingleplayerAscensionAfterCharacterChanged，515 行多人直接 return，528-541 无 4 号纪元则 MaxAscension=0"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "（`ch06_epochs.csv`；卡牌按 普通/罕见/稀有 排序显示）",
+    "fix_new": "（`ch06_epochs.csv`；按源码声明顺序列出，没有按稀有度排序；游戏内解锁文字会按稀有度重排，`EpochModel.cs:437-446`）",
+    "severity": "minor",
+    "reason": "表里不是按稀有度排的",
+    "evidence": "data/csv/cards.csv：铁甲战士 7 号 血墙 Common、扯碎 Rare、狱火 Uncommon；5 号 余烬 Common、契约终结 Rare、战鼓 Uncommon，表中顺序为 普/稀/罕"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "23 个徽章分铜/银/金三档，按角色累计次数",
+    "fix_new": "23 个徽章（8 个分铜/银/金三档，其余 15 个固定单档），按角色累计次数",
+    "severity": "minor",
+    "reason": "只有 8 个徽章有三档，原句易读成每个徽章都分三档",
+    "evidence": "Models.Badges/*.cs：BigDeck/TinyDeck/EliteKiller/Glutton/MoneyMoney/Perfect/Speedy/Healer 三档；TabletBadge 固定金、TeamPlayer 固定银、其余 13 个固定铜"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "**没看到条数上限**（`Runs/RunHistoryUtilities.cs:17-70`；`Saves.Managers/RunHistorySaveManager.cs:57`）",
+    "fix_new": "**没看到本地条数上限**，但 Steam 云同步只保留最新 100 份 / 5 MB，超出时把最旧的从云端「遗忘」（`Runs/RunHistoryUtilities.cs:17-70`；`Saves.Managers/RunHistorySaveManager.cs:13-15,57,62-69`；`Saves/CloudSaveStore.cs:950-983`）",
+    "severity": "minor",
+    "reason": "云存档有 100 份 / 5 MB 的上限",
+    "evidence": "RunHistorySaveManager.cs:13 `maxCloudBytes = 5242880`、15 `maxCloudFileCount = 100`，SaveHistoryInternal 调 `ForgetFilesInDirectoryBeforeWritingIfNecessary(HistoryPath, byteCount, 5242880, 100)`；CloudSaveStore.cs:970-981 超额时按修改时间 ForgetFile 最旧文件"
+  },
+  {
+    "file": "sections/06_meta_progression.md",
+    "fix_old": "（见 §11 待核实）",
+    "fix_new": "（见 §12 待核实）",
+    "severity": "minor",
+    "reason": "交叉引用指错节：§11 是「可借鉴」，待核实在 §12",
+    "evidence": "本文件 §11 标题「可借鉴」，§12 标题「没解决 / 拿不准的点」第 1 条即此问题"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "HP 中位数 +5.3%",
+    "fix_new": "HP 中位数 +5.5%（按取值统计；按怪物统计是 +5.3%，见第 04 章）",
+    "severity": "error",
+    "reason": "该条注明出自第 06 章，第 06 章的 HP 中位数是 ×1.055；+5.3% 是第 04 章按怪物的口径",
+    "evidence": "重跑 scripts/ch06_ascension_scan.py：ToughEnemies HP n=156，median ratio 1.05505；sections/04_monsters_acts.md:320 说明两章口径不同"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "**没有局外货币，只有时间线的 57 个纪元。**",
+    "fix_new": "**没有可花费的局外货币，内容解锁全靠时间线的 57 个纪元**（唯一跨局累计并能换到东西的是旺购积分，满 2000 只送一个无效果徽章）。",
+    "severity": "overclaim",
+    "reason": "同第 06 章 §0 第 1 条：旺购积分是跨局累计点数",
+    "evidence": "ProgressSaveManager.cs:229；Models.Events/WelcomeToWongos.cs:20,111-125"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "有待揭示的纪元时主菜单只能进时间线。（第 06 章 §2）",
+    "fix_new": "有待揭示的纪元且没有进行中的存档时，主菜单的单人、多人、图鉴被禁用，只能先进时间线。（第 06 章 §2）",
+    "severity": "overclaim",
+    "reason": "漏了「没有进行中的存档」这个前提；设置/退出等仍可用",
+    "evidence": "NMainMenu.cs:631-639 条件 `GetDiscoveredEpochCount() > 0 && !HasRunSave`，只禁用三个按钮"
+  }
+]

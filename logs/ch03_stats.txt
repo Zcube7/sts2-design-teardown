@@ -1,0 +1,83 @@
+[write] ch03_relic_taxonomy.csv: 299 rows
+[ancient] Ancient-rarity relics: 102  mapped: 102  rows: 102
+  ancient but unmapped: []
+  mapped but not Ancient rarity: []
+  mapped twice: []
+[write] ch03_ancient_relics.csv: 102 rows
+[write] ch03_potions_detail.csv: 65 rows
+[write] ch03_enchantments_detail.csv: 23 rows
+
+== relic rarity x pool (按 pools 首项；多池单列)
+   ('Ancient', 'Event') 100
+   ('Ancient', 'Shared') 2
+   ('Common', 'Defect') 1
+   ('Common', 'Ironclad') 1
+   ('Common', 'Necrobinder') 1
+   ('Common', 'Regent') 1
+   ('Common', 'Shared') 25
+   ('Common', 'Silent') 1
+   ('Event', 'Event') 34
+   ('Event', 'Shared') 1
+   ('None', 'Deprecated') 1
+   ('None', 'Fallback') 1
+   ('Rare', 'Defect') 3
+   ('Rare', 'Event|Shared') 1
+   ('Rare', 'Ironclad') 3
+   ('Rare', 'Necrobinder') 3
+   ('Rare', 'Regent') 3
+   ('Rare', 'Shared') 34
+   ('Rare', 'Silent') 3
+   ('Shop', 'Defect') 1
+   ('Shop', 'Ironclad') 1
+   ('Shop', 'Necrobinder') 1
+   ('Shop', 'Regent') 1
+   ('Shop', 'Shared') 25
+   ('Shop', 'Silent') 1
+   ('Starter', 'Defect') 1
+   ('Starter', 'Event') 5
+   ('Starter', 'Ironclad') 1
+   ('Starter', 'Necrobinder') 1
+   ('Starter', 'Regent') 1
+   ('Starter', 'Silent') 1
+   ('Uncommon', 'Defect') 2
+   ('Uncommon', 'Event|Shared') 2
+   ('Uncommon', 'Ironclad') 2
+   ('Uncommon', 'Necrobinder') 2
+   ('Uncommon', 'Regent') 2
+   ('Uncommon', 'Shared') 28
+   ('Uncommon', 'Silent') 2
+rarity: Counter({'Ancient': 102, 'Rare': 50, 'Uncommon': 40, 'Event': 35, 'Common': 30, 'Shop': 30, 'Starter': 10, 'None': 2})
+drop_source: Counter({'随机池(共享)': 115, 'Ancient事件': 102, '事件/特定来源': 35, '随机池(角色:Necrobinder)': 7, '随机池(角色:Ironclad)': 7, '随机池(角色:Defect)': 7, '随机池(角色:Regent)': 7, '随机池(角色:Silent)': 7, '欧洛巴斯之触(初始遗物升级)': 5, '初始遗物': 5, '兜底/弃用': 2})
+category: Counter({'拾取即生效': 73, '战斗开始': 54, '回合节奏': 35, '打牌/牌堆触发': 34, '经济/奖励/构筑': 29, '常驻规则/数值改写': 18, '受击/生命/战斗事件': 16, '地图/休息处/路线': 16, '每回合能量(多带代价)': 12, '战斗结束结算': 8, '无效果/占位': 4})
+category x rarity:
+   Starter	Common	Uncommon	Rare	Shop	Event	Ancient	None
+   拾取即生效 0	4	1	2	8	5	53	0
+   战斗开始 6	14	7	6	5	9	7	0
+   回合节奏 2	2	7	9	2	5	8	0
+   打牌/牌堆触发 0	0	11	13	2	3	5	0
+   受击/生命/战斗事件 0	3	5	6	1	1	0	0
+   战斗结束结算 2	0	0	1	0	3	2	0
+   每回合能量(多带代价) 0	0	0	0	1	0	11	0
+   常驻规则/数值改写 0	2	3	4	5	2	2	0
+   经济/奖励/构筑 0	2	3	7	5	4	8	0
+   地图/休息处/路线 0	3	3	2	1	1	6	0
+   无效果/占位 0	0	0	0	0	2	0	2
+tags: Counter({'拾取效果标志': 50, '有代价': 36, '计数器': 35, '后期不出': 17, '附魔': 14, '可耗尽': 10, '仿制品': 10, '宠物/召唤': 4, '可堆叠': 2})
+cost overridden: [('FakeAnchor', '50'), ('FakeBloodVial', '50'), ('FakeHappyFlower', '50'), ('FakeLeesWaffle', '50'), ('FakeMango', '50'), ('FakeOrichalcum', '50'), ('FakeSneckoEye', '50'), ('FakeStrikeDummy', '50'), ('FakeVenerableTeaSet', '50')]
+no shop: [('AmethystAubergine', 'Common'), ('BowlerHat', 'Uncommon'), ('LuckyFysh', 'Uncommon'), ('OldCoin', 'Rare'), ('TheCourier', 'Rare')]
+allowed cond: Counter({'第3幕宝箱前(单人41层/多人38层前)': 16, 'Neow专用条件': 2, '仅单人': 2, '第3幕宝箱前 且 非铁甲首局': 1, '仅多人': 1})
+late-gated: ['AmethystAubergine', 'BookOfFiveRings', 'BowlerHat', 'DragonFruit', 'FrozenEgg', 'Girya', 'JuzuBracelet', 'LastingCandy', 'LuckyFysh', 'MealTicket', 'MoltenEgg', 'OldCoin', 'Planisphere', 'Shovel', 'ToxicEgg', 'WhiteBeastStatue', 'WhiteStar']
+epoch-locked relics: Counter({'Relic5Epoch': 3, 'Necrobinder6Epoch': 3, 'Necrobinder3Epoch': 3, 'Relic2Epoch': 3, 'Ironclad6Epoch': 3, 'Defect3Epoch': 3, 'Defect6Epoch': 3, 'Regent3Epoch': 3, 'Relic3Epoch': 3, 'Silent6Epoch': 3, 'Relic1Epoch': 3, 'Regent6Epoch': 3, 'Relic4Epoch': 3, 'Silent3Epoch': 3, 'Ironclad3Epoch': 3})
+rollable per char (shared+own): 115 {'Ironclad': 7, 'Silent': 7, 'Defect': 7, 'Regent': 7, 'Necrobinder': 7}
+rollable shared by rarity: Counter({'Rare': 35, 'Uncommon': 30, 'Common': 25, 'Shop': 25})
+char pools by rarity: Counter({('Necrobinder', 'Rare'): 3, ('Ironclad', 'Rare'): 3, ('Defect', 'Rare'): 3, ('Silent', 'Rare'): 3, ('Regent', 'Rare'): 3, ('Necrobinder', 'Uncommon'): 2, ('Regent', 'Uncommon'): 2, ('Defect', 'Uncommon'): 2, ('Ironclad', 'Uncommon'): 2, ('Silent', 'Uncommon'): 2, ('Necrobinder', 'Common'): 1, ('Ironclad', 'Shop'): 1, ('Defect', 'Common'): 1, ('Regent', 'Common'): 1, ('Silent', 'Shop'): 1, ('Ironclad', 'Common'): 1, ('Defect', 'Shop'): 1, ('Silent', 'Common'): 1, ('Necrobinder', 'Shop'): 1, ('Regent', 'Shop'): 1})
+
+== potions
+rarity: Counter({'Uncommon': 20, 'Common': 20, 'Rare': 20, 'Event': 3, 'None': 1, 'Token': 1})
+usage: Counter({'CombatOnly': 59, 'AnyTime': 5, 'Automatic': 1})
+target: Counter({'AnyPlayer': 51, 'AnyEnemy': 9, 'AllEnemies': 3, 'Self': 1, '动态:战斗中AllEnemies/否则TargetedNoCreature': 1})
+pool: Counter({'Shared': 45, 'Event': 3, '角色:Ironclad': 3, '角色:Necrobinder': 3, '角色:Regent': 3, '角色:Silent': 3, '角色:Defect': 3, 'Deprecated': 1, 'Token': 1})
+category: Counter({'能量/抽牌/操控': 17, '生成卡牌': 8, '防御': 7, '角色资源': 7, '力量/敏捷': 7, '伤害': 7, '生命': 5, '减益敌人': 5, '弃用': 1, '药水栏': 1})
+rarity x pool: Counter({('Common', 'Shared'): 15, ('Rare', 'Shared'): 15, ('Uncommon', 'Shared'): 15, ('Uncommon', '角色'): 5, ('Common', '角色'): 5, ('Rare', '角色'): 5, ('Event', 'Event'): 3, ('None', 'Deprecated'): 1, ('Token', 'Token'): 1})
+not in-combat generatable: ['FairyInABottle', 'FruitJuice', 'RegenPotion']
+epoch: Counter({'Ironclad4Epoch': 3, 'Potion1Epoch': 3, 'Necrobinder4Epoch': 3, 'Regent4Epoch': 3, 'Silent4Epoch': 3, 'Defect4Epoch': 3, 'Potion2Epoch': 3})

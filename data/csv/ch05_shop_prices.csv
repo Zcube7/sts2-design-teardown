@@ -1,0 +1,12 @@
+﻿slot,count,roll_rule,base_price,multiplier,special,src
+角色卡（攻击）,2,稀有度按商店概率 54/37/9（读保底 offset 不改）,普通50/罕见75/稀有150,"×U(0.95,1.05) 取整",5 张角色卡里随机 1 张半价（整数除 2）,"MegaCrit.Sts2.Core.Entities.Merchant/MerchantInventory.cs:15-22,PopulateCharacterCardEntries; MerchantCardEntry.cs:GetCost,CalcCost"
+角色卡（技能）,2,同上,同上,同上,同上,MegaCrit.Sts2.Core.Entities.Merchant/MerchantInventory.cs
+角色卡（能力）,1,同上；5 个角色都没有普通能力牌，抽到普通按 GetNextAllowedRarity 顺延成罕见，实际 罕见91/稀有9,罕见75/稀有150,同上,同上,MegaCrit.Sts2.Core.Entities.Merchant/MerchantInventory.cs; Factories/CardFactory.cs:50-51
+无色卡,2,固定 1 罕见 + 1 稀有,罕见 86 / 稀有 172（=75/150×1.15 RoundToInt）,"×U(0.95,1.05)",不参与半价,MegaCrit.Sts2.Core.Entities.Merchant/MerchantInventory.cs:24-28; MerchantCardEntry.cs:48
+遗物,2,遗物稀有度 50/33/17，从遗物袋「尾部」抽（奖励从头部抽）,普通175/罕见225/稀有275,"×U(0.85,1.15) 四舍五入",只抽 IsAllowedInShops 的,MegaCrit.Sts2.Core.Entities.Merchant/MerchantInventory.cs:PopulateRelicEntries; MerchantRelicEntry.cs:CalcCost; Models/RelicModel.cs:305
+遗物（商店专属）,1,固定 Shop 稀有度,200,"×U(0.85,1.15)",Shop 袋空了依次降级到 普通→罕见→稀有,MegaCrit.Sts2.Core.Entities.Merchant/MerchantInventory.cs; Runs/RelicGrabBag.cs:GetAvailableDeque
+药水,3,药水稀有度 65/25/10,普通50/罕见75/稀有100,"×U(0.95,1.05)",,"MegaCrit.Sts2.Core.Entities.Merchant/MerchantPotionEntry.cs:GetCost,CalcCost"
+删牌服务,1,每家店限 1 次,75 + 25×本局已删次数,无随机,进阶 A6 通货膨胀：100 + 50×次数,MegaCrit.Sts2.Core.Entities.Merchant/MerchantCardRemovalEntry.cs:20-33
+折扣：会员卡 MembershipCard,,,,×0.50,所有商品（含删牌）,MegaCrit.Sts2.Core.Models.Relics/MembershipCard.cs
+折扣：送货员 TheCourier,,,,×0.80,买完的格子立即补货,MegaCrit.Sts2.Core.Models.Relics/TheCourier.cs
+事件：假商人 FakeMerchant,6,9 件仿冒遗物洗牌取 6,50,,向他扔「恶臭药水」开战，赢了拿全部未售仿品+商人的地毯,MegaCrit.Sts2.Core.Models.Events/FakeMerchant.cs

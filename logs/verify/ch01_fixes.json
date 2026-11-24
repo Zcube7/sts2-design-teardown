@@ -1,0 +1,234 @@
+[
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "缓冲、钨棒、无实体、滑溜都挂在这里，不在伤害公式里",
+    "fix_new": "缓冲、钨棒、滑溜只挂在这里，不在伤害公式里；无实体两边都挂（伤害上限 1 + 失血上限 1，见 4.2）",
+    "severity": "overclaim",
+    "reason": "无实体同时重写了伤害公式里的上限轮，和正文 4.2 第 4 点自相矛盾",
+    "evidence": "Models.Powers/IntangiblePower.cs:47 ModifyDamageCap 返回 1m；:19 ModifyHpLostAfterOsty 压到 1；Hook.cs:2692-2708 上限轮"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "基类上有 185 个 `virtual` 钩子方法",
+    "fix_new": "基类上有 185 个 `public virtual` 成员（其中 182 个是钩子方法，另 3 个是 CompareTo、IsMock、PreviewOutsideOfCombat）",
+    "severity": "minor",
+    "reason": "185 是全部 public virtual 成员数，含 2 个属性和 CompareTo，钩子方法是 182 个",
+    "evidence": "grep '^\\s*public virtual' Models/AbstractModel.cs = 185；去掉 After/Before/Modify/Should/TryModify 前缀后剩 CompareTo、IsMock、PreviewOutsideOfCombat"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "每个玩家：充能球回合末被动 → 手牌里\"回合末在手\"类牌依次结算（结算完进弃牌堆，有虚无则消耗）；其余**虚无**牌消耗（`ShouldEtherealTrigger` 可否决）",
+    "fix_new": "每个玩家：充能球回合末被动 → 先把不带\"回合末在手\"效果的**虚无**牌消耗（`ShouldEtherealTrigger` 可否决）→ 再让\"回合末在手\"类牌依次结算（结算完进弃牌堆，有虚无则消耗）",
+    "severity": "minor",
+    "reason": "顺序写反了：代码先消耗普通虚无牌，再结算回合末在手的牌",
+    "evidence": "Combat/CombatManager.cs:1608 OrbQueue.BeforeTurnEnd → 1627-1630 foreach CardCmd.Exhaust(causedByEthereal:true) → 1631 DoTurnEndCards"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| 5 | `Hook.BeforeFlush`（常规、Late） | WellLaidPlans（选牌保留） |",
+    "fix_new": "| 5 | `Hook.BeforeFlush`（常规、Late） | 沉眠精华附魔（SlumberingEssence：回合末仍在手则本张费用 -1 直到打出），目前唯一重写者 |",
+    "severity": "error",
+    "reason": "计划妥当（WellLaidPlans）在本版本不挂 BeforeFlush，也不是选牌保留，而是 ShouldFlush 返回 false 整手保留；BeforeFlush 只有沉眠精华附魔重写",
+    "evidence": "Models.Powers/WellLaidPlansPower.cs:12 只重写 ShouldFlush（对持有者返回 false）；localization/zhs/powers.json WELL_LAID_PLANS_POWER「在你的回合结束时，你不再丢弃你的手牌」；Models 下 override BeforeFlush 仅 Enchantments/SlumberingEssence.cs:10，BeforeFlushLate 0 个"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "`ShouldFlush` 为假时整手保留（RunicPyramid）",
+    "fix_new": "`ShouldFlush` 为假时整手保留（符文金字塔 RunicPyramid、计划妥当 WellLaidPlans 等 4 个模型）",
+    "severity": "minor",
+    "reason": "补上计划妥当，与上一行修正对应",
+    "evidence": "override ShouldFlush：Powers/RetainHandPower、Powers/WellLaidPlansPower、Relics/RingingTriangle、Relics/RunicPyramid"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "一代里回合开始自动打牌和抽牌常常互相抢时机。",
+    "fix_new": "一代里回合开始自动打牌和抽牌常常互相抢时机（与一代对比，凭公开知识）。",
+    "severity": "minor",
+    "reason": "对一代的判断没有标注来源，按约定要标「与一代对比（凭公开知识）」",
+    "evidence": "docs/notes/agent_brief.md 写法约定"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "（先按模型 ID 排序再 Fisher–Yates）",
+    "fix_new": "（先按模型 ID、再按升级等级排序，然后 Fisher–Yates）",
+    "severity": "minor",
+    "reason": "排序键除了模型 ID 还有升级等级",
+    "evidence": "Models/CardModel.cs:2272-2294 CompareTo：先 base.CompareTo（AbstractModel.cs:106 按 Id），再比 CurrentUpgradeLevel"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "洗出来的顺序只取决于\"哪些牌\"和 RNG 状态，和\"按什么顺序弃的牌\"无关。",
+    "fix_new": "洗出来的顺序只取决于\"哪些牌\"和 RNG 状态，和\"按什么顺序弃的牌\"无关（严格说排序键只有模型 ID 和升级等级：ID、等级都相同，只是附魔、苦难或临时费用不同的几张牌，彼此的相对顺序仍可能受原顺序影响，因为 `List.Sort` 不是稳定排序）。",
+    "severity": "minor",
+    "reason": "「与初始顺序无关」只对 ID 加升级等级能区分开的牌成立",
+    "evidence": "Extensions/ListExtensions.cs:22-31 StableShuffle 用 List<T>.Sort（内省排序，不稳定）；CardModel.CompareTo 对同 ID 同等级返回 0"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "- 抽牌向上取整、伤害向零截断，两处方向相反，都偏向玩家。",
+    "fix_new": "- 抽牌向上取整，偏向玩家；伤害向零截断对双方是对称的（玩家带虚弱打 7 点同样只剩 5），谈不上偏向玩家。",
+    "severity": "overclaim",
+    "reason": "伤害截断对玩家打怪和怪打玩家走同一条路径，玩家造成的伤害也被截断，不能说偏向玩家",
+    "evidence": "Commands/CreatureCmd.cs:258-434 对任意目标同一流程；Entities.Creatures/Creature.cs:450 LoseHpInternal (int)Math.Clamp 截断"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "判定函数只有一个：`IsPoweredAttack() = 有 Move 且没有 Unpowered`（`ValuePropExtensions.cs`）。",
+    "fix_new": "核心判定是 `IsPoweredAttack() = 有 Move 且没有 Unpowered`（`ValuePropExtensions.cs`；格挡侧用逻辑相同的 `IsPoweredCardOrMonsterMoveBlock()`，另有只看 Move 的 `IsCardOrMonsterMove()`）。",
+    "severity": "minor",
+    "reason": "扩展方法有 3 个，「只有一个」不准确（敏捷、脆弱用的是格挡版）",
+    "evidence": "ValueProps/ValuePropExtensions.cs 三个方法；Powers/DexterityPower.cs:33、FrailPower.cs 用 IsPoweredCardOrMonsterMoveBlock"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "覆甲、残影、余像这类能力给的格挡用 `Unpowered`",
+    "fix_new": "覆甲、余像这类能力给的格挡用 `Unpowered`（残影不给格挡，它是否决清格挡）",
+    "severity": "minor",
+    "reason": "残影（Blur）不产生格挡，只阻止格挡被清",
+    "evidence": "Powers/BlurPower.cs 只重写 ShouldClearBlock / AfterPreventingBlockClear / AfterSideTurnStart，无 GainBlock；Powers/AfterimagePower.cs:49、PlatingPower.cs:55,66 GainBlock(ValueProp.Unpowered)"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "死亡/召唤 10、能力 7",
+    "fix_new": "死亡/召唤 11、能力 7",
+    "severity": "minor",
+    "reason": "原列表加总只有 147，AfterCreatureAddedToCombat 被脚本分到「其他」没列出；脚本已改为归入死亡/召唤并重跑",
+    "evidence": "data/csv/ch01_hooks.csv 重跑后 phase 计数：死亡/召唤 11，其余各类不变，合计 148"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "AfterSideTurnEnd 67、AfterCardPlayed 66、AfterSideTurnStart 51、AfterCombatEnd 45、AfterRoomEntered 37、AfterDeath 31、BeforeCardPlayed 29、BeforeSideTurnStart 27、BeforeCombatStart 22、AfterPlayerTurnStart 22。",
+    "fix_new": "AfterSideTurnEnd 67、AfterCardPlayed 66、AfterSideTurnStart 51、AfterCombatEnd 45、ModifyDamage 43（附魔/加算/乘算/上限四类重写合计）、AfterRoomEntered 37、AfterDeath 31、BeforeCardPlayed 29、BeforeSideTurnStart 27，BeforeCombatStart 与 AfterPlayerTurnStart 并列 22。",
+    "severity": "minor",
+    "reason": "前十漏了 ModifyDamage 43（按同一张表 model_overrides 列排第 5）",
+    "evidence": "data/csv/ch01_hooks.csv model_overrides 降序：…AfterCombatEnd 45、ModifyDamage 43、AfterRoomEntered 37…"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "ModifyKeywordsInCombat、AfterCreatureAddedToCombat、ShouldPowerBeRemovedOnDeath。每个都在注释里写了理由。",
+    "fix_new": "ModifyKeywordsInCombat、AfterCreatureAddedToCombat、ShouldPowerBeRemovedOnDeath。其中 8 个在注释里写了理由（ModifyKeywordsInCombat、ShouldPowerBeRemovedOnDeath 没写）。另外，23 个\"跑局+战斗\"时点（ModifyDamage、ModifyHpLost、AfterDamageReceived、ShouldDie、AfterDeath 等）走 `RunState.IterateHookListeners`，同样不经过这道守卫。",
+    "severity": "overclaim",
+    "reason": "两个直派时点没有理由注释；且绕过守卫的不止这 10 个，跑局级遍历也没有 IsOverOrEnding 检查",
+    "evidence": "Hooks/Hook.cs:1745-1747 ModifyKeywordsInCombat 的 summary 为空；Hook.cs:2648 ShouldPowerBeRemovedOnDeath 无 summary；Hook.cs:575 AfterDamageReceived 用 runState.IterateHookListeners(combatState)；Runs/RunState.cs 迭代器与 Combat/CombatState.cs:115-185 均无 IsOverOrEnding 判断"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "最常见的组合是\"单段攻击 + 负面\"18 次、\"单段攻击 + 强化\"18 次、\"单段攻击 + 防御\"11 次。",
+    "fix_new": "最常见的组合是\"单段攻击 + 强化\"18 次、\"单段攻击 + 负面\"17 次、\"单段攻击 + 防御\"11 次。",
+    "severity": "minor",
+    "reason": "单段攻击 + 负面实为 17 次",
+    "evidence": "Models.Monsters/*.cs 括号配对解析 new MoveState(...) 内的 new XxxIntent(：双意图组合 BuffIntent+SingleAttackIntent 18、DebuffIntent+SingleAttackIntent 17、DefendIntent+SingleAttackIntent 11（1/2/3 意图 245/77/4 与原文一致）"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| Type | Buff / Debuff | 215 / 53 |",
+    "fix_new": "| Type | Buff / Debuff | 215 / 53（268 里含 3 个抽象基类 TemporaryStrength/Dexterity/FocusPower，都计入 Buff；可实例化的能力是 265 个） |",
+    "severity": "minor",
+    "reason": "268 个能力文件里有 3 个是从不实例化的抽象基类，口径应注明",
+    "evidence": "Models.Powers/TemporaryStrengthPower.cs:23、TemporaryDexterityPower.cs:19、TemporaryFocusPower.cs:19 均为 public abstract class；注释「This class is never instantiated directly」"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| 57 | 26 个临时力量/敏捷/集中、火焰屏障",
+    "fix_new": "| 57 | 24 个临时力量/敏捷/集中（21 个子类 + 3 个抽象基类）、火焰屏障",
+    "severity": "error",
+    "reason": "临时属性类实际 24 行（21 个具体子类 + 3 个基类）；原来的 26 是脚本把 IllusionPower、SleightOfFleshPower 误判成临时属性",
+    "evidence": "grep 'class \\w+ : Temporary(Strength|Dexterity|Focus)Power' 在 Models.Powers 下 21 个（另 1 个在 Powers.Mocks）；IllusionPower.cs:63、SleightOfFleshPower.cs:23 只是 `is ITemporaryPower` 判断；脚本已修正并重跑"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| 临时属性（回合末返还） | 26 |",
+    "fix_new": "| 临时属性（回合末返还） | 24 |",
+    "severity": "error",
+    "reason": "同上，脚本误把幻象、血肉戏法算进临时属性",
+    "evidence": "scripts/ch01_extract.py 修正 is_temp 判定后，data/csv/ch01_power_taxonomy.csv primary 计数：临时属性 24"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| 其他 | 11 | 目标许可（幻象、为你而死）、充能球、额外回合（龙涎香）、施加修正（人工制品） |",
+    "fix_new": "| 其他 | 13 | 目标许可（幻象、为你而死、适者生存、接续）、能力联动（厄运之衣、血肉戏法、凶恶）、充能球/铸造/星辰、额外回合（龙涎香）、施加修正（人工制品） |",
+    "severity": "error",
+    "reason": "幻象、血肉戏法归位后「其他」变成 13（目标许可 4 + 能力联动 3 + 充能球等 4 + 额外回合 1 + 施加修正 1）",
+    "evidence": "重跑后 ch01_power_taxonomy.csv primary：目标/可被攻击 4、能力联动 3、充能球/召唤/铸造/星辰 4、额外回合 1、能力施加修正 1"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "只出现在卡牌里 172 个，只出现在怪物里 57 个，卡牌和怪物都用的 12 个",
+    "fix_new": "卡牌引用、怪物不引用的 172 个（其中 164 个只出现在卡牌里，8 个也被遗物或药水引用），怪物引用、卡牌不引用的 57 个，卡牌和怪物都用的 12 个；其余 27 个卡牌和怪物都不引用（只在遗物、药水、附魔、其他能力里出现，或没有引用）",
+    "severity": "overclaim",
+    "reason": "172 的口径是「卡牌有、怪物没有」，其中 8 个也出现在遗物/药水里，不是「只出现在卡牌里」；且漏说了两边都不引用的 27 个",
+    "evidence": "data/csv/ch01_power_taxonomy.csv src_* 组合：卡 164、卡药 3、卡遗药 3、卡遗 2（=172）；怪 55、怪药 2（=57）；卡怪* 12；无/药/遗 13+10+4=27"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| 每打出一张牌，受到的攻击 +10%，本方回合开始清零 | 惩罚\"打很多张小牌\" |",
+    "fix_new": "| 每打出一张牌，受到的攻击 +10%，本方回合开始清零 | 怪物自带的弱点，奖励\"一回合多打牌\"（唯一来源是旧日雕像 BygoneEffigy 给自己施加） |",
+    "severity": "error",
+    "reason": "缓慢是怪物给自己上的负面，玩家每多打一张牌怪物就多受 10% 伤害，是奖励多打牌，不是惩罚",
+    "evidence": "Powers/SlowPower.cs ModifyDamageMultiplicative：target==Owner 时返回 1+0.1×SlowAmount；Models.Monsters/BygoneEffigy.cs:37 Apply<SlowPower>(base.Creature…)；zhs/powers.json「该敌人本回合从攻击牌中受到的伤害增加10%」"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "26 个\"本回合 +X 力量/敏捷/集中\"共用一个基类",
+    "fix_new": "21 个\"本回合 ±X 力量/敏捷/集中\"分别继承 3 个抽象基类（TemporaryStrength/Dexterity/FocusPower）",
+    "severity": "error",
+    "reason": "数量是 21 个具体子类，基类有 3 个而不是 1 个；其中 9 个是负向（降力量/降集中）",
+    "evidence": "Models.Powers 下 21 个 `: Temporary*Power` 子类；IsPositive => false 的 9 个（CrushUnder、DarkShackles、DyingStar、EnfeeblingTouch、HyperbeamFocusDown、Mangle、MonarchsGazeStrengthDown、PiercingWail、ShacklingPotion）"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "遗物 PandorasBox（`CardSelectCmd.cs:747`、`Entities.RestSite/CookRestSiteOption.cs:64`、`Models.Events/*`、`Models.Relics/PandorasBox.cs:23`）。",
+    "fix_new": "遗物 PandorasBox（`CardSelectCmd.cs:747`、`Entities.RestSite/CookRestSiteOption.cs:64`、`Models.Events/*`、`Models.Relics/PandorasBox.cs:23`）。例外是怪物偷牌：偷窃草蜢（ThievingHopper）从抽牌堆/弃牌堆挑牌后直接 `RemoveFromDeck`，不检查 `IsRemovable`，理论上能把永恒牌暂时偷出牌组（击杀后作为奖励归还）（`Models.Monsters/ThievingHopper.cs:207-224`、`Models.Powers/SwipePower.cs:69-78`）。",
+    "severity": "minor",
+    "reason": "「永恒不能从牌组移除」有一个不经 IsRemovable 的旁路",
+    "evidence": "ThievingHopper.cs:207 从 Draw/Discard 取 DeckVersion!=null 的牌，偷取优先级末档是 Ancient 稀有度（禁忌魔典即 Ancient），都不匹配时回落到全部；SwipePower.cs:75 CardPileCmd.RemoveFromDeck(card.DeckVersion)"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| `SetUntilPlayed` | 直到打出前费用为 N | Eidolon |",
+    "fix_new": "| `SetUntilPlayed` | 直到打出前费用为 N | 当前没有内容调用（API 注释举的 Eidolon 已改成\"打出消耗堆里的虚无牌\"） |",
+    "severity": "minor",
+    "reason": "例子取自过时的 API 注释，Eidolon 现在不改费用，全库没有内容调用 SetUntilPlayed",
+    "evidence": "grep 'SetUntilPlayed(' 仅 Entities.Cards/CardEnergyCost.cs:175 定义处；Models.Cards/Eidolon.cs:24-32 OnPlay 自动打出消耗堆里的虚无牌"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "| `SetThisTurn` | 本回合内多次打出都保持 | Invoke |",
+    "fix_new": "| `SetThisTurn` | 本回合内多次打出都保持 | Flatten（API 注释举的 Invoke 当前并不调用它） |",
+    "severity": "minor",
+    "reason": "唯一调用者是 Flatten，Invoke.cs 里没有任何费用调用",
+    "evidence": "grep 'SetThisTurn(' 只有 Models.Cards/Flatten.cs:80 base.EnergyCost.SetThisTurn(0)；Models.Cards/Invoke.cs 无 Cost 相关代码"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "来源消失（比如执迷离开手牌）效果立刻消失，这和本地修饰\"写在牌上\"有本质区别（`CostModifiers.cs` 注释）。",
+    "fix_new": "来源消失（比如缠结能力在回合末被移除、腐化能力消失）效果立刻消失，这和本地修饰\"写在牌上\"有本质区别（`CostModifiers.cs` 注释讲的就是这条原理；但注释里举的执迷例子已过时，当前执迷只用 `ShouldPlay` 强制先打它，不改费用）。",
+    "severity": "error",
+    "reason": "执迷（Enthralled）现在不是全局费用修饰，注释例子过时",
+    "evidence": "Models.Cards/Enthralled.cs 只重写 ShouldPlay（:21），无 TryModifyEnergyCostInCombat；全局费用修饰的 11 个重写者不含 Enthralled（BorrowedTime、Corruption、Curious、FreeAttack、FreePower、FreeSkill、Tangled、Veilpiercer、VoidForm、BrilliantScarf、SpikedGauntlets）"
+  },
+  {
+    "file": "sections/01_combat_core.md",
+    "fix_old": "**非确定性**，按系统时间播种，只用于表现（抖动、洗牌动画间隔）",
+    "fix_new": "**非确定性**，按系统时间播种，只用于不影响玩法的随机（抖动、洗牌动画间隔、怪物皮肤、文本变体；另外新开局时生成随机种子也用它，`Helpers/SeedHelper.cs:20`）",
+    "severity": "minor",
+    "reason": "「只用于表现」略绝对：开新局生成种子也走 Chaotic（不影响局内确定性）",
+    "evidence": "Random/Rng.cs:20-25 注释「Good for when we need to randomize things that don't impact gameplay」；Helpers/SeedHelper.cs:20 rng = Rng.Chaotic"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "7 张全是静默猎手的高费牌",
+    "fix_new": "7 张全是静默猎手的牌、其中 6 张是 2–3 费",
+    "severity": "minor",
+    "reason": "翻越撑击（FlickFlack）是 1 费；report 自己的勘误表已改过第 01 章，但这条速览没同步",
+    "evidence": "data/csv/cards.csv：Abrasive 3、Reflex 3、Tactician 3、Sneaky 2、Ricochet 2、Untouchable 2、FlickFlack 1"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "战斗靠 148 个 Hook 时点串起来",
+    "fix_new": "战斗和跑局靠 148 个 Hook 时点串起来（其中 42 个是纯跑局时点）",
+    "severity": "minor",
+    "reason": "148 里有 42 个只在跑局层派发（地图、商店、奖励等），不全是战斗时点",
+    "evidence": "data/csv/ch01_hooks.csv dispatch_scope：战斗静默 73、战斗直派 10、跑局+战斗 23、纯跑局 42"
+  }
+]

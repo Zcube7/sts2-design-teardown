@@ -1,0 +1,24 @@
+﻿id,cls,name_zh,name_en,can_enchant,kind,stackable,show_amount,hooks,sources,desc_zh,file
+ADROIT,Adroit,伶俐,Adroit,任意(非状态/诅咒/任务、牌组中非不能打出),打出时追加效果,,Y,OnPlay|RecalculateValues,Relics/Kifuda,获得{Block:diff()}点格挡。,MegaCrit.Sts2.Core.Models.Enchantments/Adroit.cs
+CLONE,Clone,克隆,Clone,任意,标记(休息处复制),,,,Relics/PaelsGrowth|RestSite/CloneRestSiteOption,这张牌能在休息处被复制。,MegaCrit.Sts2.Core.Models.Enchantments/Clone.cs
+CORRUPTED,Corrupted,腐化,Corrupted,仅攻击,数值倍率(+代价),,,EnchantDamageMultiplicative|OnPlay,Events/Symbiote,造成的伤害增加50%，但会失去2生命。,MegaCrit.Sts2.Core.Models.Enchantments/Corrupted.cs
+DEPRECATED_ENCHANTMENT,DeprecatedEnchantment,弃用,Deprecated,-,弃用,,,,Saves/SaveUtil,这个附魔已经从游戏中被移除。,MegaCrit.Sts2.Core.Models.Enchantments/DeprecatedEnchantment.cs
+GLAM,Glam,华彩,Glam,任意,重放,,,EnchantPlayCount|AfterCardPlayed,Relics/Glitter|Relics/SilkenTress,这张牌每场战斗能够重放一次。,MegaCrit.Sts2.Core.Models.Enchantments/Glam.cs
+GOOPY,Goopy,黏糊,Goopy,带“防御”标签,成长(永久),,,OnEnchant|AfterCardPlayed|EnchantBlockAdditive,Events/Pael|Relics/PaelsClaw,这张牌获得消耗。当被打出时，这张牌的格挡值永久增加1点。,MegaCrit.Sts2.Core.Models.Enchantments/Goopy.cs
+IMBUED,Imbued,注能,Imbued,仅技能,开局自动打出,,,AfterAutoPrePlayPhaseEntered,Relics/ElectricShrymp,这张牌在每场战斗开始时自动打出。,MegaCrit.Sts2.Core.Models.Enchantments/Imbued.cs
+INKY,Inky,墨影,Inky,任意,打出时追加效果,,,OnPlay,Cards/BladeOfInk,这张牌造成{WeakPower}层虚弱。,MegaCrit.Sts2.Core.Models.Enchantments/Inky.cs
+INSTINCT,Instinct,本能,Instinct,仅攻击,数值倍率,,,EnchantDamageMultiplicative,Events/Tanx|Relics/TriBoomerang,这张牌的攻击伤害翻倍。,MegaCrit.Sts2.Core.Models.Enchantments/Instinct.cs
+MOMENTUM,Momentum,动量,Momentum,仅攻击,成长(战斗内),,Y,OnPlay|EnchantDamageAdditive,Relics/PunchDagger,在本场战斗中，每次打出就增加这张牌的攻击伤害{Amount}点。,MegaCrit.Sts2.Core.Models.Enchantments/Momentum.cs
+NIMBLE,Nimble,灵巧,Nimble,会获得格挡的牌,数值加成,,Y,EnchantBlockAdditive,Events/SelfHelpBook|Relics/FresnelLens,这张牌获得的格挡值增加{Amount}点。,MegaCrit.Sts2.Core.Models.Enchantments/Nimble.cs
+PERFECT_FIT,PerfectFit,完美契合,Perfect Fit,任意,牌序操控,,,ModifyShuffleOrder,Events/FieldOfManSizedHoles,每当这张牌要被洗入抽牌堆时，将其放在抽牌堆顶。,MegaCrit.Sts2.Core.Models.Enchantments/PerfectFit.cs
+ROYALLY_APPROVED,RoyallyApproved,王室认证,Royally Approved,攻击或技能,加关键词,,,OnEnchant,Relics/RoyalStamp,这张牌拥有固有和保留。,MegaCrit.Sts2.Core.Models.Enchantments/RoyallyApproved.cs
+SHARP,Sharp,锋利,Sharp,仅攻击,数值加成,,Y,EnchantDamageAdditive,Events/SelfHelpBook|Relics/GnarledHammer,这张牌上的伤害值增加{Amount}点。,MegaCrit.Sts2.Core.Models.Enchantments/Sharp.cs
+SLITHER,Slither,蛇行,Slither,非X费、非不能打出,费用随机,,,AfterCardDrawn,Events/WoodCarvings,当你抽到这张牌时，使其费用在0到3之间随机变化。,MegaCrit.Sts2.Core.Models.Enchantments/Slither.cs
+SLUMBERING_ESSENCE,SlumberingEssence,沉眠精华,Slumbering Essence,任意,费用递减,,,BeforeFlush,,回合结束时，如果这张牌在你的手牌中，则将其费用降低1点，直到其被打出。,MegaCrit.Sts2.Core.Models.Enchantments/SlumberingEssence.cs
+SOULS_POWER,SoulsPower,灵魂之力,Soul's Power,自带“消耗”的牌,去关键词,,,OnEnchant,Events/GraveOfTheForgotten,这张牌失去消耗。,MegaCrit.Sts2.Core.Models.Enchantments/SoulsPower.cs
+SOWN,Sown,播种,Sown,任意,首次打出加成,,,OnPlay,Events/SapphireSeed,你在每场战斗中第一次打出这张牌时，获得{Amount:energyIcons()}。,MegaCrit.Sts2.Core.Models.Enchantments/Sown.cs
+SPIRAL,Spiral,涡旋,Spiral,基础稀有度的打击/防御,重放,,,EnchantPlayCount,Events/SpiralingWhirlpool,这张牌获得重放1。,MegaCrit.Sts2.Core.Models.Enchantments/Spiral.cs
+STEADY,Steady,稳定,Steady,任意,加关键词,,,OnEnchant,Events/WaterloggedScriptorium,这张牌获得保留。,MegaCrit.Sts2.Core.Models.Enchantments/Steady.cs
+SWIFT,Swift,迅速,Swift,任意,首次打出加成,,Y,OnPlay,Events/Nonupeipe|Events/SelfHelpBook|Relics/BeautifulBracelet|Relics/WingCharm,你第一次打出这张牌时，抽{Amount}张牌。,MegaCrit.Sts2.Core.Models.Enchantments/Swift.cs
+TEZCATARAS_EMBER,TezcatarasEmber,特兹卡塔拉的余烬,Tezcatara's Ember,任意(营养汤只挑基础打击),改费用+关键词,,,OnEnchant|EnchantDamageAdditive,Relics/NutritiousSoup,费用为0，造成{Damage} 点额外伤害，且获得永恒。,MegaCrit.Sts2.Core.Models.Enchantments/TezcatarasEmber.cs
+VIGOROUS,Vigorous,活力,Vigorous,仅攻击,首次打出加成,,Y,EnchantDamageAdditive|AfterCardPlayed,Events/StoneOfAllTime,第一次打出这张牌时，造成{Amount}点额外伤害。,MegaCrit.Sts2.Core.Models.Enchantments/Vigorous.cs

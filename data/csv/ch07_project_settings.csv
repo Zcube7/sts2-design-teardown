@@ -1,0 +1,172 @@
+﻿key,type,value
+_custom_features,string,dotnet
+Fmod/General/is_live_update_enabled,bool,False
+Fmod/General/banks_path,string,res://banks/desktop
+application/config/name,string,Slay the Spire 2
+application/run/main_scene,string,res://scenes/game.tscn
+application/config/use_custom_user_dir,bool,True
+application/config/custom_user_dir_name,string,SlayTheSpire2
+application/config/features,PackedStringArray,"['4.5', 'C#', 'Mobile']"
+application/run/flush_stdout_on_print,bool,True
+application/boot_splash/bg_color,Color,"(0.0, 0.0, 0.0, 1.0)"
+application/boot_splash/show_image,bool,False
+application/config/icon,string,res://images/icon_1024.png
+application/config/windows_native_icon,string,res://images/icon.ico
+autoload/SentryBootstrap,string,*res://addons/sentry/SentryBootstrap.cs
+autoload/FmodManager,string,*res://addons/fmod/FmodManager.gd
+debug/file_logging/max_file_size_mb,int,64
+debug/settings/gdscript/always_track_call_stacks,bool,True
+display/window/size/viewport_width,int,1920
+display/window/size/viewport_height,int,1080
+display/window/size/initial_position_type,int,3
+display/window/stretch/mode,string,canvas_items
+display/window/stretch/aspect,string,expand
+display/mouse_cursor/custom_image,string,res://images/packed/common_ui/cursor_default.png
+display/mouse_cursor/custom_image_hotspot,Vector2,"(14.0, 5.0)"
+dotnet/project/assembly_name,string,sts2
+dotnet/project/solution_directory,string,../
+editor/export/convert_text_resources_to_binary,bool,False
+editor_plugins/enabled,PackedStringArray,"['res://addons/atlas_generator/plugin.cfg', 'res://addons/dev_tools/plugin.cfg', 'res://addons/fmod/plugin.cfg', 'res://addons/mega_text/plugin.cfg', 'res://addons/megacontentcreator/plugin.cfg']"
+filesystem/import/blender/enabled,bool,False
+gui/common/snap_controls_to_pixels,bool,False
+gui/fonts/dynamic_fonts/use_oversampling,bool,False
+input/ui_accept,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_select,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_cancel,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_focus_next,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_focus_prev,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_left,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_right,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_up,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_down,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/banana,Dictionary,<未解码: unsupported variant type 24>
+input/back_button,Dictionary,<未解码: unsupported variant type 24>
+input/instant_mode,Dictionary,<未解码: unsupported variant type 24>
+input/toggle_particle_counter,Dictionary,<未解码: unsupported variant type 24>
+input/mega_accept,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_up,Dictionary,<未解码: unsupported variant type 24>
+input/mega_down,Dictionary,<未解码: unsupported variant type 24>
+input/mega_left,Dictionary,<未解码: unsupported variant type 24>
+input/mega_right,Dictionary,<未解码: unsupported variant type 24>
+input/debug_unlock_characters,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_speed_up,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_speed_down,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_version_info,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_top_bar,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_intents,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_combat_ui,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_play_container,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_hand,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_hp_bars,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_text_vfx,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_targeting_ui,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_slow_rewards,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_rest_site,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_event_ui,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_proceed_button,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_hovertips,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_cancel,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/hotkey_cancel,Dictionary,<未解码: unsupported variant type 24>
+input/react_wheel,Dictionary,<未解码: unsupported variant type 24>
+input/mega_select,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_deck_shortcut,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_potion_shortcut,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_view_map,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_options_shortcut,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/view_deck,Dictionary,<未解码: unsupported variant type 24>
+input/open_pause_menu,Dictionary,<未解码: unsupported variant type 24>
+input/mega_end_turn,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/view_map,Dictionary,<未解码: unsupported variant type 24>
+input/mega_settings_tab_left,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_settings_tab_right,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_view_draw_pile,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_view_discard_pile,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_view_deck_and_tab_left,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_view_exhaust_pile_and_tab_right,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_top_panel,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_map,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_pause_and_back,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_back,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_peek,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_mp_cursors,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_mp_targeting,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_mp_cards,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/debug_hide_mp_intents,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/joy_up,Dictionary,<未解码: unsupported variant type 24>
+input/joy_down,Dictionary,<未解码: unsupported variant type 24>
+input/joy_left,Dictionary,<未解码: unsupported variant type 24>
+input/joy_right,Dictionary,<未解码: unsupported variant type 24>
+input/debug_hide_mp_health_bars,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_left_trigger,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_right_trigger,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_right_bumper,Dictionary,<未解码: unsupported variant type 24>
+input/controller_d_pad_up,Dictionary,<未解码: unsupported variant type 24>
+input/controller_d_pad_down,Dictionary,<未解码: unsupported variant type 24>
+input/controller_d_pad_right,Dictionary,<未解码: unsupported variant type 24>
+input/controller_d_pad_left,Dictionary,<未解码: unsupported variant type 24>
+input/controller_start_button,Dictionary,<未解码: unsupported variant type 24>
+input/controller_select_button,Dictionary,<未解码: unsupported variant type 24>
+input/controller_l_stick_press,Dictionary,<未解码: unsupported variant type 24>
+input/controller_face_button_north,Dictionary,<未解码: unsupported variant type 24>
+input/controller_face_button_south,Dictionary,<未解码: unsupported variant type 24>
+input/controller_face_button_east,Dictionary,<未解码: unsupported variant type 24>
+input/controller_face_button_west,Dictionary,<未解码: unsupported variant type 24>
+input/raw_l_stick_left,Dictionary,<未解码: unsupported variant type 24>
+input/raw_l_stick_right,Dictionary,<未解码: unsupported variant type 24>
+input/raw_l_stick_up,Dictionary,<未解码: unsupported variant type 24>
+input/raw_l_stick_down,Dictionary,<未解码: unsupported variant type 24>
+input/ui_controller_touch_pad,Dictionary,<未解码: unsupported variant type 24>
+input/mega_select_card_1,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_2,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_3,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_4,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_5,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_6,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_7,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_8,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_9,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_select_card_10,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/mega_release_card,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_r_stick_left,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_r_stick_right,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_r_stick_up,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_r_stick_down,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_alt_up,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_alt_down,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_alt_left,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_alt_right,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/raw_r_stick_left,Dictionary,<未解码: unsupported variant type 24>
+input/raw_r_stick_right,Dictionary,<未解码: unsupported variant type 24>
+input/raw_r_stick_up,Dictionary,<未解码: unsupported variant type 24>
+input/raw_r_stick_down,Dictionary,<未解码: unsupported variant type 24>
+input/raw_right_trigger,Dictionary,<未解码: unsupported variant type 24>
+input/raw_left_trigger,Dictionary,<未解码: unsupported variant type 24>
+input/controller_left_bumper,Dictionary,<未解码: unsupported variant type 24>
+input/controller_l_stick_up,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_l_stick_down,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_l_stick_left,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/controller_l_stick_right,Dictionary,"{'deadzone': 0.5, 'events': []}"
+input/ui_confirm,Dictionary,"{'deadzone': 0.2, 'events': []}"
+input/ui_end_turn,Dictionary,"{'deadzone': 0.2, 'events': []}"
+internationalization/locale/include_text_server_data,bool,True
+network/limits/debugger/max_chars_per_second,int,99999999
+physics/2d/physics_engine,string,Dummy
+physics/3d/physics_engine,string,Dummy
+rendering/rendering_device/driver.windows,string,d3d12
+rendering/textures/vram_compression/import_etc2_astc,bool,True
+rendering/anti_aliasing/screen_space_roughness_limiter/enabled,bool,False
+rendering/environment/defaults/default_clear_color,Color,"(0.092, 0.122, 0.117, 1.0)"
+sentry/config/dsn,string,<已打码>
+sentry/config/disabled_in_editor,bool,False
+sentry/config/attach_screenshot,bool,False
+sentry/config/attach_log,bool,False
+sentry/config/logger_messages_as_breadcrumbs,bool,False
+sentry/config/max_breadcrumbs,int,100
+sentry/options/auto_init,bool,False
+sentry/schema_version,int,4
+sentry/options/debug_printing,int,0
+sentry/options/diagnostic_level,int,2
+sentry/options/attach_log,bool,False
+sentry/godot_logger/events,int,9
+sentry/godot_logger/breadcrumbs,int,11
+xr/openxr/startup_alert,bool,False

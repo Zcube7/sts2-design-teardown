@@ -1,0 +1,103 @@
+﻿ancient,ancient_zh,act,slot,slot_rule,condition,relic,name_zh,rarity,pools,category_zh,drawback,energy_plus1,enchant,desc_zh,src
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,ArcaneScroll,奥术卷轴,Ancient,Event,拾取即生效,,,,拾起时，将一张随机稀有牌加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:68
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,BoomingConch,轰鸣海螺,Ancient,Event,战斗开始,,,,在精英战的战斗开始时，额外抽{Cards}张牌并获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:69
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,FishingRod,钓鱼竿,Ancient,Event,战斗结束结算,,,,每{Combats}场普通战斗，随机升级你牌组中的一张牌。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:70
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,GoldenPearl,金色珍珠,Ancient,Event,拾取即生效,,,,拾起时，获得{Gold}金币。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:71
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,Kaleidoscope,万花筒,Ancient,Event,拾取即生效,,,,拾起时，获得{Cards}次来自其他角色的卡牌奖励。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:72
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,LeadPaperweight,铅制镇纸,Ancient,Event,拾取即生效,,,,拾起时，从2张无色牌中选择1张加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:73
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,LostCoffer,失物盒,Ancient,Event,拾取即生效,,,,拾起时，获得1次卡牌奖励和1瓶随机药水。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:74
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,MassiveScroll,巨大卷轴,Ancient,Event,拾取即生效,,,,拾起时，从3张多人游戏牌中选择1张加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:75
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,NeowsTorment,涅奥的苦痛,Ancient,Event,拾取即生效,,,,拾起时，将1张涅奥之怒加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:76
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,NewLeaf,新叶,Ancient,Event,拾取即生效,,,,拾起时，变化{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:77
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,PhialHolster,药瓶皮套,Ancient,Event,拾取即生效,,,,拾起时，获得{PotionSlots}个药水栏位并获得{Potions}瓶随机药水。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:78
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,PreciseScissors,精准剪刀,Ancient,Event,拾取即生效,,,,拾起时，从你的牌组中移除{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:79
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,ScrollBoxes,卷轴箱,Ancient,Event,拾取即生效,,,,拾起时，从2个卡牌包中选择1包加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:80
+Neow,涅奥,第1幕开局(Index0),正面池,14 选项进候选，最终与加塞项一起洗牌取 2,,WingedBoots,羽翼之靴,Ancient,Event,地图/休息处/路线,,,,你在选择下一层的房间时有{Rooms}次机会可以无视当前的路线。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:81
+Neow,涅奥,第1幕开局(Index0),正面加塞A,二选一(50%)；代价项为巨大扭蛋时不加,,LavaRock,熔岩石,Ancient,Event,经济/奖励/构筑,,,,第一阶段的Boss敌人额外掉落{Relics}件遗物。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:84
+Neow,涅奥,第1幕开局(Index0),正面加塞A,二选一(50%)；代价项为巨大扭蛋时不加,,SmallCapsule,小型扭蛋,Ancient,Event,拾取即生效,,,,拾起时，获得一件随机遗物。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:92
+Neow,涅奥,第1幕开局(Index0),正面加塞B,二选一(50%),,NutritiousOyster,营养牡蛎,Ancient,Event,拾取即生效,,,,拾起时，将你的最大生命值提升{MaxHp}。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:88
+Neow,涅奥,第1幕开局(Index0),正面加塞B,二选一(50%),,StoneHumidifier,石炉加湿器,Ancient,Event,地图/休息处/路线,,,,每当你在休息处休息时，将你的最大生命值提升{MaxHp}点。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:94
+Neow,涅奥,第1幕开局(Index0),正面加塞C,二选一(50%),,NeowsTalisman,涅奥的护符,Ancient,Event,拾取即生效,,,,拾起时，升级你的1张打击和1张防御。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:86
+Neow,涅奥,第1幕开局(Index0),正面加塞C,二选一(50%),,Pomander,橙型香盒,Ancient,Event,拾取即生效,,,,拾起时，升级一张牌。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:90
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,CursedPearl,诅咒珍珠,Ancient,Event,拾取即生效,Y,,,拾起时，获得一张贪婪，获得{Gold}金币。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:98
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,DowsingRod,寻龙尺,Ancient,Event,拾取即生效,Y,,,拾起时，将1张探寻加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:99
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,HeftyTablet,沉重石板,Ancient,Event,拾取即生效,Y,,,拾起时，从{Cards}张稀有牌中选择1张加入你的牌组，同时将1张受伤加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:100
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,LargeCapsule,巨大扭蛋,Ancient,Event,拾取即生效,Y,,,拾起时，获得{Relics}件随机遗物。额外将一对打击和防御，加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:101
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,LeafyPoultice,树叶药膏,Ancient,Event,拾取即生效,Y,,,拾起时，变化你的1张打击和1张防御，然后失去{MaxHp}点最大生命。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:102
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,NeowsBones,涅奥骨骰,Ancient,Event,拾取即生效,Y,,,拾起时，获得{Relics}件随机涅奥{Relics:plural:遗物|遗物}。将{Curses}张随机{Curses:plural:诅咒|诅咒}加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:103
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,NeowsSacrifice,涅奥的牺牲,Ancient,Event,拾取即生效,Y,,,拾起时，获得1瓶龙涎香，并将1张愧疚加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:104
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,PrecariousShears,松动羊毛剪,Ancient,Event,拾取即生效,Y,,,拾起时，从你的牌组中移除{Cards}张牌并失去{Damage}点生命。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:105
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,SilkenTress,华美发束,Ancient,Event,经济/奖励/构筑,Y,,Y,拾起时，失去所有金币。为你的第一次卡牌奖励中的所有牌附魔：华彩。,MegaCrit.Sts2.Core.Models.Events/Neow.cs:106
+Neow,涅奥,第1幕开局(Index0),代价池,必出 1 个；与正面项互斥：诅咒珍珠×金色珍珠、沉重石板×奥术卷轴、树叶药膏×新叶、松动羊毛剪×精准剪刀、涅奥的牺牲×药瓶皮套/失物盒,,SilverCrucible,白银熔炉,Ancient,Event,经济/奖励/构筑,Y,,,你遇到的前{Cards}次卡牌奖励将是被升级过的。你打开的第一个宝箱将是空的,MegaCrit.Sts2.Core.Models.Events/Neow.cs:107
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,,Astrolabe,星盘,Ancient,Event,拾取即生效,,,,拾起时，选择{Cards}张牌进行变化，然后将这些牌升级。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:177
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,,BlackStar,黑星,Ancient,Event,经济/奖励/构筑,,,,精英敌人在被打败时多掉落一件遗物。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:179
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,,CallingBell,召唤铃铛,Ancient,Event,拾取即生效,Y,,,拾起时，获得一个独特的诅咒和{Relics}件遗物。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:181
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,,EmptyCage,空鸟笼,Ancient,Event,拾取即生效,,,,拾起时，选择移除牌组中的{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:183
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,无“清空牌组”类修饰符,PandorasBox,潘多拉魔盒,Ancient,Event,拾取即生效,,,,变化所有“打击”和“防御”。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:185
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,,RunicPyramid,符文金字塔,Ancient,Event,常驻规则/数值改写,,,,你在回合结束时不再自动丢弃所有手牌。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:187
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,,SneckoEye,异蛇之眼,Ancient,Event,常驻规则/数值改写,Y,,,每回合多抽{Cards}张牌。每场战斗开始时获得混乱效果。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:189
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,CurrentActIndex==1,Ectoplasm,灵体外质,Ancient,Event,每回合能量(多带代价),Y,Y,,你不能再获得任何金币。在回合开始时获得{Energy:energyIcons()},MegaCrit.Sts2.Core.Models.Events/Darv.cs:191
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,CurrentActIndex==1,Sozu,添水,Ancient,Event,每回合能量(多带代价),Y,Y,,在每回合开始时获得{Energy:energyIcons()}。你无法再获得药水。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:193
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,CurrentActIndex>=1,PhilosophersStone,贤者之石,Ancient,Event,每回合能量(多带代价),Y,Y,,在每回合开始时获得{Energy:energyIcons()}。所有敌人初始获得{StrengthPower}点力量。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:195
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),单品集,11 个单品集按条件过滤后，每集出 1 个；50% 取 2 个 + 尘封魔典，50% 取 3 个,CurrentActIndex>=1,VelvetChoker,天鹅绒颈圈,Ancient,Event,每回合能量(多带代价),Y,Y,,在每回合开始时获得{Energy:energyIcons()}。你每回合不能打出超过{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:197
+Darv,达弗,共享Ancient(ModelDb.AllSharedAncients),尘封魔典,50% 概率固定占 1 格（给本角色一张非“超越”的先古牌并升级）,,DustyTome,尘封魔典,Ancient,Event,拾取即生效,,,,拾起时，获得一张{AncientCard.StringValue:cond:{}+|先古牌}。,MegaCrit.Sts2.Core.Models.Events/Darv.cs:55
+Orobas,欧洛巴斯,第2幕(Hive),槽1,"从 [放电异虾, 玻璃眼珠, X] 随机 1；X = 1/3 棱彩宝石，2/3 海玻璃(随机另一个已解锁角色)",,ElectricShrymp,放电异虾,Ancient,Event,拾取即生效,,,Y,拾起时，选择一张技能牌为它附魔：注能。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:30
+Orobas,欧洛巴斯,第2幕(Hive),槽1,"从 [放电异虾, 玻璃眼珠, X] 随机 1；X = 1/3 棱彩宝石，2/3 海玻璃(随机另一个已解锁角色)",,GlassEye,玻璃眼珠,Ancient,Event,拾取即生效,,,,拾起时，获得2组普通、2组罕见、和1组稀有卡牌奖励。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:31
+Orobas,欧洛巴斯,第2幕(Hive),槽1,"从 [放电异虾, 玻璃眼珠, X] 随机 1；X = 1/3 棱彩宝石，2/3 海玻璃(随机另一个已解锁角色)",,PrismaticGem,棱彩宝石,Ancient,Event,每回合能量(多带代价),,Y,,在每个回合开始时获得{Energy:energyIcons()}。卡牌奖励现在会包含其他颜色的卡牌。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:57
+Orobas,欧洛巴斯,第2幕(Hive),槽1,"从 [放电异虾, 玻璃眼珠, X] 随机 1；X = 1/3 棱彩宝石，2/3 海玻璃(随机另一个已解锁角色)",,SeaGlass,海玻璃,Ancient,Event,拾取即生效,,,,查看{Cards}张来自{Character.StringValue:cond:{}|其他角色}的牌。从中选择任意数量的卡牌加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:49
+Orobas,欧洛巴斯,第2幕(Hive),槽2,4 选 1,,AlchemicalCoffer,炼金箱,Ancient,Event,拾取即生效,,,,拾起时，获得{PotionSlots}个放有随机药水的药水栏位。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:36
+Orobas,欧洛巴斯,第2幕(Hive),槽2,4 选 1,,Driftwood,浮木,Ancient,Event,经济/奖励/构筑,,,,你可以在每一个卡牌奖励中重掷一次。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:37
+Orobas,欧洛巴斯,第2幕(Hive),槽2,4 选 1,,RadiantPearl,发光珍珠,Ancient,Event,战斗开始,,,,在每场战斗开始时，将{Cards}张冷光加入你的手牌。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:38
+Orobas,欧洛巴斯,第2幕(Hive),槽2,4 选 1,,SandCastle,沙堡,Ancient,Event,拾取即生效,,,,拾起时，随机升级{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:39
+Orobas,欧洛巴斯,第2幕(Hive),槽3,2 选 1；各自要求玩家还持有可升级的初始遗物/初始牌，否则显示锁定,,TouchOfOrobas,欧洛巴斯之触,Ancient,Event,拾取即生效,,,,拾起时，将{StarterRelic.StringValue:cond:{StarterRelic}替换为{UpgradedRelic}|你的初始遗物替换为先古版本}。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:64
+Orobas,欧洛巴斯,第2幕(Hive),槽3,2 选 1；各自要求玩家还持有可升级的初始遗物/初始牌，否则显示锁定,,ArchaicTooth,古老牙齿,Ancient,Event,拾取即生效,,,,拾起时，将{StarterCard.StringValue:cond:{StarterCard}变化为{AncientCard}|一张初始卡牌变化为先古版本}。,MegaCrit.Sts2.Core.Models.Events/Orobas.cs:76
+Pael,佩尔,第2幕(Hive),槽1,3 选 1,,PaelsFlesh,佩尔之肉,Ancient,Event,每回合能量(多带代价),,Y,,从你的第3回合开始，在回合开始时额外获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:32
+Pael,佩尔,第2幕(Hive),槽1,3 选 1,,PaelsHorn,佩尔之角,Ancient,Event,拾取即生效,,,,拾起时，将2张放松加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:33
+Pael,佩尔,第2幕(Hive),槽1,3 选 1,,PaelsTears,佩尔之泪,Ancient,Event,回合节奏,,,,如果你在拥有未花费的{energyPrefix:energyIcons(1)}情况下结束回合，则下个回合额外获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:34
+Pael,佩尔,第2幕(Hive),槽2,佩尔之翼 + 条件项(爪:≥3 张可附魔“黏糊”的防御；牙:≥5 张可移除牌) 整表复制一份后再加 1 个增生组织 → 增生组织权重减半,,PaelsWing,佩尔之翼,Ancient,Event,经济/奖励/构筑,,,,你可以将你的卡牌奖励献祭给佩尔。每献祭{Sacrifices}次，就能获得一件遗物。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:46
+Pael,佩尔,第2幕(Hive),槽2,佩尔之翼 + 条件项(爪:≥3 张可附魔“黏糊”的防御；牙:≥5 张可移除牌) 整表复制一份后再加 1 个增生组织 → 增生组织权重减半,,PaelsClaw,佩尔之爪,Ancient,Event,拾取即生效,,,Y,拾起时，为所有的“防御”附魔：{EnchantmentName}。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:22
+Pael,佩尔,第2幕(Hive),槽2,佩尔之翼 + 条件项(爪:≥3 张可附魔“黏糊”的防御；牙:≥5 张可移除牌) 整表复制一份后再加 1 个增生组织 → 增生组织权重减半,,PaelsTooth,佩尔之牙,Ancient,Event,拾取即生效,,,,拾起时，从你的牌组中选择{Cards}张牌移除。在每场战斗结束时，将其中随机1张牌升级然后返还。{CardTitles.StringValue:cond:  被吞噬的牌： {}|},MegaCrit.Sts2.Core.Models.Events/Pael.cs:24
+Pael,佩尔,第2幕(Hive),槽2,佩尔之翼 + 条件项(爪:≥3 张可附魔“黏糊”的防御；牙:≥5 张可移除牌) 整表复制一份后再加 1 个增生组织 → 增生组织权重减半,,PaelsGrowth,佩尔的增生组织,Ancient,Event,地图/休息处/路线,,,Y,拾起时，从牌组中选择一张牌，为其附魔：{EnchantmentName}。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:26
+Pael,佩尔,第2幕(Hive),槽3,眼/血 + 士兵(无事件宠物时) 中 1,,PaelsEye,佩尔之眼,Ancient,Event,回合节奏,,,,你在每场战斗中第一次没有打出任何牌就结束回合时，消耗所有手牌然后进行一个额外回合。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:60
+Pael,佩尔,第2幕(Hive),槽3,眼/血 + 士兵(无事件宠物时) 中 1,,PaelsBlood,佩尔之血,Ancient,Event,回合节奏,,,,在你的回合开始时，额外抽{Cards}张牌,MegaCrit.Sts2.Core.Models.Events/Pael.cs:62
+Pael,佩尔,第2幕(Hive),槽3,眼/血 + 士兵(无事件宠物时) 中 1,,PaelsLegion,佩尔的士兵,Ancient,Event,打牌/牌堆触发,,,,将你从一张卡牌中获得的格挡翻倍，然后此遗物会休眠{Turns}回合。,MegaCrit.Sts2.Core.Models.Events/Pael.cs:28
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,Claws,利爪,Ancient,Event,拾取即生效,,,,拾起时，将至多{Cards}张牌变化为撕咬。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:31
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,Crossbow,十字弓,Ancient,Event,回合节奏,,,,在你的回合开始时，将一张随机攻击牌加入你的手牌。这张牌在本回合可以免费打出。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:32
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,IronClub,铁棒,Ancient,Event,打牌/牌堆触发,,,,你每打出{Cards}张牌，就抽1张牌。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:33
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,MeatCleaver,切肉刀,Ancient,Event,地图/休息处/路线,,,,你可以在休息处进行烹饪。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:34
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,Sai,钗,Ancient,Event,回合节奏,,,,在你的回合开始时，获得{Block}点格挡。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:35
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,SpikedGauntlets,带刺手甲,Ancient,Event,每回合能量(多带代价),Y,Y,,在每回合开始时获得{Energy:energyIcons()}。能力牌的耗能增加1{energyPrefix:energyIcons(1)}。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:36
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,TanxsWhistle,坦克斯的哨子,Ancient,Event,拾取即生效,,,,拾起时，将1张吹哨加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:37
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,ThrowingAxe,投斧,Ancient,Event,打牌/牌堆触发,,,,你在每场战斗中打出的第一张牌会多打出一次。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:38
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,WarHammer,战锤,Ancient,Event,战斗结束结算,,,,每当你击败一名精英敌人的时候，随机升级{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:39
+Tanx,坦克斯,第3幕(Glory),武器池,9 个基础 + 三刃回旋镖(≥3 张可附魔“本能”的攻击牌)，洗牌取 3,,TriBoomerang,三刃回旋镖,Ancient,Event,拾取即生效,,,Y,从你的牌组中选择{Cards}张攻击牌。为这些牌附魔：本能。,MegaCrit.Sts2.Core.Models.Events/Tanx.cs:42
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽1,可可/饼干 + 营养汤(牌组有基础打击时) 中 1,,VeryHotCocoa,烫嘴可可,Ancient,Shared,战斗开始,,,,在每场战斗的第一回合额外获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:53
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽1,可可/饼干 + 营养汤(牌组有基础打击时) 中 1,,YummyCookie,美味饼干,Ancient,Event,拾取即生效,,,,拾起时，升级{Cards}张牌。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:55
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽1,可可/饼干 + 营养汤(牌组有基础打击时) 中 1,,NutritiousSoup,营养汤,Ancient,Event,拾取即生效,,,Y,拾起时，为你牌组中的所有“打击”附魔：特兹卡塔拉的余烬,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:42
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽2,3 选 1,,BiiigHug,大～抱抱,Ancient,Event,拾取即生效,Y,,,拾起时，从你的牌组中移除{Cards}张牌。每当你的抽牌堆打乱洗牌时，将一张煤灰加入你的抽牌堆。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:69
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽2,3 选 1,,Storybook,故事书,Ancient,Event,拾取即生效,,,,拾起时，将1张至亮之焰添加到你的牌组中。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:71
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽2,3 选 1,,ToastyMittens,烘焙手套,Ancient,Event,回合节奏,Y,,,在你的回合开始时，消耗你手牌中的1张牌并获得{StrengthPower}点力量。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:73
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽3,4 选 1,,GoldenCompass,黄金罗盘,Ancient,Event,地图/休息处/路线,,,,拾起时，将第2阶段的地图替换为一条特殊的直道。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:87
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽3,4 选 1,,PumpkinCandle,南瓜蜡烛,Ancient,Event,每回合能量(多带代价),Y,Y,,在每个回合开始时获得{Energy:energyIcons()}。这件遗物会在{CombatCount}场战斗后熄灭。可以在休息处为其添火。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:89
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽3,4 选 1,,ToyBox,玩具盒,Ancient,Event,拾取即生效,Y,,,拾起时，获得{Relics}件蜡制遗物。每经过{Combats}场战斗，你最左侧的蜡制遗物将会融化。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:91
+Tezcatara,特兹卡塔拉,第2幕(Hive),槽3,4 选 1,,SealOfGold,黄金印,Ancient,Event,回合节奏,Y,,,在你的回合开始时，花费{Gold}金币来获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Events/Tezcatara.cs:93
+Vakuu,瓦库,第3幕(Glory),池1,3 选 1,,BloodSoakedRose,血染玫瑰,Ancient,Event,每回合能量(多带代价),Y,Y,,拾起时，将1张执迷加入你的牌组。在回合开始时获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:29
+Vakuu,瓦库,第3幕(Glory),池1,3 选 1,,WhisperingEarring,低语耳环,Ancient,Event,每回合能量(多带代价),Y,Y,,在每个回合开始时，获得{Energy:energyIcons()}。瓦库将接管你的第一回合。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:30
+Vakuu,瓦库,第3幕(Glory),池1,3 选 1,,Fiddle,小提琴,Ancient,Event,回合节奏,Y,,,在每个回合开始时，额外抽{Cards}张牌。你在回合进行中不再能抽任何牌。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:31
+Vakuu,瓦库,第3幕(Glory),池2,3 选 1（原初之爪选项额外标注 -9 最大生命）,,PreservedFog,腌制活雾,Ancient,Event,拾取即生效,Y,,,拾起时，从你的牌组中移除{Cards}张牌。将一张愚行加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:36
+Vakuu,瓦库,第3幕(Glory),池2,3 选 1（原初之爪选项额外标注 -9 最大生命）,,SereTalon,原初之爪,Ancient,Event,拾取即生效,Y,,,拾起时，失去9点最大生命值，将{Wishes}张许愿加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:37
+Vakuu,瓦库,第3幕(Glory),池2,3 选 1（原初之爪选项额外标注 -9 最大生命）,,DistinguishedCape,卓越斗篷,Ancient,Event,拾取即生效,Y,,,拾起时，将{Curses}张随机诅咒牌和{Cards}张灵体加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:38
+Vakuu,瓦库,第3幕(Glory),池3,4 选 1,,ChoicesParadox,选择悖论,Ancient,Event,战斗开始,,,,在每场战斗开始时，从{Cards}张随机牌中选择1张放入你的手牌。被选中的牌获得保留。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:43
+Vakuu,瓦库,第3幕(Glory),池3,4 选 1,,MusicBox,音乐盒,Ancient,Event,打牌/牌堆触发,,,,将你每回合打出的第一张攻击牌的一张虚无复制品加入你的手牌。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:44
+Vakuu,瓦库,第3幕(Glory),池3,4 选 1,,LordsParasol,领主阳伞,Ancient,Event,经济/奖励/构筑,,,,当你遇见商人时，立刻获得他所出售的所有物品。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:45
+Vakuu,瓦库,第3幕(Glory),池3,4 选 1,,JeweledMask,宝石面具,Ancient,Event,战斗开始,,,,在每场战斗开始时，将一张随机能力牌从你的抽牌堆放入你的手牌，这张牌在本场战斗可以免费打出。,MegaCrit.Sts2.Core.Models.Events/Vakuu.cs:46
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,BlessedAntler,赐福鹿角,Ancient,Event,每回合能量(多带代价),Y,Y,,在每回合开始时获得{Energy:energyIcons()}。在战斗开始时，将{Cards}张晕眩放入你的抽牌堆。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:35
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,BrilliantScarf,艳丽围巾,Ancient,Event,打牌/牌堆触发,,,,你每回合从你的手牌打出的第5张牌可以被免费打出。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:36
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,DelicateFrond,娇嫩蕨草,Ancient,Event,战斗开始,,,,在每场战斗开始时，用随机药水将你的空药水栏位填满。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:37
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,DiamondDiadem,钻石头冠,Ancient,Event,战斗开始,,,,战斗开始时获得{Block}点格挡。你的格挡不会在你的第2回合开始前被移除。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:38
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,FurCoat,皮草大衣,Ancient,Event,地图/休息处/路线,,,,拾起时，随机标记{Combats}处战斗。这些战斗中的敌人将只有1点生命。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:39
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,Glitter,亮片,Ancient,Event,经济/奖励/构筑,,,Y,为之后的所有卡牌奖励附魔：华彩。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:40
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,JewelryBox,珠宝盒,Ancient,Event,拾取即生效,,,,拾起时，将1张神化加入你的牌组。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:41
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,LoomingFruit,布质果实,Ancient,Shared,拾取即生效,,,,拾起时，将你的最大生命值提升{MaxHp}。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:42
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,SignetRing,图章戒指,Ancient,Event,拾取即生效,,,,拾起时，获得{Gold}金币。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:43
+Nonupeipe,诺奴佩普,第3幕(Glory),饰品池,9 个基础 + 华美手镯(≥4 张可附魔“迅捷”的牌)，洗牌取 3,,BeautifulBracelet,华美手镯,Ancient,Event,拾取即生效,,,Y,拾起时，为你牌组中的随机{Cards}张牌附魔：迅捷2。,MegaCrit.Sts2.Core.Models.Events/Nonupeipe.cs:46

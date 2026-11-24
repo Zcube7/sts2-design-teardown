@@ -1,0 +1,299 @@
+Akabeko|赤牛|Uncommon|Shared||AfterSideTurnStart||Vigor=8|在每场战斗开始时，获得{VigorPower}点活力。
+AlchemicalCoffer|炼金箱|Ancient|Event|HasUponPickupEffect=true|AfterObtained||PotionSlots=4|拾起时，获得{PotionSlots}个放有随机药水的药水栏位。
+AmethystAubergine|紫水晶茄子|Common|Shared|NoShop|TryModifyRewards,AfterModifyingRewards|return RelicModel.IsBeforeAct3TreasureChest(runState);|Gold=15|敌人额外掉落{Gold}金币。
+Anchor|锚|Common|Shared||BeforeCombatStart||Block=10|每场战斗开始时获得{Block}点格挡。
+ArcaneScroll|奥术卷轴|Ancient|Event||AfterObtained||Cards=1|拾起时，将一张随机稀有牌加入你的牌组。
+ArchaicTooth|古老牙齿|Ancient|Event||AfterCloned,AfterObtained||StarterCard=; AncientCard=|拾起时，将{StarterCard.StringValue:cond:{StarterCard}变化为{AncientCard}|一张初始卡牌变化为先古版本}。
+ArtOfWar|孙子兵法|Rare|Shared||AfterCardPlayed,AfterSideTurnEnd,AfterEnergyReset,AfterCombatEnd||Energy=1|如果你在本回合中没有打出过攻击牌，则在下一回合额外获得1点{Energy:energyIcons()}。
+Astrolabe|星盘|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=3|拾起时，选择{Cards}张牌进行变化，然后将这些牌升级。
+BagOfMarbles|弹珠袋|Common|Shared||BeforeSideTurnStart||Vulnerable=1|在每场战斗开始时，给予所有敌人{VulnerablePower}层易伤。
+BagOfPreparation|准备背包|Common|Shared||ModifyHandDraw||Cards=2|在每场战斗开始时，额外抽{Cards}张牌。
+BeatingRemnant|律动残余|Rare|Shared||ModifyHpLostAfterOsty,AfterModifyingHpLostAfterOsty,AfterDamageReceived,BeforeSideTurnStart||MaxHpLoss=20|你在一回合内失去的生命值不会超过20点。
+BeautifulBracelet|华美手镯|Ancient|Event||AfterObtained||Cards=4; Swift=2|拾起时，为你牌组中的随机{Cards}张牌附魔：迅捷2。
+Bellows|风箱|Rare|Shared||AfterPlayerTurnStart|||你在每场战斗开始时的手牌，将被升级。
+BeltBuckle|腰带扣|Shop|Shared||AfterObtained,BeforeCombatStart,AfterCombatEnd,AfterPotionProcured,AfterPotionDiscarded,AfterPotionUsed,AfterCombatVictory||Dexterity=2|当你没有药水时，你额外拥有{DexterityPower}点敏捷。
+BigHat|大帽子|Rare|Necrobinder||AfterSideTurnStart||Cards=2|在每场战斗开始时，将{Cards}张随机虚无牌加入你的手牌。
+BigMushroom|大蘑菇|Event|Event|HasUponPickupEffect=true|AfterObtained,AfterRoomEntered,ModifyHandDraw||MaxHp=20; Cards=2|拾起时，将你的最大生命值提升{MaxHp}。在每场战斗开始时，少抽{Cards}张牌。
+BiiigHug|大～抱抱|Ancient|Event||AfterObtained,AfterShuffle||Cards=4|拾起时，从你的牌组中移除{Cards}张牌。每当你的抽牌堆打乱洗牌时，将一张煤灰加入你的抽牌堆。
+BingBong|宾邦|Event|Event||AfterCardChangedPiles|||每当你往牌组中增添卡牌时，都将额外添加一张相同的牌。
+BlackBlood|黑暗之血|Starter|Event||AfterCombatVictory||Heal=12|在战斗结束时，回复{Heal}点生命。
+BlackStar|黑星|Ancient|Event||TryModifyRewards|||精英敌人在被打败时多掉落一件遗物。
+BlessedAntler|赐福鹿角|Ancient|Event||ModifyMaxEnergy,BeforeHandDraw||Energy=1; Cards=3|在每回合开始时获得{Energy:energyIcons()}。在战斗开始时，将{Cards}张晕眩放入你的抽牌堆。
+BloodSoakedRose|血染玫瑰|Ancient|Event|HasUponPickupEffect=true|AfterObtained,ModifyMaxEnergy||Energy=1|拾起时，将1张执迷加入你的牌组。在回合开始时获得{Energy:energyIcons()}。
+BloodVial|小血瓶|Common|Shared||AfterPlayerTurnStartLate||Heal=2|在每场战斗开始时，回复{Heal}点生命。
+BoneFlute|骨笛|Common|Necrobinder||AfterAttack||Block=2|每当奥斯提攻击时，获得{Block}点格挡。
+BoneTea|骨茶|Event|Event|ShowCounter=false IsUsedUp*|AfterPlayerTurnStart||Combats=CombatsLeft|在你接下来的{Combats}场战斗开始时，升级你的初始手牌。
+BookOfFiveRings|五轮书|Common|Shared|ShowCounter=true|AfterCardChangedPiles|return RelicModel.IsBeforeAct3TreasureChest(runState);|Cards=5; Heal=20|你每将{Cards}张牌加入你的牌组时，回复{Heal}点生命。
+BookRepairKnife|修书小刀|Uncommon|Necrobinder||AfterDiedToDoom||Heal=3|每当有一名不是“爪牙”的敌人死于灾厄时，回复{Heal}点生命。
+Bookmark|书签|Rare|Necrobinder||AfterFlush|||每回合结束时，随机一张被保留的牌在被打出前的耗能减少1。
+BoomingConch|轰鸣海螺|Ancient|Event||ModifyHandDraw,AfterSideTurnStart||Cards=2; Energy=1|在精英战的战斗开始时，额外抽{Cards}张牌并获得{Energy:energyIcons()}。
+BoundPhylactery|缚魂命匣|Starter|Necrobinder|SpawnsPets=true|BeforeCombatStart,AfterEnergyResetLate||Summon=1|在你的回合开始时，召唤{Summon}
+BowlerHat|圆顶礼帽|Uncommon|Shared|NoShop|ModifyGoldGained,AfterModifyingGoldGained|return RelicModel.IsBeforeAct3TreasureChest(runState);|GoldIncrease=1.25|额外获得{GoldIncrease:percentMore()}%的金币。
+Bread|面包|Shop|Shared||ModifyMaxEnergy,AfterSideTurnStart||Energy="GainEnergy"; Energy="LoseEnergy"|在你的第一个回合开始时，失去{LoseEnergy:energyIcons()}。在其余的回合开始时，获得{GainEnergy:energyIcons()}。
+BrilliantScarf|艳丽围巾|Ancient|Event||TryModifyEnergyCostInCombatLate,TryModifyStarCost,BeforeSideTurnStart,AfterCardPlayed,AfterCombatEnd||Cards=5|你每回合从你的手牌打出的第5张牌可以被免费打出。
+Brimstone|硫磺|Shop|Ironclad||AfterSideTurnStart||Strength="SelfStrength"; Strength="EnemyStrength"|在你的每个回合开始时，你获得{SelfStrength}点力量，所有敌人获得{EnemyStrength}点力量。
+BronzeScales|铜质鳞片|Common|Shared||AfterRoomEntered||Thorns=3|在每场战斗开始时，获得{ThornsPower}点荆棘。
+BurningBlood|燃烧之血|Starter|Ironclad||AfterCombatVictory||Heal=6|在战斗结束时，回复{Heal}点生命。
+BurningSticks|燃烧木棍|Shop|Shared||AfterRoomEntered,AfterCardExhausted,AfterCombatEnd|||每场战斗中你第一次消耗技能牌时，将那张牌的复制品加入你的手牌
+Byrdpip|异鸟宝宝|Event|Event|HasUponPickupEffect=true SpawnsPets=true AddsPet=true|AfterObtained,BeforeCombatStart|||拾起时，获得一张异鸟扑击。一只幼年异鸟会在战斗中陪伴你。
+CallingBell|召唤铃铛|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Relics=3|拾起时，获得一个独特的诅咒和{Relics}件遗物。
+Candelabra|烛台|Uncommon|Shared||AfterSideTurnStart||Energy=2|在你的第2回合开始时，获得{Energy:energyIcons()}。
+CaptainsWheel|舵盘|Rare|Shared||AfterBlockCleared||Block=18|在你的第三回合开始时，获得{Block}点格挡。
+Cauldron|大锅|Shop|Shared|HasUponPickupEffect=true|AfterObtained||Potions=5|拾起时，制作{Potions}瓶随机药水。
+CentennialPuzzle|百年积木|Common|Shared||AfterDamageReceived,AfterCombatEnd||Cards=3|你在每场战斗中第一次损失生命值时，抽{Cards}张牌。
+Chandelier|吊灯|Rare|Shared||AfterSideTurnStart||Energy=3|在你的第三回合开始时，获得{Energy:energyIcons()}。
+CharonsAshes|卡戎之灰|Rare|Ironclad||AfterCardExhausted||Damage=3|每当你消耗一张牌，对所有敌人造成{Damage}点伤害。
+ChemicalX|化学物X|Shop|Shared||BeforeCardPlayed,ModifyXValue||Increase=2|耗能为X的牌的效果数值增加{Increase}点。
+ChoicesParadox|选择悖论|Ancient|Event||AfterPlayerTurnStart||Cards=5|在每场战斗开始时，从{Cards}张随机牌中选择1张放入你的手牌。被选中的牌获得保留。
+ChosenCheese|天选芝士|Event|Event||AfterCombatEnd||MaxHp=1|在战斗结束时，获得{MaxHp}点最大生命值。
+Circlet|头环|None|Fallback|IsStackable=true||||这是一个头环。
+Claws|利爪|Ancient|Event||AfterObtained||Cards=6|拾起时，将至多{Cards}张牌变化为撕咬。
+CloakClasp|斗篷扣|Rare|Shared||BeforeSideTurnEnd||Block=1|在你的回合结束时，每有一张手牌，就获得{Block}点格挡
+CrackedCore|破损核心|Starter|Defect||BeforeSideTurnStart||Lightning=1|在每场战斗开始时，生成{Lightning}个闪电充能球。
+Crossbow|十字弓|Ancient|Event||AfterSideTurnStart|||在你的回合开始时，将一张随机攻击牌加入你的手牌。这张牌在本回合可以免费打出。
+CursedPearl|诅咒珍珠|Ancient|Event||AfterObtained||Gold=333|拾起时，获得一张贪婪，获得{Gold}金币。
+DarkstonePeriapt|黑石护符|Event|Event||AfterCardChangedPiles||MaxHp=6|每当你获得一张诅咒，就将你的最大生命值提升{MaxHp}。
+DataDisk|数据磁盘|Common|Defect||AfterRoomEntered||Focus=1|在每场战斗开始时，获得{FocusPower}点集中。
+DaughterOfTheWind|风的女儿|Event|Event||AfterCardPlayed||Block=1|每当你打出一张攻击牌时，获得{Block}点格挡。
+DelicateFrond|娇嫩蕨草|Ancient|Event||BeforeCombatStart|||在每场战斗开始时，用随机药水将你的空药水栏位填满。
+DemonTongue|恶魔之舌|Rare|Ironclad||AfterDamageReceived,BeforeSideTurnStart|||每回合第一次在回合内失去生命值时，回复等量的生命值。
+DeprecatedRelic|弃用遗物|None|Deprecated|IsStackable=true||||这件遗物已经从游戏中被移除。它在这里仅做纪念意义。
+DiamondDiadem|钻石头冠|Ancient|Event||AfterSideTurnStart||Block=20|战斗开始时获得{Block}点格挡。你的格挡不会在你的第2回合开始前被移除。
+DingyRug|肮脏地毯|Shop|Shared||ModifyCardRewardCreationOptions|||卡牌奖励现在会包括无色牌。
+DistinguishedCape|卓越斗篷|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Curses=2; Cards=3|拾起时，将{Curses}张随机诅咒牌和{Cards}张灵体加入你的牌组。
+DivineDestiny|天命所归|Starter|Event||AfterSideTurnStart||Stars=7|在每场战斗开始时，获得{Stars:starIcons()}。
+DivineRight|天赋君权|Starter|Regent||AfterRoomEntered||Stars=3|在每场战斗开始时，获得{Stars:starIcons()}。
+DollysMirror|多利之镜|Shop|Shared|HasUponPickupEffect=true|AfterObtained|||拾起时，从你的牌组中选择一张牌进行复制。
+DowsingRod|寻龙尺|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，将1张探寻加入你的牌组。
+DragonFruit|火龙果|Shop|Shared||AfterGoldGained|return RelicModel.IsBeforeAct3TreasureChest(runState);|MaxHp=1|每当你获得金币时，提升{MaxHp}点你的最大生命值。
+DreamCatcher|捕梦网|Event|Event||TryModifyRestSiteHealRewards,ModifyExtraRestSiteHealText|||每当你休息时，可以添加一张牌到你的牌组。
+Driftwood|浮木|Ancient|Event||TryModifyRewardsLate|||你可以在每一个卡牌奖励中重掷一次。
+DustyTome|尘封魔典|Ancient|Event||AfterObtained||AncientCard=|拾起时，获得一张{AncientCard.StringValue:cond:{}+|先古牌}。
+Ectoplasm|灵体外质|Ancient|Event||ModifyGoldGained,AfterModifyingGoldGained,ModifyMaxEnergy||Energy=1|你不能再获得任何金币。在回合开始时获得{Energy:energyIcons()}
+ElectricShrymp|放电异虾|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，选择一张技能牌为它附魔：注能。
+EmberTea|余烬茶|Event|Event|ShowCounter=true IsUsedUp*|AfterRoomEntered||Combats=CombatsLeft; Strength=2|在接下来的{Combats}场战斗开始时，获得{StrengthPower}点力量。
+EmotionChip|情感芯片|Rare|Defect||AfterDamageReceived,AfterPlayerTurnStart,AfterCombatEnd|||在每回合开始时，如果你在之前回合受到过伤害，则触发所有充能球的被动效果。
+EmptyCage|空鸟笼|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=2|拾起时，选择移除牌组中的{Cards}张牌。
+EternalFeather|永恒羽毛|Uncommon|Shared||AfterRoomEntered||Cards=5; Heal=3|你的牌组中每有{Cards}张牌，当你进入休息处时就会回复{Heal}点生命。
+FakeAnchor|锚？？？|Event|Event|Cost=50|BeforeCombatStart||Block=4|在每场战斗开始时，获得{Block}点格挡。
+FakeBloodVial|小血瓶？？？|Event|Event|Cost=50|AfterPlayerTurnStartLate||Heal=1|在每场战斗开始时，回复{Heal}点生命。
+FakeHappyFlower|开心小花？？？|Event|Event|ShowCounter=true Cost=50|AfterSideTurnStart,AfterCombatEnd||Energy=1; Turns=5|每{Turns}个回合，获得{Energy:energyIcons()}。
+FakeLeesWaffle|李家华夫饼？？？|Event|Event|HasUponPickupEffect=true Cost=50|AfterObtained||Heal=10|拾起时，回复你{Heal}%的生命值。
+FakeMango|芒果？？？|Event|Event|HasUponPickupEffect=true Cost=50|AfterObtained||MaxHp=3|拾起时，将你的最大生命值提升{MaxHp}。
+FakeMerchantsRug|商人的地毯？？？|Event|Event|||||低劣的仿制品。没有任何作用。
+FakeOrichalcum|奥利哈钢？？？|Event|Event|Cost=50|BeforeSideTurnEndVeryEarly,BeforeSideTurnEnd,BeforeSideTurnStart||Block=3|如果你在回合结束时没有任何格挡，获得{Block}点格挡。
+FakeSneckoEye|异蛇之眼？？？|Event|Event|Cost=50|AfterObtained,BeforeCombatStart|||每场战斗开始时获得混乱效果。
+FakeStrikeDummy|打击木偶？？？|Event|Event|Cost=50|ModifyDamageAdditive||ExtraDamage=1|名字中有“打击”的卡牌造成{ExtraDamage}点额外伤害。
+FakeVenerableTeaSet|古茶具套装？？？|Event|Event|Cost=50|AfterRoomEntered,AfterEnergyReset||Energy=1|到达休息处后的下一场战斗开始时额外获得{Energy:energyIcons()}。
+FencingManual|击剑指南|Common|Regent||AfterSideTurnStart||Forge=10|在每场战斗开始时，铸造{Forge}。
+FestivePopper|节日拉炮|Common|Shared||AfterPlayerTurnStart||Damage=9|在每场战斗开始时，对所有敌人造成{Damage}点伤害。
+Fiddle|小提琴|Ancient|Event||ModifyHandDraw,ShouldDraw,AfterPreventingDraw||Cards=2|在每个回合开始时，额外抽{Cards}张牌。你在回合进行中不再能抽任何牌。
+FishingRod|钓鱼竿|Ancient|Event|ShowCounter=true|AfterCombatEnd||Combats=3|每{Combats}场普通战斗，随机升级你牌组中的一张牌。
+ForgottenSoul|遗忘之魂|Event|Event||AfterCardExhausted||Damage=1|每当你消耗一张牌，随机对一名敌人造成{Damage}点伤害。
+FragrantMushroom|芳香蘑菇|Event|Event|HasUponPickupEffect=true|AfterObtained||HpLoss=15; Cards=2|拾起时，失去{HpLoss}点生命，然后随机升级{Cards}张牌。
+FresnelLens|菲涅耳透镜|Event|Shared||TryModifyCardRewardOptionsLate,ModifyMerchantCardCreationResults,TryModifyCardBeingAddedToDeck||NimbleAmount=2|每当你将一张带有格挡的牌加入你的牌组时，为那张牌附魔：灵巧{NimbleAmount}
+FrozenEgg|冻结之蛋|Rare|Shared||TryModifyCardRewardOptionsLate,ModifyMerchantCardCreationResults,TryModifyCardBeingAddedToDeck|return RelicModel.IsBeforeAct3TreasureChest(runState);||每当你获得能力牌时，将其升级。
+FuneraryMask|葬礼面具|Uncommon|Necrobinder||BeforeHandDraw||Cards=3|在每场战斗开始时，将{Cards}张灵魂加入你的抽牌堆。
+FurCoat|皮草大衣|Ancient|Event||AfterObtained,ModifyGeneratedMapLate,BeforeCombatStart,AfterCreatureAddedToCombat||Combats=8|拾起时，随机标记{Combats}处战斗。这些战斗中的敌人将只有1点生命。
+GalacticDust|星系尘埃|Uncommon|Regent|ShowCounter=true|AfterStarsSpent||Stars=10; Block=10|每消耗{Stars}点{singleStarIcon}，就获得{Block}格挡。
+GamblingChip|赌博筹码|Rare|Shared||AfterPlayerTurnStart|||在每场战斗开始时，丢弃任意张牌，然后抽相同数量张牌。
+GamePiece|棋子|Rare|Shared||AfterCardPlayed||Cards=1|每当你打出能力牌时，抽{Cards}张牌。
+GhostSeed|幽灵种子|Shop|Shared||AfterCardEnteredCombat,AfterRoomEntered|||打击和防御获得虚无。
+Girya|壶铃|Rare|Shared|ShowCounter=true|AfterRoomEntered,TryModifyRestSiteOptions|return RelicModel.IsBeforeAct3TreasureChest(runState);||你现在能在休息处获得力量。（最多3次）
+GlassEye|玻璃眼珠|Ancient|Event||AfterObtained|||拾起时，获得2组普通、2组罕见、和1组稀有卡牌奖励。
+Glitter|亮片|Ancient|Event||TryModifyCardRewardOptionsLate|||为之后的所有卡牌奖励附魔：华彩。
+GnarledHammer|扭曲锤子|Shop|Shared|HasUponPickupEffect=true|AfterObtained||Cards=3; SharpAmount=3|拾起时，从你的牌组中选择至多{Cards}张攻击牌，附魔：锋利{SharpAmount:diff()}。
+GoldPlatedCables|镀金缆线|Uncommon|Defect||ModifyOrbPassiveTriggerCounts,AfterModifyingOrbPassiveTriggerCount|||你最右侧的充能球会额外触发一次被动效果。
+GoldenCompass|黄金罗盘|Ancient|Event|HasUponPickupEffect=true|AfterObtained,ModifyGeneratedMap,ModifyUnknownMapPointRoomTypes|||拾起时，将第2阶段的地图替换为一条特殊的直道。
+GoldenPearl|金色珍珠|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Gold=150|拾起时，获得{Gold}金币。
+Gorget|护喉甲|Common|Shared||AfterRoomEntered||Plating=4|在每场战斗开始时，获得{PlatingPower}层覆甲。
+GremlinHorn|地精之角|Uncommon|Shared||AfterDeath||Energy=1; Cards=1|每当有一名敌人死亡时，获得{Energy:energyIcons()}并抽{Cards}张牌。
+HandDrill|手钻|Event|Event||AfterBlockBroken||Vulnerable=2|每当你突破敌人的格挡时，给予其{VulnerablePower}层易伤。
+HappyFlower|开心小花|Common|Shared|ShowCounter=true|AfterSideTurnStart,AfterCombatEnd||Energy=1; Turns=3|每{Turns}个回合，获得{Energy:energyIcons()}。
+HeftyTablet|沉重石板|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=3|拾起时，从{Cards}张稀有牌中选择1张加入你的牌组，同时将1张受伤加入你的牌组。
+HelicalDart|螺线飞镖|Rare|Silent||AfterCardPlayed||Dexterity=1|你每打出一张小刀，就在本回合获得{DexterityPower}点敏捷。
+HistoryCourse|历史课|Event|Event||AfterAutoPrePlayPhaseEntered|||在你的回合开始时，打出一张你上一回合最后打出的攻击牌的复制品。
+HornCleat|船夹板|Uncommon|Shared||AfterBlockCleared||Block=14|在你的第二回合开始时，获得{Block}点格挡。
+IceCream|冰淇淋|Rare|Shared||ShouldPlayerResetEnergy|||多余的能量可以留到下一回合。
+InfusedCore|注能核心|Starter|Event||AfterSideTurnStart,ModifyOrbValue||Lightning=3; ExtraDamage=1|在每场战斗开始时，生成{Lightning}个闪电充能球。闪电充能球额外造成{ExtraDamage}点伤害。
+IntimidatingHelmet|骇人头盔|Rare|Shared||BeforeCardPlayed||Block=4; Energy=2|每当你打出一张耗能大于等于{Energy:energyIcons()}的牌，获得{Block}点格挡。
+IronClub|铁棒|Ancient|Event|ShowCounter=true|AfterCardPlayed||Cards=4|你每打出{Cards}张牌，就抽1张牌。
+IvoryTile|象牙麻将牌|Rare|Necrobinder||AfterCardPlayed||Energy=1; Energy="EnergyThreshold"|每当你打出一张耗能大于等于{EnergyThreshold:energyIcons()}的牌时，获得{Energy:energyIcons()}。
+JeweledMask|宝石面具|Ancient|Event||BeforeHandDraw|||在每场战斗开始时，将一张随机能力牌从你的抽牌堆放入你的手牌，这张牌在本场战斗可以免费打出。
+JewelryBox|珠宝盒|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，将1张神化加入你的牌组。
+JossPaper|金纸|Uncommon|Shared|ShowCounter=true|AfterCardExhausted,AfterSideTurnEnd,AfterCombatEnd||ExhaustAmount=5; Cards=1|你每消耗{ExhaustAmount}张牌，就抽{Cards}张牌。
+JuzuBracelet|佛珠手链|Common|Shared||ModifyUnknownMapPointRoomTypes|return RelicModel.IsBeforeAct3TreasureChest(runState);||你在?房间中不会再遭遇常规战斗。
+Kaleidoscope|万花筒|Ancient|Event|HasUponPickupEffect=true|IsAllowedAtNeow,AfterObtained||Cards=2|拾起时，获得{Cards}次来自其他角色的卡牌奖励。
+Kifuda|木札|Shop|Shared|HasUponPickupEffect=true|AfterObtained||Cards=3|拾起时，从你的牌组中选择至多{Cards}张牌，附魔：伶俐。
+Kunai|苦无|Rare|Shared||BeforeSideTurnStart,AfterCardPlayed,AfterCombatEnd||Cards=3; Dexterity=1|你每在同一回合内打出{Cards}张攻击牌，就获得{DexterityPower}点敏捷。
+Kusarigama|锁镰|Uncommon|Shared||BeforeCombatStart,AfterSideTurnEnd,AfterCardPlayed,AfterCombatEnd||Cards=3; Damage=6|你每在同一回合内打出{Cards}张攻击牌，就随机对一名敌人造成{Damage}点伤害。
+Lantern|灯笼|Common|Shared||AfterSideTurnStart||Energy=1|在每场战斗的第一回合获得{Energy:energyIcons()}。
+LargeCapsule|巨大扭蛋|Ancient|Event||AfterObtained||Relics=2|拾起时，获得{Relics}件随机遗物。额外将一对打击和防御，加入你的牌组。
+LastingCandy|吃不完的糖|Uncommon|Event+Shared|ShowCounter=true|TryModifyCardRewardOptions,BeforeCombatRewardOffered|if (runState.Players.Any(delegate(Player p) { if (p != null && p.Character is Ironclad) { UnlockState unlockState = p.UnlockState; if (unlockState != null) { re||每两场战斗，你的卡牌奖励就会额外包含一张能力牌。
+LavaLamp|熔岩灯|Shop|Shared||AfterRoomEntered,AfterDamageReceived,TryModifyCardRewardOptionsLate|||在战斗结束时，如果你没有受到伤害，则升级你的所有卡牌奖励。
+LavaRock|熔岩石|Ancient|Event|ShowCounter=false|TryModifyRewards||Relics=2|第一阶段的Boss敌人额外掉落{Relics}件遗物。
+LeadPaperweight|铅制镇纸|Ancient|Event||AfterObtained|||拾起时，从2张无色牌中选择1张加入你的牌组。
+LeafyPoultice|树叶药膏|Ancient|Event||AfterObtained||MaxHp=12|拾起时，变化你的1张打击和1张防御，然后失去{MaxHp}点最大生命。
+LeesWaffle|李家华夫饼|Shop|Shared|HasUponPickupEffect=true|AfterObtained||MaxHp=7|拾起时，将你的最大生命值提升{MaxHp}点，并回复所有生命。
+LetterOpener|开信刀|Uncommon|Shared||BeforeCombatStart,AfterSideTurnStart,AfterCardPlayed,AfterCombatEnd||Cards=3; Damage=5|你每在同一回合内打出{Cards}张技能牌，就对所有敌人造成{Damage}点伤害。
+LizardTail|蜥蜴尾巴|Rare|Shared|IsUsedUp*|ShouldDieLate,AfterPreventingDeath||Heal=50|当你的生命值将要降低至0或以下时，回复到最大生命值的{Heal}%（仅能起效一次）。
+LoomingFruit|布质果实|Ancient|Shared|HasUponPickupEffect=true|AfterObtained||MaxHp=31|拾起时，将你的最大生命值提升{MaxHp}。
+LordsParasol|领主阳伞|Ancient|Event||AfterRoomEntered|||当你遇见商人时，立刻获得他所出售的所有物品。
+LostCoffer|失物盒|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，获得1次卡牌奖励和1瓶随机药水。
+LostWisp|迷失鬼火|Event|Event||AfterCardPlayed||Damage=8|你每打出一张能力牌，就对所有敌人造成{Damage}点伤害。
+LuckyFysh|招财异鱼|Uncommon|Shared|NoShop|AfterCardChangedPiles|return RelicModel.IsBeforeAct3TreasureChest(runState);|Gold=15|每当你将一张卡牌加入你的牌组时，获得{Gold}金币。
+LunarPastry|月亮糕点|Rare|Regent||AfterSideTurnEnd||Stars=1|在你的回合结束时，获得{Stars:starIcons()}。
+Mango|芒果|Rare|Shared|HasUponPickupEffect=true|AfterObtained||MaxHp=14|拾起时，将你的最大生命值提升{MaxHp}。
+MassiveScroll|巨大卷轴|Ancient|Event||AfterObtained|return runState.Players.Count > 1;||拾起时，从3张多人游戏牌中选择1张加入你的牌组。
+MawBank|巨口储蓄罐|Event|Event|ShouldFlashOnPlayer=false IsUsedUp*|AfterRoomEntered,AfterItemPurchased||Gold=12|每攀爬一层楼层，就获得{Gold}金币。一旦在商店中花费金币就会使其失效。
+MealTicket|餐券|Common|Shared||AfterRoomEntered|return RelicModel.IsBeforeAct3TreasureChest(runState);|Heal=15|每当你进入商店房间时，回复{Heal}点生命。
+MeatCleaver|切肉刀|Ancient|Event||TryModifyRestSiteOptions|||你可以在休息处进行烹饪。
+MeatOnTheBone|带骨肉|Rare|Shared||BeforeCombatStart,AfterCurrentHpChanged,AfterCombatVictoryEarly||HpThreshold=50; Heal=12|如果你在战斗结束时生命值等于或低于{HpThreshold}%，回复{Heal}点生命。
+MembershipCard|会员卡|Shop|Shared||ModifyMerchantPrice||Discount=50|所有商品打折{Discount}%！
+MercuryHourglass|水银沙漏|Uncommon|Shared||AfterPlayerTurnStart||Damage=3|在你的回合开始时，对所有敌人造成{Damage}点伤害。
+Metronome|节拍器|Rare|Defect||AfterRoomEntered,AfterOrbChanneled,AfterCombatEnd||Damage=30; OrbCount=7|每场战斗中你首次生成{OrbCount}个充能球时，对所有敌人造成{Damage}点伤害。
+MiniRegent|迷你储君|Rare|Regent||AfterStarsSpent,BeforeSideTurnStart,AfterCombatEnd||Strength=1|每回合你第一次花费{singleStarIcon}时，获得{StrengthPower}点力量。
+MiniatureCannon|微型大炮|Uncommon|Shared||ModifyDamageAdditive||ExtraDamage=3|升级的攻击牌额外造成{ExtraDamage}点伤害。
+MiniatureTent|微型帐篷|Shop|Shared||ShouldDisableRemainingRestSiteOptions|||你可以在休息处选择任意数量的选项。
+MoltenEgg|熔火之蛋|Rare|Shared||TryModifyCardRewardOptionsLate,ModifyMerchantCardCreationResults,TryModifyCardBeingAddedToDeck|return RelicModel.IsBeforeAct3TreasureChest(runState);||每当你获得攻击牌时，将其升级。
+MrStruggles|抱抱先生|Event|Event||AfterPlayerTurnStart|||在你的回合开始时，对所有敌人造成等量于当前回合数的伤害。
+MummifiedHand|干瘪之手|Rare|Shared||AfterCardPlayed|||你每打出一张能力牌，手牌中就有一张随机牌在这个回合可以免费打出。
+MusicBox|音乐盒|Ancient|Event||BeforeCardPlayed,AfterCardPlayed,BeforeSideTurnStart,AfterCombatEnd|||将你每回合打出的第一张攻击牌的一张虚无复制品加入你的手牌。
+MysticLighter|神秘打火机|Shop|Shared||ModifyDamageAdditive||Damage=9|有附魔的攻击牌额外造成{Damage}点伤害。
+NeowsBones|涅奥骨骰|Ancient|Event||AfterObtained||Relics=2; Curses=1|拾起时，获得{Relics}件随机涅奥{Relics:plural:遗物|遗物}。将{Curses}张随机{Curses:plural:诅咒|诅咒}加入你的牌组。
+NeowsSacrifice|涅奥的牺牲|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，获得1瓶龙涎香，并将1张愧疚加入你的牌组。
+NeowsTalisman|涅奥的护符|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，升级你的1张打击和1张防御。
+NeowsTorment|涅奥的苦痛|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||拾起时，将1张涅奥之怒加入你的牌组。
+NewLeaf|新叶|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=1|拾起时，变化{Cards}张牌。
+NinjaScroll|忍术卷轴|Shop|Silent||BeforeHandDraw||Shivs=3|每场战斗开始时，将{Shivs}张小刀加入你的手牌。
+Nunchaku|双截棍|Uncommon|Shared|ShowCounter=true|AfterCardPlayed||Cards=10; Energy=1|你每打出{Cards}张攻击牌，获得{Energy:energyIcons()}。
+NutritiousOyster|营养牡蛎|Ancient|Event|HasUponPickupEffect=true|AfterObtained||MaxHp=11|拾起时，将你的最大生命值提升{MaxHp}。
+NutritiousSoup|营养汤|Ancient|Event||AfterObtained|||拾起时，为你牌组中的所有“打击”附魔：特兹卡塔拉的余烬
+OddlySmoothStone|意外光滑的石头|Common|Shared||AfterRoomEntered||Dexterity=1|在每场战斗开始时，获得{DexterityPower}点敏捷。
+OldCoin|古钱币|Rare|Shared|HasUponPickupEffect=true NoShop|AfterObtained|return RelicModel.IsBeforeAct3TreasureChest(runState);|Gold=300|拾起时，获得{Gold}金币。
+OrangeDough|橙色团块|Rare|Regent||AfterSideTurnStart||Cards=2|在每场战斗开始时，将{Cards}张随机无色牌加入你的手牌。
+Orichalcum|奥利哈钢|Uncommon|Shared||BeforeSideTurnEndVeryEarly,BeforeSideTurnEnd,BeforeSideTurnStart||Block=6|如果你在回合结束时没有任何格挡，获得{Block}点格挡。
+OrnamentalFan|精致折扇|Uncommon|Shared||BeforeSideTurnStart,AfterCardPlayed,AfterCombatEnd||Cards=3; Block=4|你每在同一回合内打出{Cards}张攻击牌，就获得{Block}点格挡。
+Orrery|星系仪|Shop|Shared|HasUponPickupEffect=true|AfterObtained||Cards=5|拾起时，获得{Cards}次卡牌奖励
+PaelsBlood|佩尔之血|Ancient|Event||ModifyHandDraw||Cards=1|在你的回合开始时，额外抽{Cards}张牌
+PaelsClaw|佩尔之爪|Ancient|Event||AfterObtained||Cards=3; EnchantmentName=ModelDb.Enchantment<Goopy>().Title.GetFormattedText()|拾起时，为所有的“防御”附魔：{EnchantmentName}。
+PaelsEye|佩尔之眼|Ancient|Event||AfterObtained,BeforeCardPlayed,AfterSideTurnStart,ShouldTakeExtraTurn,BeforeSideTurnEndEarly,AfterTakingExtraTurn,AfterCombatEnd|||你在每场战斗中第一次没有打出任何牌就结束回合时，消耗所有手牌然后进行一个额外回合。
+PaelsFlesh|佩尔之肉|Ancient|Event||ModifyMaxEnergy,BeforeCombatStart,BeforeSideTurnStart,AfterSideTurnStart,AfterCombatEnd||Energy=1|从你的第3回合开始，在回合开始时额外获得{Energy:energyIcons()}。
+PaelsGrowth|佩尔的增生组织|Ancient|Event||AfterObtained,TryModifyRestSiteOptions||EnchantmentName=ModelDb.Enchantment<Clone>().Title.GetFormattedText()|拾起时，从牌组中选择一张牌，为其附魔：{EnchantmentName}。
+PaelsHorn|佩尔之角|Ancient|Event||AfterObtained|||拾起时，将2张放松加入你的牌组。
+PaelsLegion|佩尔的士兵|Ancient|Event|AddsPet=true|AfterObtained,BeforeCombatStart,ModifyBlockMultiplicative,AfterModifyingBlockAmount,AfterCardPlayed,AfterSideTurnStart,AfterCombatEnd||Turns=2|将你从一张卡牌中获得的格挡翻倍，然后此遗物会休眠{Turns}回合。
+PaelsTears|佩尔之泪|Ancient|Event||BeforeSideTurnEnd,AfterSideTurnStart,AfterCombatEnd||Energy=2|如果你在拥有未花费的{energyPrefix:energyIcons(1)}情况下结束回合，则下个回合额外获得{Energy:energyIcons()}。
+PaelsTooth|佩尔之牙|Ancient|Event|HasUponPickupEffect=true|AfterCloned,AfterObtained,AfterCombatEnd||Cards=5; CardTitles=|拾起时，从你的牌组中选择{Cards}张牌移除。在每场战斗结束时，将其中随机1张牌升级然后返还。{CardTitles.StringValue:cond: 被吞噬的牌： {}|}
+PaelsWing|佩尔之翼|Ancient|Event|ShowCounter=true|TryModifyCardRewardAlternatives||Sacrifices=2|你可以将你的卡牌奖励献祭给佩尔。每献祭{Sacrifices}次，就能获得一件遗物。
+PandorasBox|潘多拉魔盒|Ancient|Event|HasUponPickupEffect=true|AfterObtained|||变化所有“打击”和“防御”。
+Pantograph|缩放仪|Uncommon|Shared||AfterRoomEntered,BeforeCombatStart||Heal=25|在Boss战开始时，回复{Heal}点生命值。
+PaperKrane|纸鹤|Rare|Silent|||||有虚弱状态的敌人造成的伤害降低40%而非25%。
+PaperPhrog|纸蛙|Uncommon|Ironclad|||||有易伤状态的敌人受到的伤害增加75%而非50%。
+ParryingShield|招架盾|Uncommon|Shared||AfterSideTurnEnd||Block=10; Damage=6|如果你在回合结束时拥有至少{Block}点格挡，则对随机敌人造成{Damage}点伤害。
+Pear|梨子|Uncommon|Shared|HasUponPickupEffect=true|AfterObtained||MaxHp=10|拾起时，将你的最大生命值提升{MaxHp}。
+PenNib|钢笔尖|Uncommon|Shared|ShowCounter=true|ModifyDamageMultiplicative,BeforeCardPlayed,AfterCardPlayed|||你每打出的第10张攻击牌将会造成双倍伤害。
+Pendulum|摆动球|Common|Shared|ShowCounter=true|BeforeHandDraw,ModifyHandDraw,AfterCombatEnd||Cards=1; Turns=3|每{Turns}个回合，抽{Cards}张牌
+Permafrost|永冻冰晶|Uncommon|Shared||AfterRoomEntered,AfterCardPlayed||Block=7|当你在战斗中第一次打出能力牌时，获得{Block}点格挡。
+PetrifiedToad|石化蟾蜍|Uncommon|Shared||BeforeCombatStartLate|||在每场战斗开始时，获得一瓶药水形状的石头
+PhialHolster|药瓶皮套|Ancient|Event|HasUponPickupEffect=true|AfterObtained||PotionSlots=1; Potions=2|拾起时，获得{PotionSlots}个药水栏位并获得{Potions}瓶随机药水。
+PhilosophersStone|贤者之石|Ancient|Event||ModifyMaxEnergy,AfterCreatureAddedToCombat,AfterRoomEntered||Strength=1; Energy=1|在每回合开始时获得{Energy:energyIcons()}。所有敌人初始获得{StrengthPower}点力量。
+PhylacteryUnbound|无界命匣|Starter|Event|SpawnsPets=true|BeforeCombatStart,AfterSideTurnStart||Summon="StartOfCombat"; Summon="StartOfTurn"|在每场战斗开始时，召唤{StartOfCombat}。在你的回合开始时，召唤{StartOfTurn}。
+Planisphere|活动星图|Uncommon|Shared||AfterRoomEntered|return RelicModel.IsBeforeAct3TreasureChest(runState);|Heal=5|每当你进入？房间的时候，回复{Heal}点生命。
+Pocketwatch|怀表|Rare|Shared||AfterCardPlayed,ModifyHandDraw,AfterModifyingHandDraw,BeforeSideTurnStart,AfterSideTurnStart,AfterCombatEnd||CardThreshold=3; Cards=3|当你在本回合打出的牌少于等于{CardThreshold}张时，则在你的下个回合开始时额外抽{Cards}张牌。
+PollinousCore|花粉核心|Event|Event|ShowCounter=true|BeforeHandDraw,AfterCombatEnd,ModifyHandDraw,AfterModifyingHandDraw||Cards=2; Turns=4|每{Turns}个回合，额外抽{Cards}张牌。
+Pomander|橙型香盒|Ancient|Event||AfterObtained||Cards=1|拾起时，升级一张牌。
+PotionBelt|药水腰带|Common|Shared|HasUponPickupEffect=true|AfterObtained||PotionSlots=2|拾起时，获得{PotionSlots}个药水栏位。
+PowerCell|能量电池|Rare|Defect||BeforeSideTurnStart||Cards=2|在每场战斗开始时，将{Cards}张耗能为0的卡牌从你的抽牌堆放入你的手牌。
+PrayerWheel|转经轮|Rare|Shared||TryModifyRewards|||普通敌人额外掉落一次卡牌奖励。
+PrecariousShears|松动羊毛剪|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=2; Damage=16|拾起时，从你的牌组中移除{Cards}张牌并失去{Damage}点生命。
+PreciseScissors|精准剪刀|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=1|拾起时，从你的牌组中移除{Cards}张牌。
+PreservedFog|腌制活雾|Ancient|Event||AfterObtained||Cards=3|拾起时，从你的牌组中移除{Cards}张牌。将一张愚行加入你的牌组。
+PrismaticGem|棱彩宝石|Ancient|Event||ModifyMaxEnergy,ModifyCardRewardCreationOptions||Energy=1|在每个回合开始时获得{Energy:energyIcons()}。卡牌奖励现在会包含其他颜色的卡牌。
+PumpkinCandle|南瓜蜡烛|Ancient|Event|ShowCounter=true|AfterObtained,ModifyMaxEnergy,AfterCombatEnd,TryModifyRestSiteOptions||CombatCount=5; Energy=1|在每个回合开始时获得{Energy:energyIcons()}。这件遗物会在{CombatCount}场战斗后熄灭。可以在休息处为其添火。
+PunchDagger|拳刃|Shop|Shared|HasUponPickupEffect=true|AfterObtained||Momentum=5|拾起时，选择一张攻击牌为它附魔：动量{Momentum}。
+RadiantPearl|发光珍珠|Ancient|Event||BeforeHandDraw||Cards=1|在每场战斗开始时，将{Cards}张冷光加入你的手牌。
+RainbowRing|彩虹戒指|Rare|Shared||BeforeSideTurnStart,AfterCardPlayed,AfterCombatEnd||Strength=1; Dexterity=1|每回合，你第一次打出攻击牌、技能牌和能力牌各一张时，获得{StrengthPower}点力量和{DexterityPower}点敏捷。
+RazorTooth|剃刀牙|Rare|Event+Shared||AfterCardPlayed|||你打出攻击牌和技能牌时，将其在本场战斗内升级。
+RedMask|红面具|Common|Shared||BeforeSideTurnStart||Weak=1|在每场战斗开始时，给于所有敌人{WeakPower}层虚弱。
+RedSkull|红头骨|Common|Ironclad||AfterRoomEntered,AfterCombatEnd,AfterCurrentHpChanged||HpThreshold=50; Strength=3|当你的生命值低于或等于{HpThreshold}%时，你额外获得{StrengthPower}点力量
+RegalPillow|皇家枕头|Common|Shared||ModifyRestSiteHealAmount,AfterRestSiteHeal,ModifyExtraRestSiteHealText,AfterRoomEntered||Heal=15|在休息时，额外回复{Heal}点生命。
+Regalite|君王矿石|Uncommon|Regent||AfterCardGeneratedForCombat,BeforeSideTurnStart,AfterCombatEnd||Block=4|每回合你第一次生成一张牌时，获得{Block}点格挡。
+ReptileTrinket|爬行动物饰品|Uncommon|Shared||AfterPotionUsed||Strength=3|当你使用药水时，在本回合获得{StrengthPower}力量。
+RingOfTheDrake|长蛇戒指|Starter|Event||ModifyHandDraw||Cards=2; Turns=3|在战斗开始时的前{Turns}个回合，你额外抽{Cards}张牌。
+RingOfTheSnake|蛇之戒指|Starter|Silent||ModifyHandDraw||Cards=2|在每场战斗开始时，额外抽{Cards}张牌。
+RingingTriangle|三角铃鼓|Shop|Shared||ShouldFlush|||在每场战斗的第一回合保留你的手牌。
+RippleBasin|波纹水盆|Uncommon|Shared||BeforeSideTurnEnd,AfterCardPlayed,BeforeSideTurnStart,AfterCombatEnd||Block=4|如果你在本回合中没有打出过攻击牌，则获得{Block}点格挡。
+RoyalPoison|王室猛毒|Event|Event||AfterPlayerTurnStart||Damage=4|在每场战斗开始时，失去{Damage}点生命。
+RoyalStamp|王室印章|Shop|Shared|HasUponPickupEffect=true|AfterObtained||Cards=1; Enchantment=ModelDb.Enchantment<RoyallyApproved>().Title.GetFormattedText()|拾起时，从牌组中选择一张攻击牌或技能牌，为它附魔：{Enchantment}。
+RuinedHelmet|损毁头盔|Rare|Ironclad||TryModifyPowerAmountReceived,AfterModifyingPowerAmountReceived,AfterCombatEnd|||你在每场战斗中第一次获得的力量值翻倍。
+RunicCapacitor|符文电容器|Shop|Defect||AfterSideTurnStart||Repeat=3|每场战斗开始时，获得{Repeat}个额外充能球栏位。
+RunicPyramid|符文金字塔|Ancient|Event||ShouldFlush|||你在回合结束时不再自动丢弃所有手牌。
+Sai|钗|Ancient|Event||AfterSideTurnStart||Block=7|在你的回合开始时，获得{Block}点格挡。
+SandCastle|沙堡|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=6|拾起时，随机升级{Cards}张牌。
+ScreamingFlagon|尖叫酒壶|Shop|Shared||BeforeSideTurnEnd||Damage=20|如果你在回合结束时没有任何手牌，则对所有敌人造成{Damage}点伤害。
+ScrollBoxes|卷轴箱|Ancient|Event||IsAllowedAtNeow,AfterObtained|||拾起时，从2个卡牌包中选择1包加入你的牌组。
+SeaGlass|海玻璃|Ancient|Event|HasUponPickupEffect=true|AfterObtained||Cards=15; Character=|查看{Cards}张来自{Character.StringValue:cond:{}|其他角色}的牌。从中选择任意数量的卡牌加入你的牌组。
+SealOfGold|黄金印|Ancient|Event||AfterSideTurnStart||Energy=1; Gold=3|在你的回合开始时，花费{Gold}金币来获得{Energy:energyIcons()}。
+SelfFormingClay|自成型黏土|Uncommon|Ironclad||AfterDamageReceived||BlockNextTurn=3|每当你在战斗中失去生命，就在下回合获得{BlockNextTurn}点格挡。
+SereTalon|原初之爪|Ancient|Event|HasUponPickupEffect=true|AfterObtained||HpLoss=9; Wishes=3|拾起时，失去9点最大生命值，将{Wishes}张许愿加入你的牌组。
+Shovel|铲子|Rare|Shared||TryModifyRestSiteOptions|return RelicModel.IsBeforeAct3TreasureChest(runState);||现在你可以在休息处挖掘遗物。
+Shuriken|手里剑|Rare|Shared||BeforeSideTurnStart,AfterCardPlayed,AfterCombatEnd||Cards=3; Strength=1|你每在同一回合内打出{Cards}张攻击牌，获得{StrengthPower}点力量。
+SignetRing|图章戒指|Ancient|Event||AfterObtained||Gold=888|拾起时，获得{Gold}金币。
+SilkenTress|华美发束|Ancient|Event|IsUsedUp*|AfterObtained,TryModifyCardRewardOptionsLate,AfterModifyingCardRewardOptions|||拾起时，失去所有金币。为你的第一次卡牌奖励中的所有牌附魔：华彩。
+SilverCrucible|白银熔炉|Ancient|Event|IsUsedUp*|TryModifyCardRewardOptionsLate,AfterModifyingCardRewardOptions,AfterRoomEntered,ShouldGenerateTreasure|return runState.Players.Count == 1;|Cards=3|你遇到的前{Cards}次卡牌奖励将是被升级过的。你打开的第一个宝箱将是空的
+SlingOfCourage|勇气投石索|Shop|Shared||AfterRoomEntered||Strength=2|在与精英敌人战斗时，获得{StrengthPower}点力量。
+SmallCapsule|小型扭蛋|Ancient|Event||AfterObtained|||拾起时，获得一件随机遗物。
+SneckoEye|异蛇之眼|Ancient|Event||AfterObtained,BeforeCombatStart,ModifyHandDraw||Cards=2|每回合多抽{Cards}张牌。每场战斗开始时获得混乱效果。
+SneckoSkull|异蛇头骨|Common|Silent||ModifyPowerAmountGivenAdditive,AfterModifyingPowerAmountGiven||Poison=1|每当你给予敌人中毒时，所给予的中毒层数增加{PoisonPower}层。
+Sozu|添水|Ancient|Event||ShouldProcurePotion,ModifyMaxEnergy||Energy=1|在每回合开始时获得{Energy:energyIcons()}。你无法再获得药水。
+SparklingRouge|闪亮口红|Uncommon|Event+Shared||AfterBlockCleared||Strength=1; Dexterity=1|在你的第3回合开始时，获得{StrengthPower}点力量和{DexterityPower}点敏捷。
+SpikedGauntlets|带刺手甲|Ancient|Event||ModifyMaxEnergy,TryModifyEnergyCostInCombat||Energy=1|在每回合开始时获得{Energy:energyIcons()}。能力牌的耗能增加1{energyPrefix:energyIcons(1)}。
+StoneCalendar|历石|Rare|Shared||AfterSideTurnStart,BeforeSideTurnEnd,AfterCombatEnd,AfterRoomEntered||Damage=52; DamageTurn=7|在第{DamageTurn}回合结束时，对所有敌人造成{Damage}点伤害。
+StoneCracker|碎石钻|Uncommon|Shared||AfterRoomEntered||Cards=2|在每场战斗开始时，在本场战斗中随机升级你抽牌堆中的{Cards}张牌。
+StoneHumidifier|石炉加湿器|Ancient|Event||AfterRestSiteHeal,ModifyExtraRestSiteHealText||MaxHp=5|每当你在休息处休息时，将你的最大生命值提升{MaxHp}点。
+Storybook|故事书|Ancient|Event||AfterObtained|||拾起时，将1张至亮之焰添加到你的牌组中。
+Strawberry|草莓|Common|Shared|HasUponPickupEffect=true|AfterObtained||MaxHp=7|拾起时，将你的最大生命值提升{MaxHp}。
+StrikeDummy|打击木偶|Common|Shared||ModifyDamageAdditive||ExtraDamage=3|名字中有“打击”的卡牌造成{ExtraDamage}点额外伤害。
+SturdyClamp|坚固钳子|Rare|Shared||ShouldClearBlock,AfterPreventingBlockClear||Block=10|可以跨回合保留最多{Block}点格挡。
+SwordOfJade|玉之剑|Event|Event||AfterRoomEntered||Strength=3|在每场战斗开始时，获得{StrengthPower}点力量。
+SwordOfStone|石之剑|Event|Event|ShowCounter=true|AfterCombatVictory||Elites=5|在击败{Elites}名精英敌人之后将变化为一件强力遗物。
+SymbioticVirus|共生病毒|Uncommon|Defect||AfterSideTurnStart||Dark=1|在每场战斗开始时，生成{Dark}个黑暗充能球。
+TanxsWhistle|坦克斯的哨子|Ancient|Event||AfterObtained|||拾起时，将1张吹哨加入你的牌组。
+TeaOfDiscourtesy|无礼之茶|Event|Event|ShowCounter=false IsUsedUp*|BeforeCombatStart||Heal=1; Combats=CombatsLeft; DazedCount=2|在下一场战斗开始时，将{DazedCount}张晕眩放入你的抽牌堆。
+TheAbacus|算盘|Shop|Shared||AfterShuffle||Block=6|你每次将抽牌堆洗牌时，获得{Block}点格挡。
+TheBoot|发条靴|Event|Event||ModifyHpLostAfterOstyLate,AfterModifyingHpLostAfterOsty||DamageMinimum=5; DamageThreshold=4|每当你造成小于等于{DamageThreshold}点未被格挡的攻击伤害时，将伤害提升为{DamageMinimum}。
+TheCourier|送货员|Rare|Shared|NoShop|ModifyMerchantPrice,ShouldRefillMerchantEntry||Discount=20|商人的卡牌、遗物和药水不再会卖光，并且所有商品打折{Discount}%。
+ThrowingAxe|投斧|Ancient|Event||AfterRoomEntered,ModifyCardPlayCount,AfterModifyingCardPlayCount,AfterCombatEnd|||你在每场战斗中打出的第一张牌会多打出一次。
+Tingsha|铜钹|Uncommon|Silent||AfterCardDiscarded||Damage=3|你每在你的回合丢弃一张牌，就对一名随机敌人造成{Damage}点伤害。
+TinyMailbox|小邮箱|Uncommon|Shared||TryModifyRestSiteHealRewards,ModifyExtraRestSiteHealText|||每当你休息时，获得2瓶随机药水。
+ToastyMittens|烘焙手套|Ancient|Event||AfterPlayerTurnStart||Strength=1|在你的回合开始时，消耗你手牌中的1张牌并获得{StrengthPower}点力量。
+Toolbox|工具箱|Shop|Shared||BeforeHandDraw||Cards=3|在每场战斗开始时，从{Cards}张随机无色牌中选择1张加入你的手牌。
+TouchOfOrobas|欧洛巴斯之触|Ancient|Event||AfterCloned,AfterObtained||StarterRelic=; UpgradedRelic=|拾起时，将{StarterRelic.StringValue:cond:{StarterRelic}替换为{UpgradedRelic}|你的初始遗物替换为先古版本}。
+ToughBandages|结实绷带|Rare|Silent||AfterCardDiscarded||Block=3|你每在你的回合丢弃一张牌，就获得{Block}点格挡。
+ToxicEgg|毒素之蛋|Rare|Shared||TryModifyCardRewardOptionsLate,ModifyMerchantCardCreationResults,TryModifyCardBeingAddedToDeck|return RelicModel.IsBeforeAct3TreasureChest(runState);||每当你获得技能牌时，将其升级。
+ToyBox|玩具盒|Ancient|Event|HasUponPickupEffect=true IsUsedUp*|AfterObtained,AfterCombatEnd||Relics=5; Combats=3|拾起时，获得{Relics}件蜡制遗物。每经过{Combats}场战斗，你最左侧的蜡制遗物将会融化。
+TriBoomerang|三刃回旋镖|Ancient|Event||AfterObtained||Cards=3|从你的牌组中选择{Cards}张攻击牌。为这些牌附魔：本能。
+TungstenRod|钨合金棍|Rare|Shared||ModifyHpLostAfterOsty,AfterModifyingHpLostAfterOsty||HpLossReduction=1|你每次失去生命时，减少失去的生命值{HpLossReduction}点。
+TuningFork|音叉|Uncommon|Shared|ShowCounter=true|AfterCardPlayed||Cards=10; Block=7|你每打出{Cards}张技能牌，获得{Block}点格挡。
+TwistedFunnel|扭曲漏斗|Uncommon|Silent||BeforeSideTurnStart||Poison=4|在每场战斗开始时，给予所有敌人{PoisonPower}层中毒。
+UnceasingTop|不休陀螺|Rare|Shared||AfterHandEmptied|||在你的回合，当你没有手牌时，抽一张牌。
+UndyingSigil|不死符文|Shop|Necrobinder||ModifyDamageMultiplicative||DamageDecrease=0.5|当敌人的灾厄层数大于等于其生命值时，它造成的伤害降低50%。
+UnsettlingLamp|不安油灯|Rare|Shared||BeforeCombatStart,BeforePowerAmountChanged,ModifyPowerAmountGivenMultiplicative,AfterCardPlayed,AfterCombatEnd|||你在每场战斗中第一次打出能给予敌人负面状态的牌时，将其效果翻倍。
+Vajra|金刚杵|Common|Shared||AfterRoomEntered||Strength=1|在每场战斗开始时，获得{StrengthPower}点力量。
+Vambrace|臂甲|Uncommon|Shared||BeforeCombatStart,ModifyBlockMultiplicative,AfterModifyingBlockAmount,AfterCardPlayed,AfterCombatEnd|||每场战斗中，你第一次从卡牌中获得的格挡值翻倍。
+VelvetChoker|天鹅绒颈圈|Ancient|Event||ModifyMaxEnergy,ShouldPlay,AfterCardPlayed,AfterRoomEntered,AfterCombatEnd,BeforeSideTurnStart||Cards=6; Energy=1|在每回合开始时获得{Energy:energyIcons()}。你每回合不能打出超过{Cards}张牌。
+VenerableTeaSet|古茶具套装|Common|Shared||AfterRoomEntered,AfterEnergyReset||Energy=2|到达休息处后的下一场战斗开始时额外获得{Energy:energyIcons()}。
+VeryHotCocoa|烫嘴可可|Ancient|Shared||AfterSideTurnStart||Energy=4|在每场战斗的第一回合额外获得{Energy:energyIcons()}。
+VexingPuzzlebox|烦人机关盒|Rare|Shared||AfterPlayerTurnStart|||在每场战斗开始时，将一张随机卡牌加入你的手牌。这张牌在本回合可以免费打出。
+VitruvianMinion|维特鲁威仆从|Shop|Regent||ModifyDamageMultiplicative,ModifyBlockMultiplicative|||名字中有“仆从”的卡牌造成双倍的伤害与格挡。
+WarHammer|战锤|Ancient|Event||AfterCombatVictory||Cards=4|每当你击败一名精英敌人的时候，随机升级{Cards}张牌。
+WarPaint|战纹涂料|Common|Shared|HasUponPickupEffect=true|AfterObtained||Cards=2|拾起时，随机升级{Cards}张技能牌。
+Whetstone|磨刀石|Common|Shared|HasUponPickupEffect=true|AfterObtained||Cards=2|拾起时，随机升级{Cards}张攻击牌。
+WhisperingEarring|低语耳环|Ancient|Event||ModifyMaxEnergy,AfterAutoPrePlayPhaseEnteredLate||Energy=1|在每个回合开始时，获得{Energy:energyIcons()}。瓦库将接管你的第一回合。
+WhiteBeastStatue|白兽雕像|Rare|Shared||ShouldForcePotionReward|return RelicModel.IsBeforeAct3TreasureChest(runState);||战斗结束后必定掉落药水。
+WhiteStar|白星|Rare|Shared||TryModifyRewards|return RelicModel.IsBeforeAct3TreasureChest(runState);||精英敌人额外掉落一次稀有卡牌奖励。
+WingCharm|羽翼护符|Shop|Shared||TryModifyCardRewardOptionsLate||SwiftAmount=1|每次卡牌奖励中，都会有随机一张牌被附魔：迅捷{SwiftAmount}。
+WingedBoots|羽翼之靴|Ancient|Event|IsUsedUp*|ShouldAllowFreeTravel,AfterRoomEntered|return runState.Players.Count == 1;|Rooms=3|你在选择下一层的房间时有{Rooms}次机会可以无视当前的路线。
+WongoCustomerAppreciationBadge|旺购客户感恩徽章|Event|Event|||||没有任何作用。
+WongosMysteryTicket|旺购神秘券|Event|Event|IsUsedUp*|AfterCombatEnd,TryModifyRewards,AfterModifyingRewards||Repeat=3; RemainingCombats=5|在{RemainingCombats}场战斗后，获得随机{Repeat}件遗物。
+YummyCookie|美味饼干|Ancient|Event|HasUponPickupEffect=true|AfterCloned,AfterObtained||Cards=4|拾起时，升级{Cards}张牌。

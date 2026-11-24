@@ -1,0 +1,258 @@
+[
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "- 解锁/纪元归属（`ProgressSaveManager.cs:368,398`）。",
+    "fix_new": "- 解锁/纪元归属（`ProgressSaveManager.cs:368,398`）；\n- 两件遗物里的特判：卷轴箱（ScrollBoxes）对故障机器人每组有 1% 概率换成 3 张爪击（`Models.Relics/ScrollBoxes.cs:70,82-84`）；吃不完的糖（LastingCandy）在有铁甲玩家处于首局时不会出现（`Models.Relics/LastingCandy.cs:82-98`）。\n\n另有 `Ironclad.GetHeavyAnimIfApplicable`、`Necrobinder.GetSummonAnimIfApplicable` 这类按角色选动画的静态助手（`Models.Characters/Ironclad.cs:96`、`Necrobinder.cs:106`），和君王之剑/小刀一样属于表现层。",
+    "severity": "overclaim",
+    "reason": "“只有”这三处不成立：遗物卷轴箱和吃不完的糖里还有按角色类型写死的玩法分支",
+    "evidence": "ScrollBoxes.cs:70 `bool flag = player.Character is Defect;`，:82 `if (flag && rewards.NextInt(100) < 1)` → 3×Claw；LastingCandy.cs:86 `p.Character is Ironclad` 且 :91 `NumberOfRuns == 0` 时 IsAllowed 返回 false"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "解锁前置见各角色 `UnlocksAfterRunAs` 与 `Saves.Managers/ProgressSaveManager.cs:368`",
+    "fix_new": "解锁前置见各角色 `UnlocksAfterRunAs` 与 `Saves.Managers/ProgressSaveManager.cs:368`（静默猎手的 `UnlocksAfterRunAs` 是 null，它的 Silent1Epoch 由涅奥纪元揭示时发放，见 `Timeline.Epochs/NeowEpoch.cs:43`）",
+    "severity": "citation",
+    "reason": "静默猎手的解锁不走 UnlocksAfterRunAs / ProgressSaveManager:368，原出处对它无效",
+    "evidence": "Silent.cs:32 `UnlocksAfterRunAs => null`；ProgressSaveManager.cs:368 只处理 Silent→Regent1、Regent→Necrobinder1、Necrobinder→Defect1；NeowEpoch.cs:43 `ObtainEpochOverride(EpochModel.GetId<Silent1Epoch>(), EpochState.ObtainedNoSlot)`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "对应 70 HP 最低的抗压设计",
+    "fix_new": "对应 70 HP（三名老角色里最低）的抗压设计",
+    "severity": "error",
+    "reason": "70 HP 不是五人最低，亡灵契约师是 66；同章 5.1 也写了“66 HP 是五人最低”",
+    "evidence": "Necrobinder.cs:32 `StartingHp => 66`；Silent.cs:34 `StartingHp => 70`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "储君的**铸造（Forge）**：第一次铸造时把一张 10 伤、2 费、保留的衍生牌「君王之剑」放进手牌",
+    "fix_new": "储君的**铸造（Forge）**：铸造时如果没有未被消耗的君王之剑（通常就是第一次铸造），就把一张 10 伤、2 费、保留的衍生牌「君王之剑」放进手牌",
+    "severity": "overclaim",
+    "reason": "新建剑的条件是“没有未被消耗的剑”而不是“第一次铸造”：剑被消耗后再铸造会再生成一把（4.2 节第 1 条写对了，速览表写窄了）",
+    "evidence": "ForgeCmd.cs:42-49 `GetSovereignBlades(player, includeExhausted: false)` 为空时才 `CreateCard<SovereignBlade>`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "（`ForgeCmd.cs:55-66`、`SovereignBlade.cs:197-201`）",
+    "fix_new": "（`ForgeCmd.cs:55-80`，复制品由 `GetSovereignBlades` 里的 `!c.IsDupe` 排除）",
+    "severity": "citation",
+    "reason": "SovereignBlade.cs:197-201 是 AfterCardChangedPiles 里播放铸造特效的代码，与“排除复制品”无关",
+    "evidence": "ForgeCmd.cs:67-71 `player.PlayerCombatState.AllCards.Where(c => { if (!c.IsDupe) ...`；SovereignBlade.cs:199-201 `ForgeCmd.PlayCombatRoomForgeVfx(base.Owner, this)`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 征服者 Conqueror | 本回合剑造成双倍伤害 |",
+    "fix_new": "| 征服者 Conqueror | 铸造，并让君王之剑本回合对**目标敌人**造成双倍伤害（征服者能力是挂在该敌人身上的减益） |",
+    "severity": "minor",
+    "reason": "双倍伤害只对被指定的那名敌人生效，不是剑对所有目标都翻倍",
+    "evidence": "Conqueror.cs:20 `TargetType.AnyEnemy`，:29 `PowerCmd.Apply<ConquerorPower>(choiceContext, cardPlay.Target, ...)`；ConquerorPower.cs:18 `PowerType.Debuff`；powers.json CONQUEROR_POWER “君王之剑在本回合对该敌人造成双倍伤害”"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "还有先古卡封印王座：每打 1 张牌 +1 星。",
+    "fix_new": "第 12 张是先古卡封印王座：每打 1 张牌 +1 星。（辐射 Radiate 只按本回合已获得的星数加命中次数，本身不产星，不在此列。）",
+    "severity": "minor",
+    "reason": "原句列了遗物 + 11 张牌再“还有”封印王座，读者会数成 12 项里含遗物；且 ch02_character_mechanics.csv 的旧 stars_gain 名单错把辐射算进、漏掉封印王座（脚本已修正，12 张数目不变）",
+    "evidence": "Radiate.cs 只读 `StarsModifiedEntry` 计算 CalculatedHits，无 GainStars；TheSealedThrone.cs:21 `Apply<TheSealedThronePower>`，TheSealedThronePower.cs:19 `PlayerCmd.GainStars`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "升级：78% 纯加数值、10% 纯降费、7% 纯改关键词、4% 改行为（代码里判断 `IsUpgraded`）",
+    "fix_new": "升级：77% 纯加数值、10% 纯降费、7% 纯改关键词、4% 改行为（代码里判断 `IsUpgraded`）、2% 混合",
+    "severity": "overclaim",
+    "reason": "6 张牌 OnUpgrade 只加数值，但出牌逻辑里还有 IsUpgraded 行为分支，不是“纯加数值”；修正后纯数值 349/454=76.9%，混合 10 张 2.2%",
+    "evidence": "TrueGrit.cs:30、TeslaCoil.cs:36、Compact.cs:40、ManifestAuthority.cs:34、Reave.cs:35、Dirge.cs:40 均有 `if (base.IsUpgraded)` 分支；scripts/ch02_card_stats.py 已改并重跑"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 纯数值 | 73 | 71 | 68 | 71 | 72 | 355 | 78.2% |",
+    "fix_new": "| 纯数值 | 72 | 71 | 66 | 70 | 70 | 349 | 76.9% |",
+    "severity": "overclaim",
+    "reason": "同上：坚毅、特斯拉线圈、压缩、君权自授、剥夺、挽歌 6 张同时有 IsUpgraded 行为分支，移入混合",
+    "evidence": "重跑后 data/csv/ch02_card_stats_by_char.csv：ALL_CHAR upgrade_main 纯数值 349 / 0.769"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 纯降费（−1） | 10 | 11 | 10 | 8 | 8 | 47 | 10.4% |",
+    "fix_new": "| 纯降费（女妖之嚎 −2，其余 −1） | 10 | 11 | 10 | 8 | 8 | 47 | 10.4% |",
+    "severity": "minor",
+    "reason": "47 张里女妖之嚎升级降 2 费，不全是 −1",
+    "evidence": "BansheesCry.cs:39 `base.EnergyCost.UpgradeBy(-2);`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 混合 | 0 | 0 | 1 | 0 | 3 | 4 | 0.9% |",
+    "fix_new": "| 混合（含“数值 + `IsUpgraded` 行为分支”6 张） | 1 | 0 | 3 | 1 | 5 | 10 | 2.2% |",
+    "severity": "overclaim",
+    "reason": "同上，混合从 4 张变为 10 张",
+    "evidence": "重跑后 ch02_card_stats_by_char.csv：Ironclad 1 / Defect 3 / Regent 1 / Necrobinder 5 混合"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "护驾！！！、类星体、慷慨捐助（变出来的牌也是升级版）。",
+    "fix_new": "护驾！！！、类星体、慷慨捐助（变出来的牌也是升级版）。另有 6 张牌 `OnUpgrade` 只加数值、出牌逻辑里也判断 `IsUpgraded`（坚毅：随机消耗改为自选；特斯拉线圈：被动触发 2 次；压缩、君权自授、剥夺、挽歌：生成的牌也升级），归入“混合”。",
+    "severity": "overclaim",
+    "reason": "补全行为改变型升级的名单，否则“纯数值”口径不成立",
+    "evidence": "TrueGrit.cs:30-32 升级后 `CardSelectCmd.FromHand` 自选消耗；TeslaCoil.cs:36-38 再调一次 `OrbCmd.Passive`；Compact.cs:40-42、ManifestAuthority.cs:34-36、Reave.cs:35-37、Dirge.cs:40-42 `CardCmd.Upgrade` 生成牌"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "基础牌升级幅度最大：打击 6→9（+50%），防御 5→8（+60%）",
+    "fix_new": "基础牌作为一组升级幅度最大（伤害 +47%、格挡 +55%，单卡最高的是先制打击、取回的 +100%）：打击 6→9（+50%），防御 5→8（+60%）",
+    "severity": "minor",
+    "reason": "按单卡并不是最大：先制打击 3→6、取回 3→6 都是 +100%，闪电霹雳 +75%；按稀有度分组才是基础牌最高",
+    "evidence": "ch02_card_detail.csv：LeadingStrike damage 3 dmg_up 3、Fetch 3/3、Thunderclap 4/3；ch02_cost_efficiency.csv ALL_CHAR rarity:Basic upgrade_gain 47.1%（伤害）/54.5%（格挡）"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "4+3+2+1 共 10 次全体伤害后归零",
+    "fix_new": "4 次被动共 4+3+2+1=10 点全体伤害（不计集中）后归零",
+    "severity": "minor",
+    "reason": "是 4 次触发、合计 10 点伤害，不是“10 次”",
+    "evidence": "GlassOrb.cs:15 `_passiveVal = 4m`，:38 每次被动后 `_passiveVal = Math.Max(0m, _passiveVal - 1m)`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "11 张牌会生成它（剥夺、守墓人、切断、捕捉灵魂、挽歌、彼岸一瞥、降灵……），收益牌有",
+    "fix_new": "8 张牌会生成它（剥夺、守墓人、切断、捕捉灵魂、挽歌、彼岸一瞥、降灵、灵魂绑定；与灵魂相关的共 11 张），另有 3 张收益牌：",
+    "severity": "error",
+    "reason": "11 是“与灵魂相关”的张数，其中纠缠、吞噬生命、灵魂风暴只是收益牌，不生成灵魂",
+    "evidence": "生成调用只出现在 CaptureSpirit/Dirge/GlimpseBeyond/GraveWarden/Reave/Severance（`Soul.Create`）、Seance（`TransformTo<Soul>`）、Soulbound（SoulboundPower 里 `Soul.Create`）；脚本新增 soul_gen 行 = 8"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 灵魂 Soul | 0 费 抽 2 消耗 | 亡灵契约师 11 张牌；药水尸鬼瓮、遗物葬礼面具 |",
+    "fix_new": "| 灵魂 Soul | 0 费 抽 2 消耗 | 亡灵契约师 8 张牌；药水尸鬼瓮、遗物葬礼面具 |",
+    "severity": "error",
+    "reason": "同上，“谁生成”一栏应是 8 张",
+    "evidence": "data/csv/ch02_character_mechanics.csv Necrobinder soul_gen = 8（剥夺、守墓人、切断、灵魂绑定、捕捉灵魂、挽歌、彼岸一瞥、降灵）"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "静默 13 张牌/能力，外加狡诈药水、遗物螺线飞镖、忍术卷轴",
+    "fix_new": "静默 10 张牌（另有精准、幻影之刃、刀刃陷阱 3 张只强化或打出小刀），外加狡诈药水、遗物忍术卷轴（螺线飞镖只在打出小刀时给敏捷，不生成小刀）",
+    "severity": "error",
+    "reason": "13 是“与小刀相关”的张数；真正生成小刀的是 10 张；螺线飞镖不生成小刀",
+    "evidence": "`Shiv.CreateInHand` 只出现在 BladeDance/BladeOfInk/BladeSymphony/CloakAndDagger/FanOfKnives/HiddenDaggers/LeadingStrike/StormOfSteel/UpMySleeve 与 InfiniteBladesPower、CunningPotion、NinjaScroll；relics.json HELICAL_DART “你每打出一张小刀，就在本回合获得…敏捷”"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 打出后获得对应的负面能力：",
+    "fix_new": "| 不能打出、也不进牌堆：在选牌界面被选中时立即获得对应的负面能力（`IChoosable.OnChosen`）：",
+    "severity": "error",
+    "reason": "这 4 张费用是 −1（不可打出），效果在知识恶魔的二选一界面被选中时直接结算",
+    "evidence": "Disintegration.cs `base(-1, CardType.Status, ...)`、`OnChosen()` 里 `PowerCmd.Apply<DisintegrationPower>`；KnowledgeDemon.cs:187-190 `FromChooseACardScreen` 后 `((IChoosable)cardModel).OnChosen()`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "11 张来自「垃圾堆」（TrashHeap）事件",
+    "fix_new": "10 张来自「垃圾堆」（TrashHeap）事件",
+    "severity": "error",
+    "reason": "垃圾堆只列 10 张事件卡（括号里列的名字也正好 10 个）；10+2+2+1+1+1+1 再加疯狂科学才是 19",
+    "evidence": "Models.Events/TrashHeap.cs:30-39：Caltrops, Clash, Distraction, DualWield, Entrench, HelloWorld, Outmaneuver, Rebound, RipAndTear, Stack"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "- 面板：每能量 11.06 伤，是所有池里最高的。",
+    "fix_new": "- 面板：事件池攻击牌每能量 11.06 伤（含撕咬、涅奥之怒、吹哨 3 张先古；只算事件稀有度的 6 张是 10.5），是所有池里最高的。",
+    "severity": "minor",
+    "reason": "本节标题是“事件卡（19 张，稀有度 = 事件）”，但 11.06 是按事件池算的，混入了 3 张先古卡，需注明口径",
+    "evidence": "ch02_cost_efficiency.csv Event damage_per_energy ALL n=9 mean 11.06；其中 Maul/NeowsFury/Whistle rarity=Ancient；只取 Event 稀有度 n=6 均值 10.5、中位 11"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 灯火钥匙 LanternKey | 事件「灯火钥匙」、「战史学家 付袭」 |",
+    "fix_new": "| 灯火钥匙 LanternKey | 事件「灯火钥匙」（在「战史学家 付袭」事件里被消耗） |",
+    "severity": "error",
+    "reason": "战史学家 付袭是钥匙要引去的目标事件，在那里移除钥匙，不是来源",
+    "evidence": "TheLanternKey.cs:52 `new SpecialCardReward(... CreateCard<LanternKey>(...))`；WarHistorianRepy.cs:46 `RemoveLanternKeysForInitialChoice()`；LanternKey.cs `ModifyNextEvent` 返回 `ModelDb.Event<WarHistorianRepy>()`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "`Entities.RestSite/HatchRestSiteOption.cs:41`",
+    "fix_new": "`Entities.RestSite/HatchRestSiteOption.cs:27`",
+    "severity": "citation",
+    "reason": "第 41 行是联机远端的特效，获得遗物在第 27 行",
+    "evidence": "HatchRestSiteOption.cs:27 `await RelicCmd.Obtain<Byrdpip>(base.Owner);`；:41 `NRelicFlashVfx.Create(ModelDb.Relic<Byrdpip>())`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "会自行消失（愧疚：5 场战斗后移除）。",
+    "fix_new": "会自行消失（愧疚：5 场战斗后移除）；可以打出消掉（孢子心灵：1 费、消耗，来自事件「冷光合唱团」）。",
+    "severity": "minor",
+    "reason": "类型列举只覆盖 17 张，漏了孢子心灵（SporeMind），而它是唯一一张可打出、带消耗的诅咒",
+    "evidence": "SporeMind 在 CurseCardPool；ch02_card_detail.csv SporeMind cost 1 keywords Exhaust；LuminousChoir.cs:58 `AddCurseToDeck<SporeMind>`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "| 尘封魔典随机给的那张（拿到时已升级） |",
+    "fix_new": "| 尘封魔典给的那张（每角色只有这 1 张候选；拿到时已升级，下列为未升级数值：升级后腐化 2 费、幽魂形态 3 层、偏差认知 +6、封印王座 0 费、禁忌魔典 1 费） |",
+    "severity": "minor",
+    "reason": "表头说“拿到时已升级”，表里却是未升级数值；且排除超越牌后每角色只剩 1 张，并非真正随机",
+    "evidence": "DustyTome.cs:52-55 候选 = 本角色先古卡 − TranscendenceCards（每角色 2−1=1 张），:61 `CardCmd.Upgrade(card)`；Corruption/ForbiddenGrimoire/TheSealedThrone OnUpgrade `EnergyCost.UpgradeBy(-1)`，WraithForm `IntangiblePower +1`，BiasedCognition `FocusPower +1`"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "白板（只有伤害的牌）**费用越高，每能量效率越高**：1 费 9~10 → 2 费 9 → 3 费 10.67 → 4 费 13；而带效果的 1 费牌整体每能量最高（8.24），2 费最低（6.48）",
+    "fix_new": "白板（只有伤害的牌）**大体是费用越高、每能量效率越高**（每档只有 1~3 张，2 费的 9 并不高于 1 费的 10）：1 费 9~10 → 2 费 9 → 3 费 10.67 → 4 费 13；全部攻击牌按费用看，1 费每能量最高（8.24），2 费最低（6.48）",
+    "severity": "overclaim",
+    "reason": "样本每档仅 1~3 张且 1→2 费并不递增；8.24/6.48 是全部攻击牌（含白板）的均值，不是“带效果的牌”",
+    "evidence": "ch02_card_detail.csv 白板：TwinStrike 10、SwordBoomerang 9（1 费），CelestialMight 9（2 费），Bludgeon 10.67，Bury 13；ch02_cost_efficiency.csv ALL_CHAR damage_per_energy cost=1 n=67 含 vanilla_n=7"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "**白板的费用曲线是递增的**：1 费 9~10 → 2 费 9",
+    "fix_new": "**白板的费用曲线大体递增**（每档仅 1~3 张，2 费并不高于 1 费）：1 费 9~10 → 2 费 9",
+    "severity": "overclaim",
+    "reason": "同上，1 费 10 → 2 费 9 不是递增",
+    "evidence": "同上"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "按局面缩放的伤害（`CalculatedDamage` 只取基础值）",
+    "fix_new": "按局面缩放的伤害（只有 `CalculatedDamage` 的牌，如完美打击、出击、榨取、守护者等 12 张有能量费的攻击牌，**直接不计入**）",
+    "severity": "minor",
+    "reason": "脚本并没有按基础值计入这些牌，而是 dmg_kind=scaling 被过滤掉了，方法描述与实际口径不符",
+    "evidence": "scripts/ch02_card_stats.py cost_efficiency()：`c['dmg_kind'] in ('direct', 'osty')`；scaling 类：BodySlam、PerfectedStrike、AshenStrike、MementoMori、Murder、Supermassive、Unleash、DeathMarch、SoulStorm、TimesUp、Squeeze、Protector"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "5. **0 费攻击牌**（5 人共 24 张）",
+    "fix_new": "5. **0 费攻击牌**（不含 6 张星耗牌和 2 张按局面缩放的牌，5 人共 24 张）",
+    "severity": "minor",
+    "reason": "5 人池 0 能量攻击牌实际 32 张，24 是排除星耗与 CalculatedDamage 牌后的统计口径",
+    "evidence": "ch02_card_detail.csv：另有陨星/星界脉冲/伽马爆破/星尘/彗星/流星雨（星耗）与欺凌、精确切击（scaling）"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "少数大数值的 0 费牌都有出牌条件（华丽收场 60 伤：抽牌堆必须为空；契约终结 18 伤：消耗堆要达到一定张数）",
+    "fix_new": "大数值的 0 费牌都有门槛：华丽收场 60 伤（抽牌堆为空才能打出）、契约终结 18 伤（消耗堆不足 3 张时不造成伤害）；背刺 11、刺杀 10 没有出牌条件，代价是固有 + 消耗的一次性",
+    "severity": "overclaim",
+    "reason": "背刺 11、刺杀 10 没有出牌条件；契约终结是伤害条件而非出牌条件",
+    "evidence": "GrandFinale.cs:20 `IsPlayable => PileType.Draw...Count == 0`；PactsEnd.cs:23 `CanDealDamage => ...Exhaust...Count() >= Cards`（无 IsPlayable 重写）；Backstab/Assassinate keywords Innate,Exhaust"
+  },
+  {
+    "file": "sections/02_characters_cards.md",
+    "fix_old": "**奥斯提出手**：带 `CardTag.OstyAttack` 的 12 张牌",
+    "fix_new": "**奥斯提出手**：亡灵契约师池里带 `CardTag.OstyAttack` 的 12 张牌（加上衍生牌扫荡凝视共 13 张）",
+    "severity": "minor",
+    "reason": "全游戏带 OstyAttack 标签的是 13 张，12 只是亡灵契约师池",
+    "evidence": "grep CardTag.OstyAttack：BoneShards, Fetch, Flatten, HighFive, Poke, Protector, Rattle, RightHandHand, SicEm, Snap, Squeeze, Unleash + SweepingGaze(Token)"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "铸造第一次生成君王之刃，之后每次铸造给所有副本加伤害。",
+    "fix_new": "铸造在没有可用的君王之剑时生成一把（通常是第一次铸造），之后每次铸造给所有副本（含已消耗的）加伤害。",
+    "severity": "error",
+    "reason": "官方简中名是“君王之剑”（全文其他处都用此名）；“第一次”条件不准",
+    "evidence": "localization/zhs/cards.json `SOVEREIGN_BLADE.title: 君王之剑`；ForgeCmd.cs:42-49"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "每能量伤害平均约 7.5：普通 7.87 / 罕见 7.47 / 稀有 7.50；稀有牌贵在机制，不在数字。升级 78% 是加数值",
+    "fix_new": "每能量伤害平均 7.65：普通 7.87 / 罕见 7.47 / 稀有 7.50；稀有牌贵在机制，不在数字。升级 77% 是纯加数值",
+    "severity": "minor",
+    "reason": "第 02 章给出的均值是 7.65（不是约 7.5）；纯数值升级占比修正为 76.9%",
+    "evidence": "ch02_cost_efficiency.csv ALL_CHAR damage_per_energy ALL mean 7.65；重跑后 ch02_card_stats_by_char.csv ALL_CHAR 纯数值 0.769"
+  }
+]

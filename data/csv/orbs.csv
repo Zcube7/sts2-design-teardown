@@ -1,0 +1,6 @@
+﻿id,cls,name_zh,name_en,vars,desc_zh,dev_note
+DARK_ORB,DarkOrb,黑暗,Dark,,充能球：[gold]激发[/gold]时，对生命值最少的敌人造成伤害。伤害每回合增加。,
+FROST_ORB,FrostOrb,冰霜,Frost,,充能球：获得[gold]格挡[/gold]。,
+GLASS_ORB,GlassOrb,玻璃,Glass,,充能球：对所有敌人造成伤害。伤害每回合减少。,
+LIGHTNING_ORB,LightningOrb,闪电,Lightning,,充能球：对随机敌人造成伤害。,
+PLASMA_ORB,PlasmaOrb,等离子,Plasma,,充能球：获得能量。,

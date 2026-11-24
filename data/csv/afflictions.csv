@@ -1,0 +1,8 @@
+﻿id,cls,name_zh,name_en,vars,desc_zh,dev_note
+BOUND,Bound,魂缚,Bound,,每回合只能打出[blue]1[/blue]张[gold]魂缚[/gold]卡牌。卡牌会在回合结束时失去[gold]魂缚[/gold]。,"Most of this Affliction's logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.ChainsOfBindingPower"" />."
+ENTANGLED,Entangled,缠身,Entangled,,{Amount:energyIcons()}费用增加1。,"This Affliction has no logic of its own. All logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.TangledPower"" />."
+GALVANIZED,Galvanized,流电,Galvanized,,打出这张牌时受到[blue]{Amount}[/blue]点伤害。,"Most of this Affliction's logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.GalvanicPower"" />."
+HEXED,Hexed,邪咒,Hexed,,这张牌获得[gold]虚无[/gold]。,"Most of this Affliction's logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.HexPower"" />."
+RINGING,Ringing,昏眩,Ringing,,你在本回合只能打出[blue]1[/blue]张牌。,"Most of this Affliction's logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.RingingPower"" />."
+SMOG,Smog,烟雾,Smog,,你在本回合无法再打出更多[gold]技能[/gold]牌。回合结束时消除。,"This Affliction has no logic of its own. All logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.SmoggyPower"" />."
+TAINTED,Tainted,污染,Tainted,,打出时获得[blue]{Amount}[/blue]层[gold]污染[/gold]。,"Most of this Affliction's logic lives in <see cref=""T:MegaCrit.Sts2.Core.Models.Powers.TaintedPower"" />."

@@ -1,0 +1,362 @@
+[
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "整局用一个洗好的牌堆发遗物：精英和宝箱从前端抽，商店从后端抽，一局内不重复。",
+    "fix_new": "每个玩家有一个开局洗好的遗物袋：精英、事件、铲子等从前端抽，商店从后端抽；**宝箱例外**，所有宝箱房（单人局也一样）都从另一个只含共享池的全局袋 `SharedRelicGrabBag` 前端抽，所以宝箱开不出角色专属遗物。抽出或拿到的遗物会同时从两个袋里移除，正常一局内不重复。",
+    "severity": "error",
+    "reason": "宝箱不从个人遗物袋抽，而是从全局 SharedRelicGrabBag 抽（单人也是），该袋只含共享池，宝箱永远不出角色遗物",
+    "evidence": "Rooms/TreasureRoom.cs:47 进房调用 TreasureRoomRelicSynchronizer.BeginRelicPicking；Multiplayer.Game/TreasureRoomRelicSynchronizer.cs:107-108 `RelicFactory.RollRarity(_rng)` + `_sharedGrabBag.PullFromFront(rarity, runState)`；Runs/RunManager.cs:494 每局都用 State.SharedRelicGrabBag 构造该同步器；RunManager.cs:530 共享袋只用 SharedRelicPool.GetUnlockedRelics 建袋；个人袋只被 RelicReward/事件/DigRestSiteOption/商店等经 RelicFactory 使用"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "- **取用**：精英奖励和宝箱走 `PullFromFront`，商店走 `PullFromBack`（`RelicGrabBag.cs:125,153`；`Factories/RelicFactory.cs`）。",
+    "fix_new": "- **取用**：精英奖励、事件、铲子挖掘、扭蛋/玩具盒等走个人袋的 `PullFromFront`，商店走个人袋的 `PullFromBack`（`RelicGrabBag.cs:125,153`；`Factories/RelicFactory.cs`）。**宝箱不走个人袋**：进房即调用 `TreasureRoomRelicSynchronizer.BeginRelicPicking`，用独立的 `Rng.TreasureRoomRelics` 掷稀有度后从全局共享袋前端抽（`Rooms/TreasureRoom.cs:47`、`Multiplayer.Game/TreasureRoomRelicSynchronizer.cs:105-108`），单人局同样如此。",
+    "severity": "error",
+    "reason": "宝箱用的是 SharedRelicGrabBag 而不是个人 RelicGrabBag",
+    "evidence": "PullFromFront 调用点：Rewards/RelicReward.cs:85-94、Entities.RestSite/DigRestSiteOption.cs:29、Models.Events/*（RanwidTheElder/RelicTrader/ThisOrThat/Trial/UnrestSite 等）、Models.Relics/LargeCapsule.cs:27、ToyBox.cs:92、PaelsWing.cs:90 → 都是 player.RelicGrabBag；宝箱是 TreasureRoomRelicSynchronizer.cs:108 `_sharedGrabBag.PullFromFront`，_rng = State.Rng.TreasureRoomRelics（RunManager.cs:494）"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "- **多人**：另有一个 `SharedRelicGrabBag`，用 Shared 池全量建袋（`Runs/RunManager.cs:530`），供共享宝箱使用（`Multiplayer.Game/TreasureRoomRelicSynchronizer.cs:107-108`）。任何玩家拿到某个遗物后，会把它同时从共享袋里移除（`RelicFactory.cs` 的 `SharedRelicGrabBag.Remove`）。",
+    "fix_new": "- **全局共享袋（单人局也有）**：每局开局另建一个 `SharedRelicGrabBag`，用 Shared 池**已解锁**的遗物建袋、不按稀有度过滤（`Runs/RunManager.cs:530`），**所有宝箱房**都从它抽（`Multiplayer.Game/TreasureRoomRelicSynchronizer.cs:105-108`；`RunManager.cs:494` 单人局同样创建）。所以宝箱只出共享池的 C/U/R（全解锁时 90 个），不出角色专属和 Shop 档；袋里虽然混进了布质果实、烫嘴可可、菲涅耳透镜，但宝箱只掷 C/U/R、降级链到不了 Ancient/Event，照样抽不到。共享袋开了 `refreshAllowed`，某档抽空会按原始列表补满（`Runs/RunState.cs:542`、`RelicGrabBag.cs:224-228`）。从个人袋抽出（`RelicFactory.cs:48,76`）或获得（`Commands/RelicCmd.cs:44`）的遗物都会同步从共享袋移除。",
+    "severity": "error",
+    "reason": "共享袋不是多人专用；建袋用的是已解锁列表而非全量；宝箱（含单人）全部走共享袋；移除时机是「抽出或获得」而不只是「拿到」",
+    "evidence": "RunManager.cs:530 `State.SharedRelicGrabBag.Populate(ModelDb.RelicPool<SharedRelicPool>().GetUnlockedRelics(State.UnlockState), State.Rng.UpFront)` 在 InitializeNewRun 里无条件执行；RunState.cs:542/577 `new RelicGrabBag(refreshAllowed: true)`；RelicGrabBag.Populate(IEnumerable) 第 95-115 行不做稀有度过滤；RelicFactory.cs:48,76 抽出即 `SharedRelicGrabBag.Remove`；RelicCmd.cs:41-45 获得时两个袋都 Remove"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "- **吃不完的糖、闪亮口红、剃刀牙**同时在 Event 和 Shared 池，既能随机掉，也能由事件给。",
+    "fix_new": "- **吃不完的糖、闪亮口红、剃刀牙**同时列在 Event 和 Shared 池，但全源码没有任何事件按名字给出它们，`EventRelicPool` 也不被任何抽取逻辑使用（只在 `Models/ModelDb.cs:281` 注册），所以它们实际只能随机掉落；Event 池成员身份只影响 `.Pool` 的显示归属。",
+    "severity": "error",
+    "reason": "没有任何事件给这三个遗物，Event 池也没有抽取入口，「也能由事件给」不成立",
+    "evidence": "全源码 grep LastingCandy|SparklingRouge|RazorTooth 只命中两个池文件、自身文件、AbstractModelSubtypes.cs、Runs/CardCreationFlags.cs（文档注释）、SerializableRunV16ToV17.cs（存档迁移）；grep EventRelicPool 只命中 ModelDb.cs:281 与 AbstractModelSubtypes.cs:4097"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "一代的 Boss 遗物整体搬进了达弗（Darv「囤积者」）的池子。",
+    "fix_new": "达弗（Darv「囤积者」）池子里的 11 个遗物沿用了一代 Boss 遗物的原名（与一代对比，凭公开知识）；但一代 Boss 遗物并没有整体搬过来，Busted Crown、Coffee Dripper、Cursed Key 等在二代代码里不存在，黑暗之血改由欧洛巴斯之触给出。",
+    "severity": "overclaim",
+    "reason": "「整体搬进」夸大：只有 11 个一代 Boss 遗物名出现在达弗池，其余大部分在二代不存在；且是一代对比未标「凭公开知识」",
+    "evidence": "Models.Events/Darv.cs:177-197 的 11 个单品集；Models.Relics/ 下无 BustedCrown/CoffeeDripper/CursedKey/FusionHammer/MarkOfPain/RunicDome/SlaversCollar/TinyHouse/SacredBark/RunicCube 等类；BlackBlood 只经 TouchOfOrobas.cs:32-33 获得"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "失去生命的管线顺序：发条靴把伤害抬到至少 5，钨合金棍再 -1，律动残余最后封顶（`Commands/CreatureCmd.cs:283-312`，见第 01 章）",
+    "fix_new": "失去生命的修正分阶段：钨合金棍和律动残余都在 `ModifyHpLostAfterOsty` 同一阶段（谁先谁后取决于监听者遍历顺序），发条靴在更晚的 `ModifyHpLostAfterOstyLate`，且只改持有者打出去的攻击伤害、不改自己掉血，所以不会和前两者作用在同一次失血上（`Hooks/Hook.cs:1870-1910`、`Commands/CreatureCmd.cs:283-292`）",
+    "severity": "error",
+    "reason": "顺序写反且对象混淆：发条靴在 Late 阶段（最后），只作用于自己造成的伤害；钨合金棍与律动残余同阶段，没有固定先后",
+    "evidence": "Models.Relics/TheBoot.cs:26 `ModifyHpLostAfterOstyLate`，第 28-35 行要求 dealer 是持有者/Osty 且 target 不是持有者；TungstenRod.cs:19、BeatingRemnant.cs:42 都是 `ModifyHpLostAfterOsty`；Hooks/Hook.cs:1897-1909 先遍历 AfterOsty 再遍历 AfterOstyLate"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "| 附魔 | 14 | 见 §5.4 |",
+    "fix_new": "| 附魔 | 14 | 见 §6.3 |",
+    "severity": "citation",
+    "reason": "§5.4 是特殊药水，会附魔的遗物在 §6.3",
+    "evidence": "本章 §6.3 末尾「会附魔的遗物共 14 个」"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "产金 5 个（紫水晶茄子/圆顶礼帽/招财异鱼/古钱币/火龙果）",
+    "fix_new": "金币相关 5 个（紫水晶茄子/圆顶礼帽/招财异鱼/古钱币产金；火龙果是获得金币时 +1 最大生命）",
+    "severity": "minor",
+    "reason": "火龙果不产金，是把获得金币转成最大生命",
+    "evidence": "Models.Relics/DragonFruit.cs CanonicalVars MaxHpVar(1)；localization/zhs/relics.json DRAGON_FRUIT.description「每当你获得金币时，提升{MaxHp}点你的最大生命值」"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "- **「代价」的设计主要集中在两处。** 一是涅奥的代价池（每局必出 1 个），二是瓦库（6/10 带代价）。",
+    "fix_new": "- **「代价」分布（按本章人工「有代价」标签）：** 涅奥的代价池 10 个（每局必出 1 个）、瓦库 6/10、达弗 6/12、特兹卡塔拉 5/10，坦克斯和诺奴佩普各 1。",
+    "severity": "overclaim",
+    "reason": "与本章 §3.3 表自相矛盾：达弗 6/12、特兹卡塔拉 5/10 的代价密度与瓦库相当，不是「主要集中在两处」",
+    "evidence": "data/csv/ch03_ancient_relics.csv drawback 列：Neow 10、Darv 6、Tezcatara 5、Vakuu 6、Tanx 1、Nonupeipe 1、Orobas 0、Pael 0；§3.3 表同"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "中和→压制、释放→守护者、陨星→流星雨",
+    "fix_new": "中和→压制、出击→守护者、陨星→流星雨",
+    "severity": "error",
+    "reason": "亡灵契约师被超越的起始牌是 Unleash，简中名「出击」，不是「释放」",
+    "evidence": "Models.Relics/ArchaicTooth.cs:37-38 `Card<Unleash>() → Card<Protector>()`；localization/zhs/cards.json:1198 \"UNLEASH.title\": \"出击\""
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "- **另有 8 张无色先古牌由 Ancient 遗物直接塞进牌组**：",
+    "fix_new": "- **Event 卡池里的 9 张先古牌全部出自 Ancient 遗物**，其中第 9 张富足（Abundance）是寻龙尺（涅奥代价项）给的任务牌「探寻」完成后变化而来（`Models.Cards/Dowsing.cs:63`）；**另 8 张由 Ancient 遗物直接塞进牌组**：",
+    "severity": "minor",
+    "reason": "漏了第 9 张无色先古牌富足（Abundance）",
+    "evidence": "data/csv/cards.csv rarity=Ancient 且 pool=Event 共 9 张：Abundance/Apotheosis/Apparition/BrightestFlame/Maul/NeowsFury/Relax/Whistle/Wish；Models.Relics/DowsingRod.cs:21 加入 Dowsing 任务牌，Models.Cards/Dowsing.cs:63 `CardCmd.TransformTo<Abundance>(this)`"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "缚魂命匣：从第 2 回合起每回合召唤 1",
+    "fix_new": "缚魂命匣：开局召唤 1，此后每回合召唤 1",
+    "severity": "minor",
+    "reason": "漏了开局那次召唤",
+    "evidence": "Models.Relics/BoundPhylactery.cs `BeforeCombatStart` → SummonPet()；`AfterEnergyResetLate` 在 TurnNumber != 1 时再召唤"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "推测是同时持有真假两个异蛇之眼的成就，见第 06 章",
+    "fix_new": "代码注释写明是「同时拿到真假异蛇之眼」的徽章（Badge，`Models.Badges/DoubleSnecko.cs:9,25-27`），见第 06 章",
+    "severity": "minor",
+    "reason": "不是推测：源码注释与判定逻辑都明确；且它是徽章不是成就",
+    "evidence": "DoubleSnecko.cs:9 `/// Obtained both fake and real Snecko Eyes.`，类继承 Badge，第 25-27 行同时检查 SneckoEye 与 FakeSneckoEye"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "**不进商店的 5 个遗物全是「产金」类。** 它们是紫水晶茄子、圆顶礼帽、招财异鱼、古钱币、送货员，避免出现「花钱买印钞机」。",
+    "fix_new": "**不进商店的 5 个遗物都和金币有关。** 紫水晶茄子、圆顶礼帽、招财异鱼、古钱币是产金，送货员是打折。推断用意是避免「花钱买印钞机」；但同样省钱的会员卡是 Shop 档、只在商店卖，所以这条规律只对产金类成立。",
+    "severity": "overclaim",
+    "reason": "送货员是省金不是产金；设计意图是推断，且会员卡这个反例说明「省金不进店」不成立",
+    "evidence": "Models.Relics/{AmethystAubergine,BowlerHat,LuckyFysh,OldCoin,TheCourier}.cs `IsAllowedInShops => false`；MembershipCard.cs Rarity=Shop、Discount=50 且无该覆写"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "**规律**：5 个全是「产金/省金」，在商店里卖等于让玩家花钱换钱，是没有意义的选项。",
+    "fix_new": "**规律（推断）**：4 个产金 + 1 个省金。产金遗物放进商店等于让玩家花钱换钱；但同样省金的会员卡（Shop 档）恰恰只在商店卖，送货员为什么被排除，代码里看不出理由。",
+    "severity": "overclaim",
+    "reason": "设计意图属推断，且会员卡是反例",
+    "evidence": "同上：MembershipCard 为 Shop 稀有度、可在商店出售；TheCourier 才有 IsAllowedInShops=false"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "回血和加最大生命的 3 瓶不会被战斗内效果随机生成。",
+    "fix_new": "果汁、再生药水、瓶中精灵这 3 瓶不会被战斗内效果随机生成（同样回血的鲜血药水没有排除）。",
+    "severity": "overclaim",
+    "reason": "原句暗示所有回血药水都被排除，但铁甲的鲜血药水（回 20%）仍可在战斗中随机生成",
+    "evidence": "只有 Models.Potions/{FairyInABottle,FruitJuice,RegenPotion}.cs 覆写 CanBeGeneratedInCombat；BloodPotion.cs 无覆写；Factories/PotionFactory.cs:64-68,92-95 战斗内生成候选=本角色池+共享池"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "联机时可以扔给队友（`PotionModel.cs:393` `CanThrowAtAlly`）",
+    "fix_new": "联机且在战斗中可以扔给队友（`PotionModel.cs:393` `CanThrowAtAlly`，战斗外返回 false）",
+    "severity": "minor",
+    "reason": "CanThrowAtAlly 还要求战斗进行中",
+    "evidence": "PotionModel.cs:393-399 `if (TargetType == AnyPlayer && Players.Count > 1) return CombatManager.Instance.IsInProgress; return false;`"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "所以每次休息克隆牌数翻倍。",
+    "fix_new": "所以每在休息处选一次「克隆」，带克隆的牌数就翻倍（代码里没有上限）。",
+    "severity": "minor",
+    "reason": "翻倍需要在休息处选择「克隆」选项，不是每次休息自动发生",
+    "evidence": "Entities.RestSite/CloneRestSiteOption.cs:42-53 OnSelect 才复制；Models.Relics/PaelsGrowth.cs:31-39 每个休息处加一个 CloneRestSiteOption；Models/CardModel.cs:1205-1209 复制时深拷贝附魔"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "怪物上能力时给全部合规牌打上标记，能力消失时清掉。",
+    "fix_new": "由能力决定何时打标记（上能力时、开战时、抽牌时或打出第一张技能后）和何时清掉（能力移除时、每回合末，流电整场不清）。",
+    "severity": "overclaim",
+    "reason": "只有缠结/恶咒/昏眩是「上能力时全部标记」；魂缚是抽牌时逐张标、烟雾是打出技能后标；魂缚和烟雾每回合末清，流电从不清",
+    "evidence": "Models.Powers/TangledPower.cs、HexPower.cs、RingingPower.cs 用 AfterApplied；GalvanicPower.cs、VitalSparkPower.cs 用 BeforeCombatStart；ChainsOfBindingPower.cs 用 AfterCardDrawn + BeforeSideTurnEnd 清；SmoggyPower.cs 用 AfterCardPlayed + AfterSideTurnEnd 清；GalvanicPower.cs 无清除逻辑"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "  - 上能力时给全部合规牌打标记（`AfterApplied`）；",
+    "fix_new": "  - 打标记的时机各不相同：缠结/恶咒/昏眩在上能力时（`AfterApplied`），流电/活力火花在开战时（`BeforeCombatStart`），魂缚锁链在抽牌时（`AfterCardDrawn`），烟雾弥漫在打出第一张技能后（`AfterCardPlayed`）；",
+    "severity": "overclaim",
+    "reason": "把 3 个能力的做法写成了通用规则",
+    "evidence": "同上一条，见 Models.Powers/*Power.cs"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "  - 能力消失时清掉所有标记（`AfterRemoved`）。",
+    "fix_new": "  - 清标记：缠结/恶咒/昏眩/活力火花在能力移除时（`AfterRemoved`），魂缚锁链和烟雾弥漫在每回合末清，流电没有清标记逻辑。",
+    "severity": "overclaim",
+    "reason": "ChainsOfBinding/Smoggy 不走 AfterRemoved，Galvanic 根本不清",
+    "evidence": "ChainsOfBindingPower.cs BeforeSideTurnEnd 里 ClearAffliction；SmoggyPower.cs AfterSideTurnEnd 里 ClearAffliction；GalvanicPower.cs 无 AfterRemoved"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "| 魂缚之链 ChainsOfBindingPower | 女王，招式「傀儡丝线」",
+    "fix_new": "| 魂缚锁链 ChainsOfBindingPower | 女王，招式 PUPPET_STRINGS（本地化无中文招式名，意译「傀儡丝线」）",
+    "severity": "minor",
+    "reason": "能力官方简中名是「魂缚锁链」；该招式在 monsters.json 里没有中文名",
+    "evidence": "localization/zhs/powers.json:88 \"CHAINS_OF_BINDING_POWER.title\": \"魂缚锁链\"；zhs/monsters.json 无 QUEEN.moves.PUPPET_STRINGS.title；Models.Monsters/Queen.cs:135 MoveState(\"PUPPET_STRINGS_MOVE\")"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "藤蔓蹒跚者，招式「缠绕藤蔓」",
+    "fix_new": "藤蔓蹒跚者，招式「紧绕藤蔓」",
+    "severity": "minor",
+    "reason": "招式官方简中名不符",
+    "evidence": "localization/zhs/monsters.json VINE_SHAMBLER.moves.GRASPING_VINES.title = 紧绕藤蔓"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "| 电流 GalvanicPower（加在怪物自身）",
+    "fix_new": "| 流电 GalvanicPower（加在怪物自身）",
+    "severity": "minor",
+    "reason": "能力官方简中名是「流电」（与苦难同名）",
+    "evidence": "localization/zhs/powers.json:276 \"GALVANIC_POWER.title\": \"流电\""
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "| 邪咒 HexPower | 幽灵骑士，招式「邪咒」",
+    "fix_new": "| 恶咒 HexPower | 幽灵骑士，招式「恶咒」",
+    "severity": "minor",
+    "reason": "能力和招式的官方简中名都是「恶咒」（苦难才叫邪咒）",
+    "evidence": "localization/zhs/powers.json:328 \"HEX_POWER.title\": \"恶咒\"；zhs/monsters.json SPECTRAL_KNIGHT.moves.HEX.title = 恶咒"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "仪式兽，招式「兽吼」",
+    "fix_new": "仪式兽，招式「野兽咆哮」",
+    "severity": "minor",
+    "reason": "招式官方简中名不符",
+    "evidence": "localization/zhs/monsters.json CEREMONIAL_BEAST.moves.BEAST_CRY.title = 野兽咆哮"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "| 烟雾 SmoggyPower | 活雾，招式「进阶毒气」",
+    "fix_new": "| 烟雾弥漫 SmoggyPower | 活雾，招式「先进毒气」",
+    "severity": "minor",
+    "reason": "能力与招式的官方简中名不符",
+    "evidence": "localization/zhs/powers.json:644 \"SMOGGY_POWER.title\": \"烟雾弥漫\"；zhs/monsters.json LIVING_FOG.moves.ADVANCED_GAS.title = 先进毒气"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "实际来源是事件「溺水信标」DrowningBeacon。",
+    "fix_new": "实际来源是事件「淹水灯塔」DrowningBeacon。",
+    "severity": "minor",
+    "reason": "事件官方简中名是「淹水灯塔」",
+    "evidence": "localization/zhs/events.json DROWNING_BEACON.title = 淹水灯塔"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "来自事件「药水信使」。",
+    "fix_new": "来自事件「药水快递员」。",
+    "severity": "minor",
+    "reason": "事件官方简中名是「药水快递员」",
+    "evidence": "localization/zhs/events.json POTION_COURIER.title = 药水快递员；引用点 Models.Events/PotionCourier.cs"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "发光水：消耗手牌并抽 10 张，来自事件「溺水信标」。",
+    "fix_new": "发光水：消耗手牌并抽 10 张，来自事件「淹水灯塔」。",
+    "severity": "minor",
+    "reason": "事件官方简中名是「淹水灯塔」",
+    "evidence": "localization/zhs/events.json DROWNING_BEACON.title = 淹水灯塔；Models.Events/DrowningBeacon.cs 引用 GlowwaterPotion"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「自助书」（技能 N=2）",
+    "fix_new": "事件「自助指南」（技能 N=2）",
+    "severity": "minor",
+    "reason": "事件官方简中名是「自助指南」",
+    "evidence": "localization/zhs/events.json SELF_HELP_BOOK.title = 自助指南"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「人形坑洞之地」",
+    "fix_new": "事件「人形洞穴之地」",
+    "severity": "minor",
+    "reason": "事件官方简中名不符",
+    "evidence": "localization/zhs/events.json FIELD_OF_MAN_SIZED_HOLES.title = 人形洞穴之地"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「自助书」（N=2）",
+    "fix_new": "事件「自助指南」（N=2）",
+    "severity": "minor",
+    "reason": "事件官方简中名是「自助指南」",
+    "evidence": "localization/zhs/events.json SELF_HELP_BOOK.title = 自助指南"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「遗忘者之墓」",
+    "fix_new": "事件「遗忘之墓」",
+    "severity": "minor",
+    "reason": "事件官方简中名不符",
+    "evidence": "localization/zhs/events.json GRAVE_OF_THE_FORGOTTEN.title = 遗忘之墓"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「涡旋漩涡」",
+    "fix_new": "事件「螺旋漩涡」",
+    "severity": "minor",
+    "reason": "事件官方简中名不符",
+    "evidence": "localization/zhs/events.json SPIRALING_WHIRLPOOL.title = 螺旋漩涡"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「浸水抄经室」",
+    "fix_new": "事件「水漫缮写室」",
+    "severity": "minor",
+    "reason": "事件官方简中名不符",
+    "evidence": "localization/zhs/events.json WATERLOGGED_SCRIPTORIUM.title = 水漫缮写室"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「自助书」（能力牌，N=2）",
+    "fix_new": "事件「自助指南」（能力牌，N=2）",
+    "severity": "minor",
+    "reason": "事件官方简中名是「自助指南」",
+    "evidence": "localization/zhs/events.json SELF_HELP_BOOK.title = 自助指南"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "事件「万古之石」",
+    "fix_new": "事件「永恒之石」",
+    "severity": "minor",
+    "reason": "事件官方简中名不符",
+    "evidence": "localization/zhs/events.json STONE_OF_ALL_TIME.title = 永恒之石"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "一代的「同回合 3 张」家族扩成了攻击/技能两条线，打出技能也有对应奖励",
+    "fix_new": "与一代对比（凭公开知识）：一代已有攻击线（苦无/手里剑/精致折扇）和技能线（开信刀），二代沿用并加了锁镰",
+    "severity": "minor",
+    "reason": "一代已有开信刀（同回合 3 技能），「扩成两条线」不成立；且一代对比未标注",
+    "evidence": "凭公开知识：Slay the Spire 1 的 Letter Opener 为「同回合打出 3 张技能对全体造成 5 伤」；二代 Models.Relics/LetterOpener.cs 数值相同（Cards=3, Damage=5）"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "去掉这 12 个，真正进入正常游戏循环的遗物是 287 个。",
+    "fix_new": "去掉这 12 个，有独立正式效果的遗物是 287 个（注意仿制品在「商人？？？」事件里照样能买到、头环是抽空兜底，二者都会在正常对局中出现，只是不算独立设计）。",
+    "severity": "minor",
+    "reason": "仿制品和头环都会在正常对局里拿到，「不进入正常游戏循环」口径不准",
+    "evidence": "Models.Events/FakeMerchant.cs 出售 9 个 Fake*（relicCost=50，第 24 行），第 155 行战斗奖励给 FakeMerchantsRug；Factories/RelicFactory.cs:13 FallbackRelic=Circlet，TouchOfOrobas.cs:126 也给 Circlet"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "附魔只来自三类渠道：高价值的 Ancient、要花钱的 Shop 遗物、有代价的事件。",
+    "fix_new": "附魔主要来自三类渠道：高价值的 Ancient、要花钱的 Shop 遗物、事件（例外是事件遗物菲涅耳透镜和静默卡牌墨之刃）。",
+    "severity": "minor",
+    "reason": "「只来自」与本章 §6.3 自己列的菲涅耳透镜（Event 遗物）和墨之刃（卡牌）矛盾；「有代价的事件」未核实",
+    "evidence": "Models.Relics/FresnelLens.cs:72 附魔灵巧；Models.Cards/BladeOfInk.cs:36 附魔墨影"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "存在两个遗物牌堆，个人牌堆 `RelicGrabBag` 和多人共享牌堆 `SharedRelicGrabBag`（`RunManager.cs:530`）",
+    "fix_new": "存在两个遗物牌堆，个人牌堆 `RelicGrabBag` 和全局共享牌堆 `SharedRelicGrabBag`（`RunManager.cs:530`；单人局也有，所有宝箱房都从它抽，`refreshAllowed: true`）",
+    "severity": "error",
+    "reason": "共享牌堆不是多人专用，单人宝箱同样从它抽",
+    "evidence": "RunManager.cs:494、530；TreasureRoomRelicSynchronizer.cs:108；RunState.cs:542"
+  },
+  {
+    "file": "sections/03_relics_potions.md",
+    "fix_old": "另有 8 张无色先古牌由 Ancient 遗物塞入",
+    "fix_new": "另有 9 张无色先古牌出自 Ancient 遗物（8 张直接塞入，富足由寻龙尺的任务牌「探寻」变化而来）",
+    "severity": "minor",
+    "reason": "漏了富足（Abundance）",
+    "evidence": "Models.Relics/DowsingRod.cs:21；Models.Cards/Dowsing.cs:63"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "**每局一个洗好的遗物袋**：精英、宝箱、事件从前端抽，商店从后端抽，一局内不重复。",
+    "fix_new": "**每个玩家一个洗好的遗物袋**：精英、事件从前端抽，商店从后端抽；宝箱另从一个只含共享池的全局袋抽（单人局也一样），所以宝箱不出角色专属遗物；正常一局内不重复。",
+    "severity": "error",
+    "reason": "宝箱不走个人遗物袋",
+    "evidence": "Rooms/TreasureRoom.cs:47；Multiplayer.Game/TreasureRoomRelicSynchronizer.cs:107-108；Runs/RunManager.cs:494,530"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "**有代价的遗物（36 个）一个都不在随机掉落池里**",
+    "fix_new": "**有代价的遗物（36 个）一个都不在 C/U/R 随机掉落池里**（面包、硫磺是 Shop 档，只在商店卖）",
+    "severity": "minor",
+    "reason": "个人遗物袋包含 Shop 档，面包、硫磺就在袋里（只供商店格抽），需限定 C/U/R",
+    "evidence": "Runs/RelicGrabBag.cs:16-22 袋含 Shop；Bread 在 SharedRelicPool.cs:29，Brimstone 在 IroncladRelicPool.cs:21，二者 Rarity=Shop"
+  }
+]

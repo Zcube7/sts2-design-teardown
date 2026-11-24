@@ -1,0 +1,66 @@
+﻿id,cls,name_zh,name_en,rarity,usage,target,pool,character,unlock_epoch,in_combat_generatable,custom_usability,category,shop_base_cost,vars,referenced_by,desc_zh,file
+AMBERGRIS,Ambergris,龙涎香,Ambergris,Event,AnyTime,AnyPlayer,Event,,,Y,,生命,,HealPercent=50,Relics/NeowsSacrifice,回复你最大生命值的{HealPercent}%。在战斗中使用时，额外进行一个回合。,MegaCrit.Sts2.Core.Models.Potions/Ambergris.cs
+ASHWATER,Ashwater,灰水,Ashwater,Uncommon,CombatOnly,AnyPlayer,角色:Ironclad,Ironclad,Ironclad4Epoch,Y,,能量/抽牌/操控,75,,,消耗你手牌中的任意张牌。,MegaCrit.Sts2.Core.Models.Potions/Ashwater.cs
+ATTACK_POTION,AttackPotion,攻击药水,Attack Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,生成卡牌,50,,,从3张随机攻击牌中选择1张加入你的手牌。这张牌在本回合可以免费打出。,MegaCrit.Sts2.Core.Models.Potions/AttackPotion.cs
+BEETLE_JUICE,BeetleJuice,甲虫汁,Beetle Juice,Rare,CombatOnly,AnyEnemy,Shared,,Potion1Epoch,Y,,减益敌人,100,DamageDecrease=30; Repeat=4,,敌人的攻击在下{Repeat}个回合中造成的伤害减少{DamageDecrease}%。,MegaCrit.Sts2.Core.Models.Potions/BeetleJuice.cs
+BLESSING_OF_THE_FORGE,BlessingOfTheForge,熔炉的祝福,Blessing of the Forge,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,,,在本场战斗中升级你手牌中的所有牌。,MegaCrit.Sts2.Core.Models.Potions/BlessingOfTheForge.cs
+BLOCK_POTION,BlockPotion,格挡药水,Block Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,防御,50,Block=12,Rewards/RewardsSet,获得{Block}点格挡。,MegaCrit.Sts2.Core.Models.Potions/BlockPotion.cs
+BLOOD_POTION,BloodPotion,鲜血药水,Blood Potion,Common,AnyTime,AnyPlayer,角色:Ironclad,Ironclad,Ironclad4Epoch,Y,,生命,50,HealPercent=20,,回复你最大生命值的{HealPercent}%。,MegaCrit.Sts2.Core.Models.Potions/BloodPotion.cs
+BONE_BREW,BoneBrew,骨头酿,Bone Brew,Uncommon,CombatOnly,AnyPlayer,角色:Necrobinder,Necrobinder,Necrobinder4Epoch,Y,,角色资源,75,Summon=15,,召唤{Summon}。,MegaCrit.Sts2.Core.Models.Potions/BoneBrew.cs
+BOTTLED_POTENTIAL,BottledPotential,瓶装潜能,Bottled Potential,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,100,Cards=5,,将你的所有牌洗入你的抽牌堆。抽{Cards}张牌。,MegaCrit.Sts2.Core.Models.Potions/BottledPotential.cs
+CLARITY,Clarity,明晰提取物,Clarity Extract,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,Clarity=3; Cards=1,,抽{Cards}张牌。在你的下{ClarityPower}个回合开始时，额外抽1张牌。,MegaCrit.Sts2.Core.Models.Potions/Clarity.cs
+COLORLESS_POTION,ColorlessPotion,无色药水,Colorless Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,生成卡牌,50,,,从3张随机无色牌中选择1张加入你的手牌。这张牌在本回合可以免费打出。,MegaCrit.Sts2.Core.Models.Potions/ColorlessPotion.cs
+COSMIC_CONCOCTION,CosmicConcoction,宇宙药剂,Cosmic Concoction,Rare,CombatOnly,AnyPlayer,角色:Regent,Regent,Regent4Epoch,Y,,生成卡牌,100,Cards=3,,将{Cards}张升级的无色牌加入你的手牌。,MegaCrit.Sts2.Core.Models.Potions/CosmicConcoction.cs
+CUNNING_POTION,CunningPotion,狡诈药水,Cunning Potion,Uncommon,CombatOnly,AnyPlayer,角色:Silent,Silent,Silent4Epoch,Y,,生成卡牌,75,Cards=3,,将{Cards}张小刀+加入你的手牌。,MegaCrit.Sts2.Core.Models.Potions/CunningPotion.cs
+CURE_ALL,CureAll,痊愈药水,Cure All,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,Energy=1; Cards=2,,获得{Energy:energyIcons()}。抽{Cards}张牌。,MegaCrit.Sts2.Core.Models.Potions/CureAll.cs
+DEPRECATED_POTION,DeprecatedPotion,废弃药水,Deprecated Potion,None,CombatOnly,AnyEnemy,Deprecated,,,Y,,弃用,,,Saves/SaveUtil,这瓶药水已经从游戏中移除。,MegaCrit.Sts2.Core.Models.Potions/DeprecatedPotion.cs
+DEXTERITY_POTION,DexterityPotion,敏捷药水,Dexterity Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,力量/敏捷,50,Dexterity=2,Relics/Cauldron,获得{DexterityPower}点敏捷。,MegaCrit.Sts2.Core.Models.Potions/DexterityPotion.cs
+DISTILLED_CHAOS,DistilledChaos,精炼混沌,Distilled Chaos,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,100,Repeat=3,,打出你抽牌堆顶部的{Repeat}张牌。,MegaCrit.Sts2.Core.Models.Potions/DistilledChaos.cs
+DROPLET_OF_PRECOGNITION,DropletOfPrecognition,预知之滴,Droplet of Precognition,Rare,CombatOnly,AnyPlayer,Shared,,Potion1Epoch,Y,,能量/抽牌/操控,100,,,选择你抽牌堆中的一张牌加入你的手牌。,MegaCrit.Sts2.Core.Models.Potions/DropletOfPrecognition.cs
+DUPLICATOR,Duplicator,复制药水,Duplicator,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,,,本回合，你打出的下一张牌会额外打出一次。,MegaCrit.Sts2.Core.Models.Potions/Duplicator.cs
+ENERGY_POTION,EnergyPotion,能量药水,Energy Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,50,Energy=2,Rewards/RewardsSet,获得{Energy:energyIcons()}。,MegaCrit.Sts2.Core.Models.Potions/EnergyPotion.cs
+ENTROPIC_BREW,EntropicBrew,混沌药水,Entropic Brew,Rare,AnyTime,AnyPlayer,Shared,,,Y,,药水栏,100,,,在所有空药水栏位中获得随机药水。,MegaCrit.Sts2.Core.Models.Potions/EntropicBrew.cs
+ESSENCE_OF_DARKNESS,EssenceOfDarkness,黑暗精华,Essence of Darkness,Rare,CombatOnly,AnyPlayer,角色:Defect,Defect,Defect4Epoch,Y,,角色资源,100,,,生成你充能球栏位数量个黑暗充能球。,MegaCrit.Sts2.Core.Models.Potions/EssenceOfDarkness.cs
+EXPLOSIVE_AMPOULE,ExplosiveAmpoule,爆炸安瓿,Explosive Ampoule,Common,CombatOnly,AllEnemies,Shared,,,Y,,伤害,50,Damage=10,,对所有敌人造成{Damage}点伤害。,MegaCrit.Sts2.Core.Models.Potions/ExplosiveAmpoule.cs
+FAIRY_IN_A_BOTTLE,FairyInABottle,瓶中精灵,Fairy in a Bottle,Rare,Automatic,Self,Shared,,,N,,生命,100,,,当你的生命值将被减少至0或以下时，改为丢弃这瓶药水，然后将你回复到你最大生命值的30%。,MegaCrit.Sts2.Core.Models.Potions/FairyInABottle.cs
+FIRE_POTION,FirePotion,火焰药水,Fire Potion,Common,CombatOnly,AnyEnemy,Shared,,,Y,,伤害,50,Damage=20,Rewards/RewardsSet,造成{Damage}点伤害。,MegaCrit.Sts2.Core.Models.Potions/FirePotion.cs
+FLEX_POTION,FlexPotion,肌肉药水,Flex Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,力量/敏捷,50,Strength=5,Powers/FlexPotionPower|Relics/Cauldron,获得{StrengthPower}点力量。在你的这个回合结束时，失去{StrengthPower}点力量。,MegaCrit.Sts2.Core.Models.Potions/FlexPotion.cs
+FOCUS_POTION,FocusPotion,集中药水,Focus Potion,Common,CombatOnly,AnyPlayer,角色:Defect,Defect,Defect4Epoch,Y,,角色资源,50,Focus=2,,获得{FocusPower}点集中。,MegaCrit.Sts2.Core.Models.Potions/FocusPotion.cs
+FORTIFIER,Fortifier,固化药水,Fortifier,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,防御,75,,,将你的格挡变为三倍。,MegaCrit.Sts2.Core.Models.Potions/Fortifier.cs
+FOUL_POTION,FoulPotion,污浊药水,Foul Potion,Event,AnyTime,动态:战斗中AllEnemies/否则TargetedNoCreature,Event,,,Y,Y,伤害,,Damage=12; Gold=100,Events/PotionCourier,对所有玩家和敌人造成{Damage}点伤害。 也可以投掷给商人换取{Gold}金币。,MegaCrit.Sts2.Core.Models.Potions/FoulPotion.cs
+FRUIT_JUICE,FruitJuice,果汁,Fruit Juice,Rare,AnyTime,AnyPlayer,Shared,,,N,,生命,100,MaxHp=5,,获得{MaxHp}点最大生命值。,MegaCrit.Sts2.Core.Models.Potions/FruitJuice.cs
+FYSH_OIL,FyshOil,异鱼之油,Fysh Oil,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,力量/敏捷,75,Strength=1; Dexterity=1,,获得{StrengthPower}点力量和{DexterityPower}点敏捷。,MegaCrit.Sts2.Core.Models.Potions/FyshOil.cs
+GAMBLERS_BREW,GamblersBrew,赌徒特酿,Gambler's Brew,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,,,丢弃任意张牌，然后抽相同数量的牌。,MegaCrit.Sts2.Core.Models.Potions/GamblersBrew.cs
+GHOST_IN_A_JAR,GhostInAJar,罐装幽灵,Ghost in a Jar,Rare,CombatOnly,AnyPlayer,角色:Silent,Silent,Silent4Epoch,Y,,防御,100,Intangible=1,,获得1层无实体。,MegaCrit.Sts2.Core.Models.Potions/GhostInAJar.cs
+GIGANTIFICATION_POTION,GigantificationPotion,超巨化药水,Gigantification Potion,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,力量/敏捷,100,Gigantification=1,,你打出的下一张攻击牌将会造成三倍伤害。,MegaCrit.Sts2.Core.Models.Potions/GigantificationPotion.cs
+GLOWWATER_POTION,GlowwaterPotion,发光水,Glowwater Potion,Event,CombatOnly,AnyPlayer,Event,,,Y,,能量/抽牌/操控,,Cards=10,Events/DrowningBeacon,消耗你的手牌。抽{Cards}张牌。,MegaCrit.Sts2.Core.Models.Potions/GlowwaterPotion.cs
+HEART_OF_IRON,HeartOfIron,铁心药水,Heart of Iron,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,防御,75,Plating=7,,获得{PlatingPower}层覆甲。,MegaCrit.Sts2.Core.Models.Potions/HeartOfIron.cs
+KINGS_COURAGE,KingsCourage,王之勇气,King's Courage,Uncommon,CombatOnly,AnyPlayer,角色:Regent,Regent,Regent4Epoch,Y,,角色资源,75,Forge=15,,铸造{Forge}。,MegaCrit.Sts2.Core.Models.Potions/KingsCourage.cs
+LIQUID_BRONZE,LiquidBronze,流动铜液,Liquid Bronze,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,防御,75,Thorns=3,,获得{ThornsPower}点荆棘。,MegaCrit.Sts2.Core.Models.Potions/LiquidBronze.cs
+LIQUID_MEMORIES,LiquidMemories,液态记忆,Liquid Memories,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,100,,,将你弃牌堆中的一张牌放入你的手牌。这张牌在本回合可以免费打出。,MegaCrit.Sts2.Core.Models.Potions/LiquidMemories.cs
+LUCKY_TONIC,LuckyTonic,幸运补剂,Lucky Tonic,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,防御,100,Buffer=1,,获得{BufferPower}层缓冲。,MegaCrit.Sts2.Core.Models.Potions/LuckyTonic.cs
+MAZALETHS_GIFT,MazalethsGift,马萨雷斯的赠礼,Mazaleth's Gift,Rare,CombatOnly,AnyPlayer,Shared,,Potion1Epoch,Y,,力量/敏捷,100,Ritual=1,,获得{RitualPower}层仪式。,MegaCrit.Sts2.Core.Models.Potions/MazalethsGift.cs
+OROBIC_ACID,OrobicAcid,欧洛巴斯之酸,Orobic Acid,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,生成卡牌,100,,,往你的手牌中加入一张随机攻击牌、一张随机技能牌和一张随机能力牌。这些牌在本回合免费。,MegaCrit.Sts2.Core.Models.Potions/OrobicAcid.cs
+POISON_POTION,PoisonPotion,毒药水,Poison Potion,Common,CombatOnly,AnyEnemy,角色:Silent,Silent,Silent4Epoch,Y,,伤害,50,Poison=6,Cards/BouncingFlask,给予{PoisonPower}层中毒。,MegaCrit.Sts2.Core.Models.Potions/PoisonPotion.cs
+POT_OF_GHOULS,PotOfGhouls,尸鬼瓮,Pot of Ghouls,Rare,CombatOnly,AnyPlayer,角色:Necrobinder,Necrobinder,Necrobinder4Epoch,Y,,生成卡牌,100,Cards=2,,将{Cards}张灵魂加入你的手牌。,MegaCrit.Sts2.Core.Models.Potions/PotOfGhouls.cs
+POTION_OF_BINDING,PotionOfBinding,缚魂药水,Potion of Binding,Uncommon,CombatOnly,AllEnemies,Shared,,,Y,,减益敌人,75,Vulnerable=1; Weak=1,,给予所有敌人{WeakPower:diff()}层虚弱和{VulnerablePower:diff()}层易伤。,MegaCrit.Sts2.Core.Models.Potions/PotionOfBinding.cs
+POTION_OF_CAPACITY,PotionOfCapacity,扩容药水,Potion of Capacity,Uncommon,CombatOnly,AnyPlayer,角色:Defect,Defect,Defect4Epoch,Y,,角色资源,75,Repeat=2,,获得{Repeat}个充能球栏位。,MegaCrit.Sts2.Core.Models.Potions/PotionOfCapacity.cs
+POTION_OF_DOOM,PotionOfDoom,灾厄药水,Potion of Doom,Common,CombatOnly,AnyEnemy,角色:Necrobinder,Necrobinder,Necrobinder4Epoch,Y,,伤害,50,Doom=33,,给予{DoomPower}层灾厄。,MegaCrit.Sts2.Core.Models.Potions/PotionOfDoom.cs
+POTION_SHAPED_ROCK,PotionShapedRock,药水形状的石头,Potion-Shaped Rock,Token,CombatOnly,AnyEnemy,Token,,,Y,,伤害,,Damage=15,Relics/PetrifiedToad,造成{Damage}点伤害。,MegaCrit.Sts2.Core.Models.Potions/PotionShapedRock.cs
+POWDERED_DEMISE,PowderedDemise,消亡粉末,Powdered Demise,Uncommon,CombatOnly,AnyEnemy,Shared,,Potion2Epoch,Y,,伤害,75,Demise=9,,敌人在自身的每个回合结束时，失去{Demise}点生命。,MegaCrit.Sts2.Core.Models.Potions/PowderedDemise.cs
+POWER_POTION,PowerPotion,能力药水,Power Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,生成卡牌,50,,,从3张随机能力牌中选择1张加入你的手牌。这张牌在本回合可以免费打出。,MegaCrit.Sts2.Core.Models.Potions/PowerPotion.cs
+RADIANT_TINCTURE,RadiantTincture,明耀酊剂,Radiant Tincture,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,Energy=1; Radiance=3,,获得{Energy:energyIcons()}。在你的下{RadiancePower}个回合开始时，额外获得{energyPrefix:energyIcons(1)}。,MegaCrit.Sts2.Core.Models.Potions/RadiantTincture.cs
+REGEN_POTION,RegenPotion,再生药水,Regen Potion,Uncommon,CombatOnly,AnyPlayer,Shared,,,N,,生命,75,Regen=5,,获得{RegenPower}层再生。,MegaCrit.Sts2.Core.Models.Potions/RegenPotion.cs
+SHACKLING_POTION,ShacklingPotion,镣铐药水,Shackling Potion,Rare,CombatOnly,AllEnemies,Shared,,,Y,,减益敌人,100,Strength=7,Powers/ShacklingPotionPower,所有敌人在这个回合失去{StrengthPower}点力量。,MegaCrit.Sts2.Core.Models.Potions/ShacklingPotion.cs
+SHIP_IN_A_BOTTLE,ShipInABottle,瓶中船,Ship in a Bottle,Rare,CombatOnly,AnyPlayer,Shared,,Potion2Epoch,Y,,防御,100,Block=10,,获得{Block:diff()}点格挡。在下个回合开始时获得{Block:diff()}点格挡。,MegaCrit.Sts2.Core.Models.Potions/ShipInABottle.cs
+SKILL_POTION,SkillPotion,技能药水,Skill Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,生成卡牌,50,,,从3张随机技能牌中选择1张加入你的手牌。这张牌在本回合可以免费打出。,MegaCrit.Sts2.Core.Models.Potions/SkillPotion.cs
+SNECKO_OIL,SneckoOil,异蛇之油,Snecko Oil,Rare,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,100,Cards=7,,抽{Cards}张牌。在本回合随机化你手牌中所有牌的耗能。,MegaCrit.Sts2.Core.Models.Potions/SneckoOil.cs
+SOLDIERS_STEW,SoldiersStew,士兵炖汤,Soldier's Stew,Rare,CombatOnly,AnyPlayer,角色:Ironclad,Ironclad,Ironclad4Epoch,Y,,角色资源,100,,,在本场战斗中，所有名字中有“打击”的牌获得重放：1。,MegaCrit.Sts2.Core.Models.Potions/SoldiersStew.cs
+SPEED_POTION,SpeedPotion,速度药水,Speed Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,力量/敏捷,50,Dexterity=5,Powers/SpeedPotionPower,获得{DexterityPower}点敏捷。在你的这个回合结束时，失去{DexterityPower}点敏捷。,MegaCrit.Sts2.Core.Models.Potions/SpeedPotion.cs
+STABLE_SERUM,StableSerum,稳定血清,Stable Serum,Uncommon,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,75,Repeat=2,,保留你的手牌{Repeat}回合。,MegaCrit.Sts2.Core.Models.Potions/StableSerum.cs
+STAR_POTION,StarPotion,星星药水,Star Potion,Common,CombatOnly,AnyPlayer,角色:Regent,Regent,Regent4Epoch,Y,,角色资源,50,Stars=3,,获得{Stars:starIcons()}。,MegaCrit.Sts2.Core.Models.Potions/StarPotion.cs
+STRENGTH_POTION,StrengthPotion,力量药水,Strength Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,力量/敏捷,50,Strength=2,Relics/Cauldron|Rewards/RewardsSet,获得{StrengthPower}点力量。,MegaCrit.Sts2.Core.Models.Potions/StrengthPotion.cs
+SWIFT_POTION,SwiftPotion,迅捷药水,Swift Potion,Common,CombatOnly,AnyPlayer,Shared,,,Y,,能量/抽牌/操控,50,Cards=3,,抽{Cards}张牌。,MegaCrit.Sts2.Core.Models.Potions/SwiftPotion.cs
+TOUCH_OF_INSANITY,TouchOfInsanity,癫狂之触,Touch of Insanity,Uncommon,CombatOnly,AnyPlayer,Shared,,Potion2Epoch,Y,,能量/抽牌/操控,75,,,选择你手牌中的一张牌，使其在本场战斗可以免费打出。,MegaCrit.Sts2.Core.Models.Potions/TouchOfInsanity.cs
+VULNERABLE_POTION,VulnerablePotion,易伤药水,Vulnerable Potion,Common,CombatOnly,AnyEnemy,Shared,,,Y,,减益敌人,50,Vulnerable=3,Relics/Cauldron,给予{VulnerablePower}层易伤。,MegaCrit.Sts2.Core.Models.Potions/VulnerablePotion.cs
+WEAK_POTION,WeakPotion,虚弱药水,Weak Potion,Common,CombatOnly,AnyEnemy,Shared,,,Y,,减益敌人,50,Weak=3,Relics/Cauldron,给予{WeakPower}层虚弱。,MegaCrit.Sts2.Core.Models.Potions/WeakPotion.cs

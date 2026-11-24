@@ -1,0 +1,10 @@
+[
+  {
+    "file": "sections/05_map_economy_events.md",
+    "fix_old": "- 每名玩家有一个按稀有度分组、开局洗好的遗物袋（宝箱房用全队共享的那一份）；**精英、宝箱、事件从队头抽，商店从队尾抽**（`RelicFactory.PullNextRelicFromFront/Back`；`TreasureRoomRelicSynchronizer.cs:BeginRelicPicking`）。",
+    "fix_new": "- 每名玩家有一个按稀有度分组、开局洗好的遗物袋：**精英、事件从队头抽，商店从队尾抽**（`RelicFactory.PullNextRelicFromFront/Back`）。**宝箱房不用个人袋**，单人局也一样，一律从全局的 `SharedRelicGrabBag` 队头抽；这个袋只装共享池里已解锁的遗物，所以宝箱开不出角色专属遗物和 Shop 档（`TreasureRoomRelicSynchronizer.cs:108`，第 3 章核查）。",
+    "severity": "error",
+    "reason": "宝箱房走全局共享袋，不是个人袋；单人局也如此",
+    "evidence": "TreasureRoomRelicSynchronizer.cs:108 `_sharedGrabBag.PullFromFront(rarity, runState)`；主笔复核"
+  }
+]

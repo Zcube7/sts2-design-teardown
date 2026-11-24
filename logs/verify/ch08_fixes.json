@@ -1,0 +1,290 @@
+[
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "储君（Regent）的「引力 Gravity」机制在 2024-05 开始淘汰，引力能力的代码至今还留在包里，但已经没有任何引用。",
+    "fix_new": "储君（Regent）的「引力 Gravity」机制在 2024-05 开始淘汰；包里那个零引用的 `GravityPower` 其实是后来引力井 Gravity Well 卡给玩家的本回合增益（2024-11 重做，2025-12 随卡弃用后成了死件），不是 2024-05 那套引力机制的残留。",
+    "severity": "error",
+    "reason": "把零引用的 GravityPower 当成 2024-05 被淘汰的储君引力机制的遗留；它其实是引力井卡的增益能力，2025 年还在改，2025-12 随卡弃用",
+    "evidence": "MegaCrit.Sts2.Core.Models.Powers/GravityPower.cs:18-22 注释「avoid applying extra damage on multiple plays of Gravity Well」，Type => PowerType.Buff；PN 2024_11_21:74「Reworked Gravity Well card」；PN 2025_01_23:109「Gravity power now specifies that it wears off at the end of your turn」；PN 2025_03_13:7「Gravity Power now does damage instead of HP Loss」；PN 2025_07_17:124「Gravity now counts as a buff for the player」；PN 2025_12_11:44-50 Regent 弃用 Gravity Well"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "储君的「引力」被淘汰，引力能力类还在包里，但已经**没有任何引用**（见 6.3）。",
+    "fix_new": "储君的「引力」机制 2024-05 起被淘汰；包里零引用的 `GravityPower` 是引力井 Gravity Well 卡的增益能力，引力井在 `PN 2025_12_11` 弃用后它才成了死件（见 6.3）。",
+    "severity": "error",
+    "reason": "同上：GravityPower 不是 2024-05 引力机制的残留，而是引力井卡（2025-12 弃用）的能力",
+    "evidence": "GravityPower.cs:18-22 注释提到 Gravity Well；PN 2025_07_10:133「Gravity Well card's power no longer triggers when a teammate plays a card」；PN 2025_07_17:105「Fixed Gravity Well power description」；PN 2025_12_11:50 弃用 Gravity Well"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| `GravityPower` 引力 | 「本回合每打出一张牌，对所有敌人造成 2 点伤害」 | 储君的引力机制，2024-05 开始淘汰（`PN 2024_05_04`），引力井 2025-12 被删（`PN 2025_12_11`） |",
+    "fix_new": "| `GravityPower` 引力 | 「本回合每打出一张牌，对所有敌人造成 2 点伤害」，玩家增益 | 引力井 Gravity Well 卡打出后给的能力（类注释提到 Gravity Well；`PN 2025_01_23`「wears off at the end of your turn」、`PN 2025_07_17`「Gravity now counts as a buff for the player」），引力井 2025-12 被删（`PN 2025_12_11`）后成为死件。和 2024-05 开始淘汰的那套引力机制（`PN 2024_05_04`）不是一回事 |",
+    "severity": "error",
+    "reason": "表格把 GravityPower 归因为 2024-05 淘汰的储君引力机制，实际是引力井卡的增益能力",
+    "evidence": "GravityPower.cs:18-22、:26（PowerType.Buff）、:54-59（己方回合结束移除）；PN 2025_01_23:109、PN 2025_07_17:105/124、PN 2025_12_11:50"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "引入召唤 X 和魂 Souls，一次弃用 30 多张卡（`PN 2024_11_01`）",
+    "fix_new": "引入召唤 X 和魂 Souls，一次弃用 21 张亡灵卡（`PN 2024_11_01`）",
+    "severity": "error",
+    "reason": "2024-11-01 弃用的亡灵卡是 21 张，不是 30 多张（同补丁另弃 2 张储君卡，合计也只有 23）",
+    "evidence": "PN 2024_11_01:12「Deprecated cards: Carve Soul, Ghost Eater, Morph Form, Barbs, Better Than Ever, Big Hand, Binding Chains, Blood Dividend, Caged Rage, Chain Punch, Dark Siphon, Death Grip, Dragged Prey, Encase, For My Own Good, Loyalty, One-Inch Punch, Twist Soul, Heel, Grab, Enfeebling Touch」共 21 个；:20 储君另弃 Hypernova、King's Gambit"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "**设计观察**：五个角色里有三个经历过「锁起来回炉」。官方在内测期允许角色在相当长的时间里不可玩，比如 Defect 从 2024-07 锁到 2025-04，接近 9 个月；",
+    "fix_new": "**设计观察**：五个角色里有两个经历过「锁起来回炉」：亡灵契约师两次（`PN 2023_08_04`「这一版先休息」、`PN 2024_07_12` 起锁到 `PN 2024_11_01`），Defect 一次。官方在内测期允许角色在相当长的时间里不可玩，比如 Defect 从 2024-07-12 锁到 2025-04-25，9 个多月；",
+    "severity": "overclaim",
+    "reason": "补丁里被锁 / 暂停的只有亡灵契约师和 Defect 两个角色，找不到第三个；Defect 被锁 287 天，超过 9 个月而不是接近 9 个月",
+    "evidence": "PN 2023_08_04:7「The Necrobinder is taking a break this build」；PN 2024_07_12:80「Added some logic to lock Necrobinder and Defect for now」；PN 2024_11_01:4「The Necrobinder is back」；PN 2025_04_25:4「The Defect is playable again!」。全量 grep 铁甲/静默/储君没有 lock/unavailable/is back 类记录"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "另外，「回退」这个动作只在 EA 后出现（5 次），比如幻象 Mirage 和创世之柱 Pillar of Creation「恢复到 0.109.0 之前的版本」（`PN 2026_07_30`）。这说明上线后改坏了就退，不再像内测期那样硬着头皮继续改。",
+    "fix_new": "另外，EA 后以 Reverted 开头的「回退」条目有 5 次，比如幻象 Mirage 和创世之柱 Pillar of Creation「恢复到 0.109.0 之前的版本」（`PN 2026_07_30`）。但内测期也有回退：Entrench「reverted to its previous version」（`PN 2024_10_10`，即上表 P2 那 1 次）、Grand Finale 卡池「changed back」（`PN 2025_04_25`）、Blade of Ink 改名又改回（`PN 2026_01_01`）、Golden Pearl「changed back」（`PN 2026_01_22`）。EA 后回退更常见、写得更明，但不是「只在 EA 后出现」。",
+    "severity": "error",
+    "reason": "与本节自己的表格矛盾（P2 回退 = 1），且内测期还有多处改回原版的记录",
+    "evidence": "data/csv/ch08_patch_notes_entries.csv action=REVERT：2024-10-10 Entrench 一条在 P2；PN 2024_10_10:33、PN 2025_04_25:41、PN 2026_01_01:13、PN 2026_01_22:59"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "只有一次例外：上线后第一个大补丁以压制无限连为主（`PN 2026_03_19`，加强 37 条，削弱 25 条），即便那次加强也多于削弱。",
+    "fix_new": "上线后第一个大补丁以压制无限连为主（`PN 2026_03_19`，加强 37 条，削弱 25 条），加强仍多于削弱；EA 后唯一一份削弱多于加强的是 `PN 2026_04_09`（加强 2、削弱 4）。",
+    "severity": "minor",
+    "reason": "原句说「唯一例外」又说那次加强多于削弱，自相矛盾；真正削弱多于加强的是 2026-04-09",
+    "evidence": "data/csv/ch08_patch_timeline.csv：2026-03-19 a_BUFF=37 a_NERF=25；2026-04-09 a_BUFF=2 a_NERF=4；2026-04-26 5/5；其余 EA 补丁均加强 ≥ 削弱"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "**补丁里明确写着 Deprecated 的卡约 130 张**（启发式拆分，误差约 ±10），而当前卡池是 596 张。",
+    "fix_new": "**补丁里明确写着 Deprecated / Removed 的卡名约 170 个**（启发式拆分，两种独立抽法分别得 172、174 个；其中约 15 个后来以同名回归，如 Expertise、Chill、Barrage、Juggernaut、Dual Wield、Entrench、Caltrops，净删约 155 张），而当前卡池是 596 张。",
+    "severity": "error",
+    "reason": "约 130（±10）的数字无脚本可复现，独立重算明显更多",
+    "evidence": "方法 1：逐行扫非合集英文补丁，「Deprecated/Removed … card(s)」行与其后的列表项，去掉 option/choice/hovertip/rarity 等噪声 → 174 个卡名，其中 14 个在 data/csv/cards.csv 有同名现役模型；方法 2：ch08_patch_notes_entries.csv 中 action=DEPRECATE、子类为角色或文本含 card 的 98 条拆名 → 172 个。单 PN 2024_11_01 就有 21+2 张，PN 2025_02_13 13 张，PN 2025_12_11 10 张。核查员临时脚本（未入库）"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "596 张卡（加上被删的约 130 张）几乎张张都动过",
+    "fix_new": "596 张卡（加上被删的约 155 张）几乎张张都动过",
+    "severity": "error",
+    "reason": "被删卡数应为约 155（明确弃用约 170 个卡名，减去同名回归的约 15 个）",
+    "evidence": "同上一条的两种重算"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "约 130 张卡被删，一个 Boss 位换了 3 任",
+    "fix_new": "约 155 张卡被删，一个 Boss 位换了 3 任",
+    "severity": "error",
+    "reason": "同上，被删卡数偏低",
+    "evidence": "同上"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "**改名一共 174 次，57% 集中在 2025-12 到 2026-02**",
+    "fix_new": "**改名约 250 次（252），约 46% 集中在 2025-12 到 2026-02**（另一波高峰是 2025-08，42 次）",
+    "severity": "error",
+    "reason": "原脚本漏抓了大量「Renamed the following …:」列表项，174 偏低，集中度 57% 偏高",
+    "evidence": "原脚本切条目时把列表在「Used Notepad -> Stone Cracker」这类以 -ed 结尾的项处切断，后续项都没进改名表：PN 2025_08_14:220-248 有 28 个遗物改名，原表只有 11 个；PN 2025_05_15 药水改名列表 15 个，原表 2025-05 只有 5 个。已修 scripts/ch08_patch_notes.py（新增 extract_rename_lists 按原文补抓，其余 CSV 不变）并重跑：252 条，2025-12/2026-01/2026-02 = 27/59/29 = 115（45.6%），2025-08 = 42。另一种独立数法（逐行扫原文）得 258 个去重对，结论一致"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "- 改名表：`ch08_patch_renames.csv` 一共 174 条。按月统计：2026-01 有 51 条，2026-02 有 27 条，2025-12 有 22 条，2025-08 有 21 条，2025-09 有 14 条。",
+    "fix_new": "- 改名表：`ch08_patch_renames.csv` 一共 252 条（核查时补抓了原脚本漏掉的「Renamed the following …:」列表项，原为 174）。按月统计：2026-01 有 59 条，2025-08 有 42 条，2026-02 有 29 条，2025-12 有 27 条，2025-05 有 21 条，2025-09 有 18 条；EA 后只有 3 条。",
+    "severity": "error",
+    "reason": "改名表漏抓约 80 条，按月分布随之改变（2025-08 实为第二高峰）",
+    "evidence": "重跑后的 data/csv/ch08_patch_renames.csv（252 行）按 date 前 7 位计数；2026-01-15 一份 45 条（42 个遗物 + 3 条单行改名）"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "二代把改名集中在 EA 前 3 个月，导致短期内大量重名、连锁改名",
+    "fix_new": "二代的改名有近一半集中在 EA 前 3 个月（2025-12～2026-02，115/252），另一波在 2025-05～09（约 80 条），导致短期内大量重名、连锁改名",
+    "severity": "overclaim",
+    "reason": "按补全后的改名表，EA 前 3 个月约占 46%，2025 年中还有一波同量级的改名",
+    "evidence": "重跑后的 ch08_patch_renames.csv：2025-05 21、2025-06 6、2025-07 5、2025-08 42、2025-09 18"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| `data/csv/ch08_patch_renames.csv` | 174 条改名（旧名 → 新名，新名是否在当前本地化里） |",
+    "fix_new": "| `data/csv/ch08_patch_renames.csv` | 252 条改名（旧名 → 新名，新名是否在当前本地化里；pattern=list/line 为核查时按原文补抓的） |",
+    "severity": "minor",
+    "reason": "改名表重跑后为 252 行",
+    "evidence": "scripts/ch08_patch_notes.py 重跑输出「renames from entries 174 + raw-list supplement 78」"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "HP 100/200/300，各 3 个招式，开场获得人工制品 | **补丁说明里一次都没出现过**；美术只有 `images/monsters/the_adversary_placeholder.png` 占位图；本地化和图鉴文本是齐的（`localization/eng/monsters.json:397-`）。**推断**：这是还没上线的内容，「Mk 1→3」像是随进程升级的同一个对手 |",
+    "fix_new": "HP 100/200/300，各 3 个招式，开场获得 0/1/2 层人工制品 | 补丁说明里出现过两次：`PN 2025_11_20`「Nerfed Adversary: Artifact decreased from 1/2/3 -> 0/1/2」（和当前代码一致，说明内测服上打得到过），`PN 2026_01_08`「Adjusted placeholder Adversary assets」；美术只有 `images/monsters/the_adversary_placeholder.png` 占位图；本地化里名字和招式名齐全（`localization/eng/monsters.json:397-408`；`bestiary.json` 只有通用界面文本，没有逐怪条目）。**推断**：内测服上出现过、当前没接入任何遭遇，是待上线还是已砍无法判断；「Mk 1→3」像是随进程升级的同一个对手 |",
+    "severity": "error",
+    "reason": "「补丁说明里一次都没出现过」与原文不符；Mk1 开场人工制品是 0 层；bestiary.json 没有逐怪文本",
+    "evidence": "PN 2025_11_20:101-102（Enemies 段）「Nerfed Adversary: Artifact decreased from 1/2/3 -> 0/1/2」；PN 2026_01_08:99；TheAdversaryMkOne.cs:32 Apply<ArtifactPower>(…0m…)、MkTwo.cs:36 1m、MkThree.cs:34 2m；bestiary.json 共 19 行，均为 ACTIONS/LOCKED/STATS 等通用 key"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| 徽章 `WHOMPER`、`FAVORITE_CARD` 只有本地化文本 | `localization/eng/badges.json`（第 6 章发现；本章只复核到 key 存在） | 徽章系统还在扩充（`PN 2026_04_26` 刚新增 3 个） |",
+    "fix_new": "| 徽章 `FAVORITE_CARD` 只有本地化文本；`WHOMPER` 有类 `Whomper`，但注释写着「THIS BADGE IS CURRENTLY NOT IN USE」「DESIGN NOTE: Not a great badge because it overvalues a specific archetype」，`IsObtained()` 恒为 false，也不在 `BadgePool` 的 23 个徽章里 | `localization/eng/badges.json`；`MegaCrit.Sts2.Core.Models.Badges/Whomper.cs:5-28`、`BadgePool.cs:10-34` | Whomper 是设计上被否掉的徽章（死件），不是「还没做」；FAVORITE_CARD **推断**是待做的徽章 |",
+    "severity": "error",
+    "reason": "WHOMPER 不是「只有本地化文本」，代码里有类且明确标注弃用和弃用理由",
+    "evidence": "Whomper.cs:5-9「THIS BADGE IS CURRENTLY NOT IN USE / Deal more than 100 damage with a single card. / DESIGN NOTE: Not a great badge because it overvalues a specific archetype.」，:26-29 IsObtained() return false；BadgePool.cs:10 new Badge[23] 列表里没有 Whomper；全 .cs 无其它引用"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "被砍内容真正的证据在三处：本地化残留、图集孤儿子图、没有任何引用的类（4 个能力、1 个遭遇、对手 1～3 型 The Adversary 三只怪）。",
+    "fix_new": "被砍内容真正的证据在三处：本地化残留、图集孤儿子图、没有任何引用的类（4 个能力、1 个遭遇、对手 1～3 型 The Adversary 三只怪，外加注释标明「NOT IN USE」的徽章 `Whomper`）。",
+    "severity": "minor",
+    "reason": "按同一方法扫全部 Models.* 目录，还有一个零引用的内容类 Whomper 徽章",
+    "evidence": "对 Models.* 全部子目录做标识符交叉引用（排除自身与 AbstractModelSubtypes.cs）：Badges 下 Whomper 零引用（Achievements 下 9 个零引用类由 ModelDb 反射收集，不算死件）"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| `epochs.json:71-118` | 每个角色还有两档纪元没做 |",
+    "fix_new": "| `epochs.json:67-249`（TODO 分散在 67-74、87-90、111-118、145-152、194-201、242-249） | 每个角色还有两档纪元没做 |",
+    "severity": "citation",
+    "reason": "71-118 只覆盖 Defect9/Event4/Ironclad8-9，Necrobinder/Regent/Silent 的 TODO 在 145-249 行",
+    "evidence": "grep -n TODO localization/eng/epochs.json：67-74 DEFECT8/9，87-90 EVENT4，111-118 IRONCLAD8/9，145-152 NECROBINDER8/9，194-201 REGENT8/9，242-249 SILENT8/9，共 44 行 = 11 个 key × 4"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "也就是说，StS2 前 8 个月是在 Unity 上做的，后来整体迁到了 Godot。",
+    "fix_new": "也就是说，现存补丁覆盖的前 7 个月（2023-02～09）是 Unity 版，之后整体迁到了 Godot。开发并不始于 2023-02：最早一份补丁已经在修内部工单（`#STS-49xx`），还说「年初以来一直在做大规模架构迁移」。",
+    "severity": "overclaim",
+    "reason": "「StS2 前 8 个月」把补丁起点当成开发起点；补丁覆盖的 Unity 期是 2023-02-09～09-15，约 7 个月",
+    "evidence": "PN 2023_02_09:1「This is the oldest patch notes pasted in our internal playtest server」，:17-21 已有 #STS-4935/4969/4975 工单与单元测试，:45「a pretty major architecture migration since the start of the year」"
+  },
+  {
+    "file": "report.md",
+    "fix_old": "**前 8 个月用 Unity 做，2024 年 4 月换成 Godot。**",
+    "fix_new": "**现存补丁的前 7 个月（2023-02～09）是 Unity 版，2024 年 4 月起换成 Godot。**",
+    "severity": "overclaim",
+    "reason": "同第 08 章 0.2：补丁起点不是开发起点，Unity 期补丁约 7 个月",
+    "evidence": "PN 2023_02_09:1、:45；PN 2023_09_15:4；PN 2024_04_12:23"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "- 读者：2025 年以前是写给**内测玩家**看的（「Hey playtesters」），2026-03 之后写给公众（「Hey Slayers」）。",
+    "fix_new": "- 读者：EA（2026-03）以前是写给**内测玩家**看的（「Hey playtesters」，最晚见于 `PN 2025_11_06`），2026-03 之后写给公众（「Hey Slayers」）。",
+    "severity": "minor",
+    "reason": "「Hey playtesters / Greetings, playtesters」一直用到 2025-10/11，不是 2025 年以前",
+    "evidence": "PN 2025_10_30:1「Hey playtesters」；PN 2025_11_06:1「Greetings, playtesters!」；PN 2026_02_26:1「Thank you to all of our playtesters」"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "2025 年以后实体名都加了 `[b]…[/b]`",
+    "fix_new": "2026-01-22 起实体名都加了 `[b]…[/b]`",
+    "severity": "minor",
+    "reason": "2025 年全部补丁的列表项都没有 [b] 加粗实体名，加粗从 2026-01-22 开始",
+    "evidence": "逐份统计以「- 」开头且含 [b] 的行：2025_01_09～2026_01_15 全为 0，2026_01_22 为 22，2026_01_29 为 79"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "事件文本重写（`PN 2025_08_14` 的 WRITING 段有 90 条）加上第一轮改名潮。",
+    "fix_new": "`PN 2025_08_14` 的 WRITING 段原文 90 行（脚本合并列表后计 39 条），内容是卡 / 药水 / 遗物措辞修订、对话调整和 28 个遗物改名；再加上 9 月的事件重写（`PN 2025_09_25` 导语）。",
+    "severity": "minor",
+    "reason": "2025-08-14 的 WRITING 段不是事件文本重写；90 是原文行数，和表里按脚本条目计的 134 不是同一口径",
+    "evidence": "PN 2025_08_14:157-249：Improved wording for cards/potions/relics、Updated dialogue…、Renamed the following relics（28 个）；ch08_patch_notes_entries.csv 中该文件 WORDING 39 条；PN 2025_09_25:1「still churning our way through event updates and rewrites」"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| 14 | 君王之剑 Sovereign Blade | 卡 | 29 | 7 | 3 | 12 | 24 | 2024-06 → 2026-05 |",
+    "fix_new": "| 14 | 君王之剑 Sovereign Blade | 卡 | 30 | 7 | 3 | 13 | 24 | 2024-06 → 2026-05 |",
+    "severity": "minor",
+    "reason": "与本章自己的 ch08_patch_top_entities.csv 不符",
+    "evidence": "ch08_patch_top_entities.csv（原版与重跑版一致）：Sovereign Blade,card,…,mentions_all=30,mentions_balance=7,balance_as_subject=3,mentions_bugfix=13,n_patches=24"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "君王之剑 12 / 7；",
+    "fix_new": "君王之剑 13 / 7；",
+    "severity": "minor",
+    "reason": "君王之剑修 Bug 提及为 13",
+    "evidence": "同上"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "**仍在使用**：游戏代码里有 60 多处 `NDebugAudioManager.Instance.Play(...)`",
+    "fix_new": "**仍在使用**：游戏代码里有 54 处 `NDebugAudioManager.Instance(?).Play(...)`（连同 Stop 和音量设置共 61 处引用，分布在 36 个文件）",
+    "severity": "minor",
+    "reason": "Play 调用是 54 处，61 是包括 Stop/SetVolume 在内的全部引用",
+    "evidence": "grep NDebugAudioManager.Instance：.Play 15 + ?.Play 39 = 54；.Stop 2、?.StopAll 2、?.SetSfxAudioVolume 2、?.SetMasterAudioVolume 1；共 61 处、36 个文件"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "由 `TmpSfx` 统一列出（`MegaCrit.Sts2.Core.Audio.Debug/TmpSfx.cs:9-15`），用途见 6.5。",
+    "fix_new": "`TmpSfx.assetPaths` 只列了其中 29 个（`MegaCrit.Sts2.Core.Audio.Debug/TmpSfx.cs:9-15`），充能球的 `<球id>_channel/passive/evoke.mp3` 由 `MegaCrit.Sts2.Core.Models/OrbModel.cs:73-77` 按 id 拼名，用途见 6.5。",
+    "severity": "minor",
+    "reason": "TmpSfx 列表只有 29 项（6.5 自己也这么写），并非统一列出全部 52 个文件",
+    "evidence": "TmpSfx.cs:9-15 assetPaths 24 项 + BattleStart 2 + PotionSlosh 3 = 29；OrbModel.cs:73-77 DebugPassiveSfx/DebugEvokeSfx/DebugChannelSfx = Id.Entry 小写 + _passive/_evoke/_channel.mp3"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "调试 `debug/` 6 个。",
+    "fix_new": "调试 `debug/` 7 个。",
+    "severity": "minor",
+    "reason": "shaders/vfx/debug/ 下是 7 个 .gdshader",
+    "evidence": "ch08_shaders.csv：debug_ancient_card_border_overlay、debug_flipbook_shader、debug_laser、debug_laser_line_test、debug_particle_pivot_offset、debug_perspective_shader、debug_spotlight_shader"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| 着色器（`.gdshader` 90 + `.gdshaderinc` 7 + 着色器 `.tres` 21）、材质 162、主题 34 |",
+    "fix_new": "| 着色器（`shaders/` 下 `.gdshader` 90 + `.gdshaderinc` 7 + `.tres` 20 + 1 个 `.gdc` 脚本；另有 10 个 `.gdshader` 在 `scenes/`、`materials/` 下，计入场景 / 材质类，所以 7.7 全包是 100 个）、材质 162、主题 34 |",
+    "severity": "minor",
+    "reason": "和 7.7 的 100/7/20 不一致，需注明口径；21 里有 1 个是 ShaderGenerator.gdc 而不是 .tres",
+    "evidence": "pck_index.csv 中 shaders/ 前缀：.gdshader 90、.gdshaderinc 7、.tres 20、.gdc 1（shaders/blur/ShaderGenerator.gdc）；ch08_shaders.csv 另有 10 个 .gdshader 不在 shaders/ 下（如 scenes/combat/doom_bar.gdshader）"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "Blessed Antlers 后来改成古神遗物，见 `PN 2026_01_01`",
+    "fix_new": "Blessed Antlers 后来成了诺奴佩普的祝福遗物（最晚见于 `PN 2025_08_21`「Nonupeipe's Blessed Antlers blessing」），`PN 2026_01_01` 又重做了一次",
+    "severity": "citation",
+    "reason": "PN 2026_01_01 只写「Reworked Blessed Antlers」，变成古神遗物的证据更早",
+    "evidence": "PN 2025_08_21:45「Buffed Nonupeipe's Blessed Antlers blessing」；PN 2025_09_18:127「Nerfed Nonupeipe's Blessed Antlers relic」；PN 2026_01_01:39「Reworked Blessed Antlers」"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "囤积者 Hoarder，后来的达弗 Darv（`PN 2024_05_31`）",
+    "fix_new": "囤积者 Hoarder（`PN 2024_05_31`；**推断**就是后来的达弗 Darv，补丁里没有这条改名记录，Darv 从 `PN 2024_11_01` 起才出现）",
+    "severity": "overclaim",
+    "reason": "Hoarder → Darv 的改名在补丁里查不到，只能是推断",
+    "evidence": "全量 grep：hoarder 最后见于 PN 2024_08_23:106；darv 最早见于 PN 2024_11_01:118；两者之间无 rename 记录"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "一代遗物大多是在 2024-05 到 2025-11 之间陆续回归的，用来填新系统（比如时间线解锁池）留下的空位：`PN 2025_07_31` 导语写着「解锁机制暴露出我们需要更多内容」，所以那次一口气补了 17 个遗物和 4 瓶药水。",
+    "fix_new": "一代遗物大多是在 2024-05 到 2025-11 之间陆续回归的。**推断**其中一部分是用来填新系统（比如时间线解锁池）留下的空位：`PN 2025_07_31` 导语写着「解锁机制暴露出我们需要更多内容」，那次一口气补了 17 个遗物和 4 瓶药水，但其中只有铜钹 Tingsha 一个是一代回归（上面的遗物清单也漏了它），其余都是新遗物。",
+    "severity": "overclaim",
+    "reason": "拿以新遗物为主的一批补充当一代遗物填空位的证据，且未标推断；清单漏了 Tingsha",
+    "evidence": "PN 2025_07_31:1 导语；:16-56 新增遗物 Seethe、Helical Dart、Soup Recipe、Lidar、Metronome、Big Hat、Bookmark、Mini Regent、Orange Dough、Amethyst Aubergine、Bread、Burning Sticks、Light Bulb、Mystic Lighter、Little Ghost、Tuning Fork，唯一一代回归是 :21「Added returning relic from StS1, Tingsha」"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "| 能力 | 29 | 多数是被删卡留下的能力",
+    "fix_new": "| 能力 | 30 | 多数是被删卡留下的能力",
+    "severity": "minor",
+    "reason": "powers.json 中无类的 id 共 33 个，去掉仍被代码按字符串引用的 3 个 TEMPORARY_*_DOWN 后是 30",
+    "evidence": "powers.json id 减 data/csv/powers.csv id（排除 MOCK_）= 33；其中 TEMPORARY_DEXTERITY_DOWN/FOCUS_DOWN/STRENGTH_DOWN 各有 1 个 .cs 字符串引用；其余 30 个（含 VISUAL_ONLY、TORN、UNSTABLE、UNSTEADY、INKED、GRABBED 等）在 .cs/.tscn/.tres 中都无引用"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "开局祝福（涅奥）和 Boss 的调整频次是普通卡的 4～5 倍。",
+    "fix_new": "涅奥的平衡段提及（62 次）约为现役卡均值（约 2.2 次）的 28 倍；Boss 多为 4～14 次（均值约 8），约为卡均值的 3～6 倍。",
+    "severity": "minor",
+    "reason": "「4～5 倍」对涅奥和 Boss 都不成立：涅奥远超，Boss 与调得最多的卡相当",
+    "evidence": "ch08_patch_top_entities.csv：587 个现役卡实体 mentions_balance 均值 2.23、中位数 2；Neow 62；Boss：Knowledge Demon 14、Queen 13、Ceremonial Beast 12、Waterfall Giant 12、Vantom 11、Soul Fysh 8、Test Subject 6、The Insatiable 4、Lagavulin Matriarch 4、Aeonglass 4、The Kin 3"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "EA 后立刻拆成 beta 和主分支两条线，还改成双周更。",
+    "fix_new": "EA 一周后就拆成 beta 和主分支两条线（`PN 2026_03_12`），两个月后又改成双周更（`PN 2026_05_07`）。",
+    "severity": "minor",
+    "reason": "双周更是 2026-05-07 才开始的，不是 EA 后立刻",
+    "evidence": "PN 2026_03_12:1-3「Happy 1-week-since-launch day」「newly released public-beta branch」；PN 2026_05_07:7-9「Bi-Weekly Patching … moving to patch every 2 weeks」"
+  },
+  {
+    "file": "sections/08_devhistory_assets.md",
+    "fix_old": "5 只怪有恐惧症 Spine 皮肤，另有 11 张替换图（见 7.4）",
+    "fix_new": "5 只怪有恐惧症 Spine 皮肤，另有 11 张替换图（见 7.3 怪物行）",
+    "severity": "citation",
+    "reason": "恐惧症皮肤与替换图在 7.3 的怪物行，7.4 是图集",
+    "evidence": "本章 7.3 怪物行；HasPhobiaSpineSkin => true 的 5 个类：FossilStalker、HauntedShip、SkulkingColony、TheObscura、TwigSlimeM；pck_index images/monsters/phobia_mode/ 11 张"
+  }
+]
